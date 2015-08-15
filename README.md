@@ -12,7 +12,7 @@ This README outlines the details of collaborating on this Ember addon.
 
 ## Usage
 
-
+```
 {{#ember-grid items=myData columns=myColumns as |row|}}
 
   {{#eg-column key="name" myData=Bryan}}
@@ -42,7 +42,7 @@ This README outlines the details of collaborating on this Ember addon.
 	{{/eg-scrollable-columns}}
 
 {{/ember-grid}}
-
+```
 
 
 
