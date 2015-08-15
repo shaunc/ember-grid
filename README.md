@@ -25,17 +25,17 @@ This README outlines the details of collaborating on this Ember addon.
 	  
 	  {{#eg-column key="name"}}
 	  
-	    {{#header-cell}}
+	    {{#eg-header}}
 	      <h1>Name</h1>
-	    {{/header-cell}}
+	    {{/eg-header}}
 	  
-      {{#row-cell}}
-        {{edit value="name"}}
-      {{/row-cell}}
+      {{#eg-body}}
+        {{my-component value="name"}}
+      {{/eg-body}}
 
-      {{#footer-cell value=averagePrice}}  // gets called with column as param
-        {{edit value=value}}
-      {{/footer-cell}}
+      {{#eg-footer value=averagePrice}}  // gets called with column as param
+        {{my-component value=value}}
+      {{/eg-footer}}
 
 	  {{/eg-column}}
 
@@ -45,10 +45,11 @@ This README outlines the details of collaborating on this Ember addon.
 ```
 
 
-
-{{#et-headers as |cell|}}
-  {{header-cell}}
-{{/et-headers}}
+This is then rendered as
+```
+{{#eg-headers as |cell|}}
+  {{eg-header-cell}}
+{{/eg-headers}}
 
 {{#ember-collection}}
   
@@ -56,12 +57,12 @@ This README outlines the details of collaborating on this Ember addon.
 
 {{/ember-collection}}
 
-{{#et-footer-rows as |rows|}}
-  {{#et-footer-row-cells as |cell|}}
-    {{footer-row-cell}}
-  {{/et-footer-row-cells}}
-{{/et-footer-rows}}
-
+{{#eg-footer-rows as |rows|}}
+  {{#eg-footer-row-cells as |cell|}}
+    {{eg-footer-row-cell}}
+  {{/eg-footer-row-cells}}
+{{/eg-footer-rows}}
+```
 
 
 
