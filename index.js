@@ -2,5 +2,5 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-infinite-table'
+  name: 'ember-grid'
 };
