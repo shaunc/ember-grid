@@ -1,2 +1,10 @@
 {{yield}}
-Stuff here
+<ul>
+	{{#each column in columns}}
+		<li>
+		  {{column.title}} : {{column.width}} ({{column.mydata}})
+		</li>
+	{{else}}
+		No columns defined
+	{{/each}}
+</ul>
