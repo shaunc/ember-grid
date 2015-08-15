@@ -2,7 +2,13 @@
 
 {{outlet}}
 
-{{#ember-grid}}
-  {{eg-column width=120 title="Name" mydata="steve"}}
+{{#ember-grid items=gridRows}}
+  {{#eg-column width=120 title="Name" mydata="steve"}}
+    {{eg-header title="Name"}}
+    {{eg-body path="name"}}
+    {{#eg-footer}}
+      Footer text
+    {{/eg-footer}}
+  {{/eg-column}}
   {{eg-column width=55 title="Image"}}
 {{/ember-grid}}
