@@ -1,7 +1,8 @@
 {{yield}}
+
 <h2>Columns</h2>
 <ul>
-	{{#each column in columns}}
+	{{#each columns key="key" as |column|}}
 		<li>
 		  {{column.title}} : {{column.width}} ({{column.mydata}})
 		</li>
@@ -9,3 +10,12 @@
 		No columns defined
 	{{/each}}
 </ul>
+
+<h1>Header</h1>
+<div class="header">
+  {{#each columns key="key" as |column|}}
+    <span class="column">
+    {{eg-render/eg-header column=column}}
+    </span>
+  {{/each}}
+</div>

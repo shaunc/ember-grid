@@ -13,6 +13,7 @@ export default Ember.Component.extend({
 	    var parentView = this.get('parentView');
 	    if (parentView instanceof EmberGridColumn) {
 	    	parentView.set('_body', this.attrs);
+	    	parentView.set('_body.element', this.get('element'));
 	    }
 	    this.get('element').style.display = 'none';
 	  });

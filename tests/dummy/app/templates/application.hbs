@@ -1,14 +1,16 @@
 <h2 id="title">Ember Grid</h2>
-
-{{outlet}}
-
-{{#ember-grid items=gridRows}}
-  {{#eg-column width=120 title="Name" mydata="steve"}}
-    {{eg-header title="Name"}}
+{{#ember-grid }}
+  
+  {{#eg-column key="1" width=120 title="Name" mydata="steve"}}
+    {{#eg-header}}
+      <h2>Name</h2>
+    {{/eg-header}}
     {{eg-body path="name"}}
     {{#eg-footer}}
       Footer text
     {{/eg-footer}}
   {{/eg-column}}
-  {{eg-column width=55 title="Image"}}
+  
+  {{eg-column key="2" width=55 title="Image"}}
+
 {{/ember-grid}}

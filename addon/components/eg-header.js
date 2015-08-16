@@ -4,7 +4,7 @@ import layout from '../templates/components/eg-header';
 
 export default Ember.Component.extend({
   layout: layout,
-	classNames: ['header-def'],
+  classNames: ['header-def'],
 
   didInsertElement: function() {
     this._super.apply(this, arguments);
@@ -13,6 +13,7 @@ export default Ember.Component.extend({
 	    var parentView = this.get('parentView');
 	    if (parentView instanceof EmberGridColumn) {
 	    	parentView.set('_header', this.attrs);
+	    	parentView.set('_header.element', this.get('element'));
 	    }
 		  this.get('element').style.display = 'none';
   	});
