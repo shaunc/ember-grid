@@ -1,8 +1,8 @@
-# Ember-infinite-table
+# Ember-Grid
 
-This README outlines the details of collaborating on this Ember addon.
+A Declarative data grid for ember.
 
-[![Build Status](https://travis-ci.org/BryanCrotaz/ember-grid.svg?branch=master)](https://travis-ci.org/BryanCrotaz/ember-grid)
+[![Build Status](https://travis-ci.org/shaunc/ember-grid.svg?branch=master)](https://travis-ci.org/shaunc/ember-grid)
 
 ## Installation
 
@@ -13,24 +13,28 @@ This README outlines the details of collaborating on this Ember addon.
 ## Usage
 
 ```
-{{#ember-grid items=myData columns=myColumns as |row|}}
 
-  {{#eg-column key="name" myData=Bryan}}
-    {{#header-cell key="name"}}
+{{#ember-grid data=myData columns=myColumns as |row|}} 
+                                              // columns may be declared in their entirety
+                                              // or passed in and annotated.
+
+  {{#eg-column key="name" cellData=getData}}  // callback called with data row and column
+    {{#eg-header}}
       <h1>Name</h1>
-    {{/header-cell}}
-  {{/eg-column}}
+    {{/eg-header}}
 
-  {{#eg-scrollable-columns}}
-	  
-	  {{#eg-column key="name"}}
+  {{/eg-column}}                   // this column will render with default body cell, defined below
+
+  {{#eg-columns-list as |column|}} // declare annotations for a series of columns
+  
+	  {{#eg-column key=column.key cellData=column.dataKey}}
 	  
 	    {{#eg-header}}
-	      <h1>Name</h1>
+	      <h1>column.name</h1>
 	    {{/eg-header}}
 	  
-      {{#eg-body}}
-        {{my-component value="name"}}
+      {{#eg-body as |field|}}     // field has already been extracted by the column accessor accessor
+        {{my-component value=field.value}}
       {{/eg-body}}
 
       {{#eg-footer value=averagePrice}}  // gets called with column as param
@@ -39,7 +43,12 @@ This README outlines the details of collaborating on this Ember addon.
 
 	  {{/eg-column}}
 
-	{{/eg-scrollable-columns}}
+  {{/eg-columns-list}}
+
+  {{! cell definition out side of columns is default }}
+  {{#eg-body as |field column|}}
+    <pre>field</pre>
+  {{/eg-body}}
 
 {{/ember-grid}}
 ```
