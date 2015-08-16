@@ -20,7 +20,7 @@ export default Ember.Component.extend({
   	this.set('_header', header);
   	if (header)
   	{
-	    var sourceElement = header.get('element');
+	    var sourceElement = header.element;
 	    var destinationElement = this.get('element');
 	    var node = sourceElement.firstChild;
 	    var lastNode = sourceElement.lastChild;
