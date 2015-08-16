@@ -27,12 +27,10 @@ A Declarative data grid for ember.
 
   {{#eg-columns-list as |column|}} // declare annotations for a series of columns
   
-	  {{#eg-column key=column.key cellData=column.dataKey}}
-	  
-	    {{#eg-header}}
-	      <h1>column.name</h1>
-	    {{/eg-header}}
-	  
+	  {{#eg-column key=column.key title="My Column Title" cellData=column.dataKey}}
+	   
+      // eg-header is not specified, so the default header will use column.title (My Column Title)
+
       {{#eg-body as |field|}}     // field has already been extracted by the column accessor accessor
         {{my-component value=field.value}}
       {{/eg-body}}
