@@ -18,18 +18,20 @@ A Declarative data grid for ember.
                                               // columns may be declared in their entirety
                                               // or passed in and annotated.
 
-  {{#eg-column key="name" cellData=getData}}  // callback called with data row and column
+  {{#eg-column key="name" footer="My Column Footer" cellData=getData}}  // callback called with data row and column
     {{#eg-header}}
       <h1>Name</h1>
     {{/eg-header}}
+
+    // eg-footer is not specified, so the default footer will use column.footer (My Column Footer)
 
   {{/eg-column}}                   // this column will render with default body cell, defined below
 
   {{#eg-columns-list as |column|}} // declare annotations for a series of columns
   
-	  {{#eg-column key=column.key title="My Column Title" cellData=column.dataKey}}
+	  {{#eg-column key=column.key header="My Column Header" cellData=column.dataKey}}
 	   
-      // eg-header is not specified, so the default header will use column.title (My Column Title)
+      // eg-header is not specified, so the default header will use column.header (My Column Header)
 
       {{#eg-body as |field|}}     // field has already been extracted by the column accessor accessor
         {{my-component value=field.value}}

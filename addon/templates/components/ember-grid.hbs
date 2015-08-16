@@ -12,10 +12,19 @@
 </ul>
 
 <h1>Header</h1>
+
 <div class="header">
   {{#each columns key="key" as |column|}}
     <span class="column">
-    {{eg-render/eg-header column=column}}
+    	{{eg-render/eg-header-cell column=column}}
+    </span>
+  {{/each}}
+</div>
+
+<div class="footer">
+  {{#each columns key="key" as |column|}}
+    <span class="column">
+    	{{eg-render/eg-footer-cell column=column}}
     </span>
   {{/each}}
 </div>

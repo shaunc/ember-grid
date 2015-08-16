@@ -1,7 +1,7 @@
 <h2 id="title">Ember Grid</h2>
 {{#ember-grid }}
   
-  {{#eg-column key="1" width=120 title="Name" mydata="steve"}}
+  {{#eg-column key="1" width=120 mydata="steve"}}
     {{#eg-header}}
       <h2>Name</h2>
     {{/eg-header}}
@@ -11,6 +11,6 @@
     {{/eg-footer}}
   {{/eg-column}}
   
-  {{eg-column key="2" width=55 title="Image"}}
+  {{eg-column key="2" width=55 header="Image" footer="Images above"}}
 
 {{/ember-grid}}

@@ -1,12 +1,12 @@
 import Ember from 'ember';
-import layout from '../../templates/components/eg-render/eg-header';
+import layout from '../../templates/components/eg-render/eg-footer-cell';
 
 export default Ember.Component.extend({
   layout: layout,
 
   didInsertElement: function() {
   	Ember.run.next(this, function() {
-  		this.renderHeader()
+  		this.renderFooter()
   	});
   },
 
@@ -14,13 +14,13 @@ export default Ember.Component.extend({
   	this.set('_column', this.attrs.column.value);
   },
 
-  renderHeader: function() {
+  renderFooter: function() {
   	var column = this.get('_column');
-  	var header = column._zones.header;
-  	this.set('_header', header);
-  	if (header)
+  	var footer = column._zones.footer;
+  	this.set('_footer', footer);
+  	if (footer)
   	{
-	    var sourceElement = header.element;
+	    var sourceElement = footer.element;
 	    var destinationElement = this.get('element');
 	    var node = sourceElement.firstChild;
 	    var lastNode = sourceElement.lastChild;
