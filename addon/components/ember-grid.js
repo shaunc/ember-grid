@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/ember-grid';
+import layout from './ember-grid/template';
 
 export default Ember.Component.extend({
   layout: layout,

@@ -6,7 +6,7 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {
   	Ember.run.next(this, function() {
-  		this.renderFooter()
+  		this.renderFooter();
   	});
   },
 

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import EmberGridColumn from './eg-column';
-import layout from '../templates/components/eg-header';
+import layout from './eg-header/template';
 
 export default Ember.Component.extend({
   layout: layout,
