@@ -1,4 +1,7 @@
-{{!ember-grid}}{{yield}}
+{{!ember-grid}}
+
+{{! yield injects the declarative components}}
+{{yield}}
 
 <h1>Header</h1>
 
@@ -9,9 +12,11 @@
     </span>
   {{/each}}
 </div>
-   {{eg-render/eg-body-container 
-      data=attrs.data columns=columns height=bodyHeight width=bodyWidth
-      contentWidth=contentWidth rowHeight=rowHeight}}
+
+{{eg-render/eg-body-container 
+  data=attrs.data columns=columns height=bodyHeight width=bodyWidth
+  contentWidth=contentWidth rowHeight=rowHeight}}
+
 <div class="footer">
   {{#each columns key="key" as |column|}}
     <span class="column">

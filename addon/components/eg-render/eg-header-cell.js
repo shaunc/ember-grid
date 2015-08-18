@@ -4,9 +4,11 @@ import layout from './eg-header-cell/template';
 export default Ember.Component.extend({
   layout: layout,
 
+  _header: Ember.computed.alias('_column._zones.header'),
+
   didInsertElement: function() {
   	Ember.run.next(this, function() {
-  		this.renderHeader()
+  		this.renderHeader();
   	});
   },
 
@@ -15,9 +17,7 @@ export default Ember.Component.extend({
   },
 
   renderHeader: function() {
-  	var column = this.get('_column');
-  	var header = column._zones.header;
-  	this.set('_header', header);
+  	var header = this.get('_header');
   	if (header)
   	{
 	    var sourceElement = header.element;
@@ -28,6 +28,6 @@ export default Ember.Component.extend({
 	      destinationElement.insertBefore(node, null);
 	      node = node !== lastNode ? lastNode.parentNode.firstChild : null;
 	    }
-	}
+	  }
   }
 });

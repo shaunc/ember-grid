@@ -14,8 +14,8 @@ export default Ember.Component.extend({
   	Ember.run.next(this, function() {
 	    var parentView = this.get('parentView');
 	    if (parentView instanceof EmberGridColumn) {
-	    	parentView.set('_footer', this.attrs);
-	    	parentView.set('_footer.element', this.get('element'));
+	    	parentView.set('_column._zones.footer', this.attrs);
+	    	parentView.set('_column._zones.footer.element', this.get('element'));
 	    }
 	  	this.get('element').style.display = 'none';
 		});

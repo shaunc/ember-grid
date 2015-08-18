@@ -28,6 +28,6 @@ export default Ember.Component.extend({
 	      destinationElement.insertBefore(node, null);
 	      node = node !== lastNode ? lastNode.parentNode.firstChild : null;
 	    }
-	}
+	  }
   }
 });

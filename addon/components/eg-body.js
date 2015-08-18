@@ -46,15 +46,16 @@ export default Ember.Component.extend({
   	Ember.run.next(this, function() {
 	    var parentView = this.get('parentView');
 	    if (parentView instanceof EmberGridColumn) {
-        var parentBody = parentView.get('_column._zones.body');
-        if( parentBody == null) {
+        var columnBody = parentView.get('_column._zones.body');
+        if( columnBody == null) {
           parentView.set('_column._zones.body', this._body);
-          parentBody = this._body;
+          columnBody = this._body;
         }
         else {
-          this._body = Ember.merge(parentBody, this._body);
+          columnBody.setProperties(this._body);
+          this.set('_body', columnBody);
         }
-	    	Ember.set(parentBody, 'element', this.get('element'));
+	    	Ember.set(columnBody, 'element', this.get('element'));
 	    }
 	    //this.get('element').style.display = 'none';
 	  });

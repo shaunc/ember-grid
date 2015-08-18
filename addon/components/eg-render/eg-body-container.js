@@ -22,7 +22,7 @@ export default Ember.Component.extend({
       return true;
     }),
   actions: {
-    scrollSource: function (startingIndex) {
+    scrollSource: function (/*startingIndex*/) {
       var collectionElt = this.get('element.firstElementChild');
       if (collectionElt == null) { return; }
       var scrollTop = collectionElt.scrollTop;
@@ -32,7 +32,7 @@ export default Ember.Component.extend({
           if (body != null) {
             Ember.set(body, 'offsetY', scrollTop);
           }
-        })
+        });
       }, 100);
     }
   }

@@ -1,7 +1,7 @@
 Column {{this.hasBlock}}
-{{#if hasBlock}}{{yield _column}}{{else}}
-  {{#eg-header as |column|}}{{column.title}}{{/eg-header}}
+{{#if hasBlock}}
+  {{yield _column}}
+{{else}}
   {{#eg-body as |field|}}{{field}}{{/eg-body}}
-  {{#eg-footer as |column|}}{{column.footer}}{{/eg-footer}}
 {{/if}}
 

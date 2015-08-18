@@ -7,7 +7,7 @@ function formatStyle(x, y) {
     ' -moz-transform: translate('+x+'px, '+y+'px);' + 
     ' -ms-transform: translate('+x+'px, '+y+'px);' + 
     ' -o-transform: translate('+x+'px, '+y+'px);' + 
-    ' transform: translate('+x+'px, '+y+'px);'
+    ' transform: translate('+x+'px, '+y+'px);';
 }
 
 export default Ember.Component.extend({
@@ -17,12 +17,11 @@ export default Ember.Component.extend({
 
   style: Ember.computed('column.offset', function(){
     var offset = this.get('column.offset');
-    var column = this.get('column');
     if (!isNaN(offset)) {
       return formatStyle(offset, 0); 
     }
     else {
-      return 'display: none;'
+      return 'display: none;';
     }
   }),
   sourceElement: Ember.computed.alias('column._zones.body.element'),
@@ -30,8 +29,7 @@ export default Ember.Component.extend({
   didReceiveAttrs: function() {
     var sourceElement = this.get('sourceElement');
     if (sourceElement == null) { return; }
-    var cellElement = $(sourceElement)
-      .find('.eg-body-cell[data-row-index=' + this.get('rowIndex') + ']');
+    var cellElement = Ember.$(sourceElement).find('.eg-body-cell[data-row-index=' + this.get('rowIndex') + ']');
 
     if (cellElement == null) { return; }
     this.set('cellElement', cellElement[0]);
