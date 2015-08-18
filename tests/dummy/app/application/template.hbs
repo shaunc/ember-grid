@@ -1,0 +1,27 @@
+<h2 id="title">Ember Grid</h2>
+{{#ember-grid width=800 height=200 rowHeight=25 data=gridRows}}
+
+  {{#eg-column key="name" width=150 title="Name"}}
+    {{eg-header title="Name"}}
+    {{#eg-body as |field column rowIndex|}}
+      [{{rowIndex}}:{{column.key}}] <strong>{{field}}</strong>
+    {{/eg-body}}
+    {{#eg-footer}}
+      Footer text
+    {{/eg-footer}}
+  {{/eg-column}}
+
+  {{eg-column key="age" width=50 title="Age" footer="Age Footer"}}
+
+  {{#eg-column key="salary" width=80 title="Salary" footer="Salary Footer"}}
+    {{#eg-header as |column|}}
+      <span style="text-align: right;">{{column.title}}</span>
+    {{/eg-header}}
+    {{#eg-body as |field|}}
+      {{field}} 
+    {{/eg-body}}
+    {{#eg-footer as |column|}}{{column.footer}}{{/eg-footer}}
+  {{/eg-column}}
+
+  {{eg-column key="email" width=100 title="Email" footer="Email Footer"}}
+{{/ember-grid}}

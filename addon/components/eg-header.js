@@ -6,6 +6,8 @@ export default Ember.Component.extend({
   layout: layout,
   classNames: ['header-def'],
 
+  _column: Ember.computed.alias('parentView._column'),
+
   didInsertElement: function() {
     this._super.apply(this, arguments);
 

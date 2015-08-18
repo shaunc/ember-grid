@@ -1,30 +1,21 @@
-{{yield}}
-
-<h2>Columns</h2>
-<ul>
-	{{#each columns key="key" as |column|}}
-		<li>
-		  {{column.title}} : {{column.width}} ({{column.mydata}})
-		</li>
-	{{else}}
-		No columns defined
-	{{/each}}
-</ul>
+{{!ember-grid}}{{yield}}
 
 <h1>Header</h1>
 
 <div class="header">
   {{#each columns key="key" as |column|}}
     <span class="column">
-    	{{eg-render/eg-header-cell column=column}}
+      {{eg-render/eg-header-cell column=column}}
     </span>
   {{/each}}
 </div>
-
+   {{eg-render/eg-body-container 
+      data=attrs.data columns=columns height=bodyHeight width=bodyWidth
+      contentWidth=contentWidth rowHeight=rowHeight}}
 <div class="footer">
   {{#each columns key="key" as |column|}}
     <span class="column">
-    	{{eg-render/eg-footer-cell column=column}}
+      {{eg-render/eg-footer-cell column=column}}
     </span>
   {{/each}}
 </div>

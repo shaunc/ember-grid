@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../../templates/components/eg-render/eg-header-cell';
+import layout from './eg-header-cell/template';
 
 export default Ember.Component.extend({
   layout: layout,

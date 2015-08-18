@@ -1,0 +1,17 @@
+{{! eg-render/eg-body-container }}{{#if requiredPresent}}
+  {{#ember-collection 
+      items=attrs.data height=attrs.height width=attrs.width 
+      cell-layout=(fixed-grid-layout attrs.contentWidth attrs.rowHeight)
+      startingIndexDidChange=(action "scrollSource")
+      as |row rowIndex|
+      }}
+    {{#each columns as |column| }}
+      {{eg-render/eg-body-cell rowIndex=rowIndex column=column}}
+    {{/each}}
+  {{/ember-collection}}
+{{else}}
+  {{#unless attrs.data}}Data missing.{{/unless}}
+  {{#unless attrs.height}}Height missing.{{/unless}}
+  {{#unless attrs.width}}Width missing.{{/unless}}
+  {{#unless attrs.rowHeight}}rowHeight missing.{{/unless}}
+{{/if}}

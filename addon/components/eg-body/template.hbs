@@ -1,1 +1,16 @@
-{{yield}}
+{{! eg-body ~}}
+{{#if requiredPresent}}
+  {{#ember-collection
+      items=data height=height width=width offset-y=offsetY
+      cell-layout=(fixed-grid-layout width rowHeight)
+      as |row rowIndex|}}
+      <div class='eg-body-cell' data-row-index="{{rowIndex}}">
+        {{~ yield (eg-cell-data this rowIndex) _column rowIndex ~}}
+      </div>
+  {{/ember-collection}}
+{{else}}
+  {{#unless data}}Data is required.{{/unless}}
+  {{#unless height}}Height is required.{{/unless}}
+  {{#unless width}}Column width is required.{{/unless}}
+  {{#unless rowHeight}}Row height is required.{{/unless}}
+{{/if}}
