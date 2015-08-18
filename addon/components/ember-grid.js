@@ -6,18 +6,18 @@ var getMutValue = Ember.__loader.require('ember-htmlbars/hooks/get-value')['defa
 
 export default Ember.Component.extend({
   layout: layout,
+  classNames: ['ember-grid'],
+
   columns: null,
 
   bodyWidth: Ember.computed.alias('width'),
   contentWidth: Ember.computed( 'columns.[]', function() {
     var columns = this.get('columns');
-    if (columns == null || columns.length == 0) { return 0; }
+    if (columns == null || columns.length === 0) { return 0; }
     return columns.slice(-1)[0].offset;
   }),
-  classNames: ['ember-grid'],
-
   init: function() {
-    this._super()
+    this._super();
     this.columns = new Ember.A([]);
   },
 
@@ -40,17 +40,17 @@ export default Ember.Component.extend({
     this.width = this._maybeMutAttr('width', 0);
     this.rowHeight = this._maybeMutAttr('rowHeight', 0);
     this.headerHeight = this._maybeMutAttr('headerHeight', 0);
-    this.footerHeight = this._maybeMutAttr('fooderHeight', 0);
+    this.footerHeight = this._maybeMutAttr('footerHeight', 0);
     this.bodyHeight = this.height - this.headerHeight - this.footerHeight;
     this.data = this._maybeMutAttr('data', Ember.A([]));
-    var self = this
+    var self = this;
     var offset = 0;
     this.columns.forEach(function(column) { 
       offset = self._refreshColumn(column, offset); });
   },
   _refreshColumn: function(column, offset) {
     var body;
-    column.offset = offset;
+    Ember.set(column, 'offset', offset);
     offset += (column.width | 0);
     if (column._zones == null) {
       Ember.set(column, '_zones', Ember.Object.create({}));
@@ -62,11 +62,15 @@ export default Ember.Component.extend({
     else {
       body = column._zones.body;
     }
+    var height = this.get('bodyHeight'), 
+      limit = Math.ceil(height / this.rowHeight) + 10;
     body.setProperties({
-      height: this.get('bodyHeight'),
+      height: height,
       width: column.width,
       rowHeight: this.rowHeight,
-      data: this.data
+      data: this.data,
+      offset: 0,
+      limit: limit
     });
     return offset;
   },

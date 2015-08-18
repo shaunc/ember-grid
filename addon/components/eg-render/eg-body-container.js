@@ -21,17 +21,15 @@ export default Ember.Component.extend({
       return true;
     }),
   actions: {
-    scrollSource: function (startingIndex) {
-      var collectionElt = this.get('element.firstElementChild');
-      if (collectionElt == null) { return; }
-      var scrollTop = collectionElt.scrollTop;
+    scrollSource: function (offset, limit) {
       var bodies = this.get('sourceBodies') || [];
       Ember.run.debounce(function() { 
         bodies.map( function(body){
           if (body != null) {
-            Ember.set(body, 'offsetY', scrollTop);
+            Ember.set(body, 'offset', Math.max(offset - 10, 0));
+            Ember.set(body, 'limit', limit + 10);
           }
-        })
+        });
       }, 100);
     }
   }

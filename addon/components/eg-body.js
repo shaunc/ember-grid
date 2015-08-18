@@ -8,16 +8,22 @@ export default Ember.Component.extend({
 
   _body: null,
   _column: Ember.computed.alias('parentView._column'),
-  offsetY: Ember.computed.alias('_body.offsetY'),
-
-	data: Ember.computed.alias('_body.data'),
-  height: Ember.computed.alias('_body.height'),
-  width: Ember.computed.alias('_body.width'),
-  rowHeight: Ember.computed.alias('_body.rowHeight'),
-  requiredPresent: Ember.computed('_body.{data,height,width,rowHeight}', function(){
-    var {data, height, width, rowHeight} = this.getProperties(
-      'data', 'height', 'width', 'rowHeight' );
-    return data != null && height != null && width != null && rowHeight != null;
+  _items: Ember.computed('_body.{data,offset,limit}', function(){
+    var {'_body.data': data, '_body.offset': offset, '_body.limit': limit} = this.getProperties(
+      '_body.data', '_body.offset', '_body.limit');
+    return (data || []).slice(offset, offset + limit);
+  }),
+  _requiredPresent: Ember.computed('_body.{data,height,width,rowHeight,offset,limit}', function(){
+    var body = this._body || {};
+    var {data, height, width, rowHeight, offset, limit} = body;
+    return data != null && height != null && width != null && 
+      rowHeight != null && offset != null && limit != null;
+  }),
+  contextDidChange: Ember.observer(
+    '_data', '_body.{height,width,rowHeight,offset,limit}', function(){
+      Ember.run.next(this, function(){ 
+        this.rerender();
+      });
   }),
 
   /**
@@ -40,6 +46,12 @@ export default Ember.Component.extend({
       this.set('_body', body);
     }
     Ember.merge(body, this.attrs);
+    if (body._offset == null) {
+      Ember.set(body, 'offset', 0);
+    }
+    if (body.limit == null && body.rowHeight != null && body.height != null) {
+      Ember.set(body, 'limit', Math.ciel(body.height / body.rowHeight) + 10);
+    }
   },
   didInsertElement: function() {
     this._super.apply(this, arguments);
@@ -47,15 +59,16 @@ export default Ember.Component.extend({
   	Ember.run.next(this, function() {
 	    var parentView = this.get('parentView');
 	    if (parentView instanceof EmberGridColumn) {
-        var parentBody = parentView.get('_column._zones.body');
-        if( parentBody == null) {
+        var columnBody = parentView.get('_column._zones.body');
+        if( columnBody == null) {
           parentView.set('_column._zones.body', this._body);
-          parentBody = this._body;
+          columnBody = this._body;
         }
         else {
-          this._body = Ember.merge(parentBody, this._body);
+          columnBody.setProperties(this._body);
+          this.set('_body', columnBody);
         }
-	    	Ember.set(parentBody, 'element', this.get('element'));
+	    	Ember.set(columnBody, 'element', this.get('element'));
 	    }
 	    //this.get('element').style.display = 'none';
 	  });

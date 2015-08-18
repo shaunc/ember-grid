@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import EmberGrid from './ember-grid';
 import layout from './eg-column/template';
+import ColumnModel from '../eg-column/model';
 
 export default Ember.Component.extend({
   layout: layout,
@@ -8,15 +9,17 @@ export default Ember.Component.extend({
 
 	_column: null,
 
+	init: function() {
+		this._super.apply(this, arguments);
+		this._column = ColumnModel.create({});
+		this._column.key = this.elementId;
+	},
+
 	didReceiveAttrs: function() {
-    this._super();
-		this._column = (this._column || Ember.Object.create({}));
-		Ember.merge(this._column, this.attrs);
-		if (this._column._zones == null) {
-			this._column._zones = Ember.Object.create({
-				header: null, body: null, footer: null
-			})
-		}
+		this._super();
+		Ember.run.next(this, function() {
+			this.get('_column').setProperties(this.attrs);
+		});
 	},
 
   didInsertElement: function() {
