@@ -4,6 +4,11 @@ import layout from './template';
 export default Ember.Component.extend({
   layout: layout,
   classNames: ['ember-grid'],
+  attributeBindings: ['style'],
+
+  style: Ember.computed('bodyWidth', function() {
+    return 'width:'+this.get('bodyWidth')+'px;';
+  }),
 
   columns: null,
 

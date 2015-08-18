@@ -3,10 +3,10 @@
 {{! yield injects the declarative components}}
 {{yield}}
 
-{{eg-render/eg-header columns=columns}}
+{{eg-render/eg-header columns=columns width=bodyWidth}}
 
 {{eg-render/eg-body
   data=attrs.data columns=columns height=bodyHeight width=bodyWidth
   contentWidth=contentWidth rowHeight=rowHeight}}
 
-{{eg-render/eg-footer columns=columns}}
+{{eg-render/eg-footer columns=columns width=bodyWidth}}
