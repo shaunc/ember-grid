@@ -7,6 +7,11 @@ var getMutValue = Ember.__loader.require('ember-htmlbars/hooks/get-value')['defa
 export default Ember.Component.extend({
   layout: layout,
   classNames: ['ember-grid'],
+  attributeBindings: ['style'],
+
+  style: Ember.computed('bodyWidth', function() {
+    return 'width:'+this.get('bodyWidth')+'px;';
+  }),
 
   columns: null,
 
