@@ -1,8 +1,14 @@
 import Ember from 'ember';
-import layout from './eg-footer-cell/template';
+import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
+
+  classNames: ['cell'],
+  attributeBindings: ['style'],
+
+  _footer: Ember.computed.alias('_column._zones.footer'),
+  width: Ember.computed.alias('_column.width'),
 
   didInsertElement: function() {
     this._super();
@@ -17,9 +23,7 @@ export default Ember.Component.extend({
   },
 
   renderFooter: function() {
-  	var column = this.get('_column');
-  	var footer = column._zones.footer;
-  	this.set('_footer', footer);
+  	var footer = this.get('_footer');
   	if (footer)
   	{
 	    var sourceElement = footer.element;
@@ -31,5 +35,9 @@ export default Ember.Component.extend({
 	      node = node !== lastNode ? lastNode.parentNode.firstChild : null;
 	    }
 	  }
-  }
+  },
+
+  style: Ember.computed('width', function() {
+    return 'width:'+this.get('width')+'px;';
+  })
 });

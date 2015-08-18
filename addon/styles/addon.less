@@ -1,0 +1,34 @@
+.ember-grid {
+	
+	border: 1px solid black;
+
+	.header, .body {
+	  border-bottom: 1px solid black;
+	}
+
+	.header, .footer, .body {
+		.cell {
+    	border-right: 1px solid black;
+    	padding-left: 2px;
+    	padding-right: 2px;
+    	padding-top: 1px;
+    	padding-bottom: 2px;
+
+    	&:last-child {
+    		border-right: none;
+    	}
+		}
+	}
+
+	.header, .footer {
+		position: relative;
+
+		.cell {
+			position: relative;
+    	display: inline-block;
+		}
+
+	}
+
+}
+

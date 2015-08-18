@@ -1,10 +1,14 @@
 import Ember from 'ember';
-import layout from './eg-header-cell/template';
+import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
 
+  classNames: ['cell'],
+  attributeBindings: ['style'],
+
   _header: Ember.computed.alias('_column._zones.header'),
+  width: Ember.computed.alias('_column.width'),
 
   didInsertElement: function() {
     this._super();
@@ -31,5 +35,9 @@ export default Ember.Component.extend({
 	      node = node !== lastNode ? lastNode.parentNode.firstChild : null;
 	    }
 	  }
-  }
+  },
+
+  style: Ember.computed('width', function() {
+    return 'width:'+this.get('width')+'px;';
+  })
 });

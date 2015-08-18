@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import EmberGridColumn from './eg-column';
-import layout from './eg-body/template';
+import EmberGridColumn from '../eg-column/component';
+import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
@@ -9,11 +9,14 @@ export default Ember.Component.extend({
   _body: null,
   _column: Ember.computed.alias('parentView._column'),
   _items: Ember.computed('_body.{data,offset,limit}', function(){
-    var {'_body.data': data, '_body.offset': offset, '_body.limit': limit} = this.getProperties(
+    var {
+      '_body.data': data, '_body.offset': offset, '_body.limit': limit
+    } = this.getProperties(
       '_body.data', '_body.offset', '_body.limit');
     return (data || []).slice(offset, offset + limit);
   }),
-  _requiredPresent: Ember.computed('_body.{data,height,width,rowHeight,offset,limit}', function(){
+  _requiredPresent: Ember.computed(
+      '_body.{data,height,width,rowHeight,offset,limit}', function(){
     var body = this._body || {};
     var {data, height, width, rowHeight, offset, limit} = body;
     return data != null && height != null && width != null && 

@@ -1,9 +1,9 @@
 import Ember from 'ember';
-import layout from './eg-body-container/template';
+import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
-  classNames: ['eg-body-container'],
+  classNames: ['body'],
 
   sourceBodies: Ember.computed('columns.@each._zones.body', function(){
     return this.get('columns').map(

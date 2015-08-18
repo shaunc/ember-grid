@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import layout from './ember-grid/template';
-
-// XXX this is workaround for "didReceiveAttrs" called out of order.
-var getMutValue = Ember.__loader.require('ember-htmlbars/hooks/get-value')['default'];
+import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
@@ -21,28 +18,18 @@ export default Ember.Component.extend({
     this.columns = new Ember.A([]);
   },
 
-  // Utility to get attribute value which may or may not be wrapped in mut helper.
-  // returns defaultValue if attribute not defined or defined as null or undefined
-  _maybeMutAttr(key, defaultValue) {
-    if (this.attrs == null) { return defaultValue; }
-    var obj = this.attrs[key];
-    if (obj == null) { return defaultValue; }
-    obj = getMutValue(obj);
-    obj = (obj == null) ? defaultValue : obj;
-    return obj;
-  },
   didReceiveAttrs() {
     this._super();
     if (this.columns == null) {
       this.columns = new Ember.A();
     }
-    this.height = this._maybeMutAttr('height', 0);
-    this.width = this._maybeMutAttr('width', 0);
-    this.rowHeight = this._maybeMutAttr('rowHeight', 0);
-    this.headerHeight = this._maybeMutAttr('headerHeight', 0);
-    this.footerHeight = this._maybeMutAttr('footerHeight', 0);
+    this.height = this.getAttr('height') |  0;
+    this.width = this.getAttr('width') |  0;
+    this.rowHeight = this.getAttr('rowHeight') |  0;
+    this.headerHeight = this.getAttr('headerHeight') |  0;
+    this.footerHeight = this.getAttr('footerHeight') |  0;
     this.bodyHeight = this.height - this.headerHeight - this.footerHeight;
-    this.data = this._maybeMutAttr('data', Ember.A([]));
+    this.data = this.getAttr('data') ||  Ember.A([]);
     var self = this;
     var offset = 0;
     this.columns.forEach(function(column) { 
@@ -64,6 +51,7 @@ export default Ember.Component.extend({
     }
     var height = this.get('bodyHeight'), 
       limit = Math.ceil(height / this.rowHeight) + 10;
+    console.log("SET DATA", this.data.length);
     body.setProperties({
       height: height,
       width: column.width,

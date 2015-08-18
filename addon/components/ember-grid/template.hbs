@@ -3,24 +3,10 @@
 {{! yield injects the declarative components}}
 {{yield}}
 
-<h1>Header</h1>
+{{eg-render/eg-header columns=columns}}
 
-<div class="header">
-  {{#each columns key="key" as |column|}}
-    <span class="column">
-      {{eg-render/eg-header-cell column=column}}
-    </span>
-  {{/each}}
-</div>
-
-{{eg-render/eg-body-container 
+{{eg-render/eg-body
   data=attrs.data columns=columns height=bodyHeight width=bodyWidth
   contentWidth=contentWidth rowHeight=rowHeight}}
 
-<div class="footer">
-  {{#each columns key="key" as |column|}}
-    <span class="column">
-      {{eg-render/eg-footer-cell column=column}}
-    </span>
-  {{/each}}
-</div>
+{{eg-render/eg-footer columns=columns}}
