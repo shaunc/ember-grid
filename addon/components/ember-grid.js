@@ -32,6 +32,7 @@ export default Ember.Component.extend({
     return obj;
   },
   didReceiveAttrs() {
+    this._super();
     if (this.columns == null) {
       this.columns = new Ember.A();
     }

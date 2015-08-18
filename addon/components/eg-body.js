@@ -33,6 +33,7 @@ export default Ember.Component.extend({
     return data[rowIndex][key];
   },
   didReceiveAttrs: function() {
+    this._super();
     var body = this._body;
     if (body == null ) {
       body = Ember.Object.create({});

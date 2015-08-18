@@ -25,21 +25,14 @@ export default Ember.Component.extend({
       return 'display: none;'
     }
   }),
-  sourceElement: Ember.computed.alias('column._zones.body.element'),
 
-  didReceiveAttrs: function() {
-    var sourceElement = this.get('sourceElement');
-    if (sourceElement == null) { return; }
-    var cellElement = $(sourceElement)
-      .find('.eg-body-cell[data-row-index=' + this.get('rowIndex') + ']');
-
-    if (cellElement == null) { return; }
-    this.set('cellElement', cellElement[0]);
-  },
   didInsertElement: function() {
     this._super.apply(this, arguments);
     var element = this.element;
-    var cellElement = this.get('cellElement');
+    var sourceElement = this.get('column._zones.body.element');
+    if (sourceElement == null) { return; }
+    var cellElement = $(sourceElement)
+      .find('.eg-body-cell[data-row-index=' + this.get('rowIndex') + ']')[0];
     if (cellElement == null) { return; }
     while (cellElement.childNodes.length > 0) {
       element.appendChild(cellElement.childNodes[0]);

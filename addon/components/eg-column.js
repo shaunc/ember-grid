@@ -9,6 +9,7 @@ export default Ember.Component.extend({
 	_column: null,
 
 	didReceiveAttrs: function() {
+    this._super();
 		this._column = (this._column || Ember.Object.create({}));
 		Ember.merge(this._column, this.attrs);
 		if (this._column._zones == null) {

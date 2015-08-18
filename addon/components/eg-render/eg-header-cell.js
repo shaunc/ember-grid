@@ -5,12 +5,14 @@ export default Ember.Component.extend({
   layout: layout,
 
   didInsertElement: function() {
+    this._super();
   	Ember.run.next(this, function() {
   		this.renderHeader()
   	});
   },
 
   didReceiveAttrs: function() {
+    this._super();
   	this.set('_column', this.attrs.column.value);
   },
 
