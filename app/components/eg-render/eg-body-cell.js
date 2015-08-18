@@ -1,1 +1,1 @@
-export { default } from 'ember-grid/components/eg-render/eg-body-cell';
+export { default } from 'ember-grid/components/eg-render/eg-body-cell/component';

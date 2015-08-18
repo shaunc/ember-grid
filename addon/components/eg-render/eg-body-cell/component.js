@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from './eg-body-cell/template';
+import layout from './template';
 
 function formatStyle(x, y) {
   return 'position: absolute; top: 0; left: 0;' +

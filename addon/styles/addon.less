@@ -6,5 +6,24 @@
 	  border-bottom: 1px solid black;
 	}
 
+	.header, .footer {
+		position: relative;
+
+		.column {
+			position: relative;
+    	display: inline-block;
+    	border-right: 1px solid black;
+    	padding-left: 2px;
+    	padding-right: 2px;
+    	padding-top: 1px;
+    	padding-bottom: 2px;
+
+    	&:last-child {
+    		border-right: none;
+    	}
+		}
+
+	}
+
 }
 
