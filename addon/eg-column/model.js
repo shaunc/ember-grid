@@ -5,6 +5,7 @@ export default Ember.Object.extend({
 		this.setProperties({
 			width: 0,
 		  resizable: true,
+		  align: 'left',
 		  _zones: {}
 		});
 

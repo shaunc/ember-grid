@@ -9,6 +9,7 @@ export default Ember.Component.extend({
   classNameBindings: ['isDragging:dragging'],
 
   _header: Ember.computed.alias('_column._zones.header'),
+  align: Ember.computed.alias('_column.align'),
 
   width: Ember.computed('_column.width', {
     get(key) {

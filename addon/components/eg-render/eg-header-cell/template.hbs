@@ -1,6 +1,8 @@
 {{yield}}
 {{#unless _header}}
-  {{_column.header}}
+	<div class="default {{align}}">
+	  {{_column.header}}
+	</div>
 {{/unless}}
 
 {{#if resizable}}

@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   attributeBindings: ['style'],
 
   _footer: Ember.computed.alias('_column._zones.footer'),
+  align: Ember.computed.alias('_column.align'),
   width: Ember.computed.alias('_column.width'),
 
   didInsertElement: function() {

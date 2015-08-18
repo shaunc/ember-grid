@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   attributeBindings: ['style', 'rowIndex:data-row-index'],
 
   width: Ember.computed.alias('column.width'),
+  align: Ember.computed.alias('column.align'),
+
   isOddRow: Ember.computed('rowIndex', function() {
     return this.get('rowIndex') % 2 === 1;
   }),

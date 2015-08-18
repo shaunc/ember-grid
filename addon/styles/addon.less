@@ -33,6 +33,18 @@
     	&:last-child {
     		border-right: none;
     	}
+
+    	.default {
+    		&.left {
+    			text-align: left;
+    		}
+    		&.center {
+    			text-align: center;
+    		}
+    		&.right {
+    			text-align: right;
+    		}
+    	}
 		}
 
 		.resizeHandle {
@@ -40,12 +52,13 @@
 	    right: -3px;
 	    top: 0px;
 	    bottom: 0px;
-	    width: 3px;
+	    width: 5px;
 	    cursor: ew-resize;
 		}
 	}
 
   .header {
+
     .dragging {
 	    cursor: ew-resize;
 	  }
@@ -62,6 +75,7 @@
 	}
 
 	.body {
+
 		.ember-list-container {
 		  overflow: auto;
 		  position: relative;
