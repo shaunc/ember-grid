@@ -29,7 +29,6 @@ export default Ember.Component.extend({
 	    if (parentView instanceof EmberGrid) {
 	    	parentView._addColumn(this.get('_column'));
 	    }
-	    this.get('element').style.display = 'none';
 	  });
 	}
 
