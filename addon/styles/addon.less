@@ -18,12 +18,17 @@
 	}
 
 	.header, .footer, .body {
+
+	  font-size: 0px;
+
 		.cell {
     	border-right: 1px solid black;
     	padding-left: 2px;
     	padding-right: 2px;
     	padding-top: 1px;
     	padding-bottom: 2px;
+
+    	font-size: 14px;
 
     	&:last-child {
     		border-right: none;
@@ -65,9 +70,15 @@
 			.ember-list-item-view {
 			  position: absolute;
 			  overflow: hidden;
-			  font-size: 12px;
+
+			  .cell {
+			  	&.odd {
+			  		background-color: #F1F0F0;
+			  	}
+			  }
 			}
 		}
+
 	}
 }
 
