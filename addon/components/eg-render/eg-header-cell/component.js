@@ -9,7 +9,18 @@ export default Ember.Component.extend({
   classNameBindings: ['isDragging:dragging'],
 
   _header: Ember.computed.alias('_column._zones.header'),
-  width: Ember.computed.alias('_column.width'),
+
+  width: Ember.computed('_column.width', {
+    get(key) {
+      return this.get('_column.width');
+    },
+    set(key, value) {
+      value = this.constrainDragWidth(value);
+      this.set('_column.width', value);
+      return value;
+    }
+  }),
+
   resizable: Ember.computed.alias('_column.resizable'),
 
   isDragging: Ember.computed('parentView.draggingHeaderCell', function() {
@@ -18,7 +29,8 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {
     this._super();
-  	Ember.run.next(this, function() {
+  	Ember.run.scheduleOnce('afterRender', this, function() {
+      this.set('width', this.constrainDragWidth(this.get('width')));
   		this.renderHeader();
   	});
   },
@@ -49,5 +61,52 @@ export default Ember.Component.extend({
 
   startDragging: function() {
     this.set('parentView.draggingHeaderCell', this);
+  },
+
+  minSize: Ember.computed('_column.min-width', function() {
+    var element = this.$();
+    var cssInt = function(name) {
+      return parseInt(this.css(name));
+    }.bind(element);
+
+    var colMinWidth = this.get('_column.min-width') + cssInt("padding-left") + cssInt("padding-right") + 
+                                                      cssInt("border-left")  + cssInt("border-right") + 
+                                                      cssInt("margin-left")  + cssInt("margin-right");
+
+    return Math.max(cssInt("min-width"), colMinWidth);
+  }),
+
+  maxSize: Ember.computed('_column.max-width', function() {
+    var element = this.$();
+    var cssInt = function(name) {
+      return parseInt(this.css(name));
+    }.bind(element);
+
+    var cssMaxWidth = cssInt("max-width");
+    if (!cssMaxWidth) {
+      cssMaxWidth = Number.MAX_VALUE;
+    }
+    
+    var colMaxWidth = this.get('_column.max-width') + cssInt("padding-left") + cssInt("padding-right") + 
+                                                      cssInt("border-left")  + cssInt("border-right") + 
+                                                      cssInt("margin-left")  + cssInt("margin-right");
+    if (!colMaxWidth) {
+      colMaxWidth = Number.MAX_VALUE;
+    }
+
+    return Math.min( cssMaxWidth, colMaxWidth);
+  }),
+
+  constrainDragWidth: function(newWidth) {
+    var minSize = this.get('minSize');
+    var maxSize = this.get('maxSize');
+    if (minSize && newWidth < minSize) {
+      newWidth = minSize;
+    }
+    if (maxSize && newWidth > maxSize) {
+      newWidth = maxSize;
+    }
+    return newWidth;
   }
+
 });

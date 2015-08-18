@@ -4,7 +4,7 @@ import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
-  classNames: ['eg-body-cell'],
+  classNames: ['cell', 'eg-body-cell'],
   attributeBindings: ['style', 'rowIndex:data-row-index'],
 
   width: Ember.computed.alias('column.width'),

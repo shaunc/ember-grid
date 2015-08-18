@@ -37,4 +37,5 @@ export default Ember.Component.extend({
 
     cell.set('width', newWidth);
   }
+
 });
