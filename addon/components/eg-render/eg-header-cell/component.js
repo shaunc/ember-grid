@@ -4,6 +4,7 @@ import layout from './template';
 export default Ember.Component.extend({
   layout: layout,
 
+  classNames: ['cell'],
   attributeBindings: ['style'],
 
   _header: Ember.computed.alias('_column._zones.header'),

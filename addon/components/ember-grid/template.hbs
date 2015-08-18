@@ -9,10 +9,4 @@
   data=attrs.data columns=columns height=bodyHeight width=bodyWidth
   contentWidth=contentWidth rowHeight=rowHeight}}
 
-<div class="footer">
-  {{#each columns key="key" as |column|}}
-    <span class="column">
-      {{eg-render/eg-footer-cell column=column}}
-    </span>
-  {{/each}}
-</div>
+{{eg-render/eg-footer columns=columns}}

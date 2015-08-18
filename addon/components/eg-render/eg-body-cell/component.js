@@ -12,7 +12,7 @@ function formatStyle(x, y) {
 
 export default Ember.Component.extend({
   layout: layout,
-  classNames: ['eg-body-cell'],
+  classNames: ['cell'],
   attributeBindings: ['style'],
 
   style: Ember.computed('column.offset', function(){
