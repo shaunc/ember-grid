@@ -8,9 +8,4 @@
         {{~ yield (eg-cell-data this rowIndex) _column rowIndex ~}}
       </div>
   {{/ember-collection}}
-{{else}}
-  {{#unless data}}Data is required.{{/unless}}
-  {{#unless height}}Height is required.{{/unless}}
-  {{#unless width}}Column width is required.{{/unless}}
-  {{#unless rowHeight}}Row height is required.{{/unless}}
 {{/if}}
