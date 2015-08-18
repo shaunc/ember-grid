@@ -6,9 +6,15 @@ export default Ember.Component.extend({
 
   classNames: ['cell'],
   attributeBindings: ['style'],
+  classNameBindings: ['isDragging:dragging'],
 
   _header: Ember.computed.alias('_column._zones.header'),
   width: Ember.computed.alias('_column.width'),
+  resizable: Ember.computed.alias('_column.resizable'),
+
+  isDragging: Ember.computed('parentView.draggingHeaderCell', function() {
+    return this === this.get('parentView.draggingHeaderCell');
+  }),
 
   didInsertElement: function() {
     this._super();
@@ -39,5 +45,9 @@ export default Ember.Component.extend({
 
   style: Ember.computed('width', function() {
     return 'width:'+this.get('width')+'px;';
-  })
+  }),
+
+  startDragging: function() {
+    this.set('parentView.draggingHeaderCell', this);
+  }
 });

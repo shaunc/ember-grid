@@ -18,7 +18,22 @@
     		border-right: none;
     	}
 		}
+
+		.resizeHandle {
+	    position: absolute;
+	    right: -3px;
+	    top: 0px;
+	    bottom: 0px;
+	    width: 3px;
+	    cursor: ew-resize;
+		}
 	}
+
+  .header {
+    .dragging {
+	    cursor: ew-resize;
+	  }
+  }
 
 	.header, .footer {
 		position: relative;

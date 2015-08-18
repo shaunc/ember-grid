@@ -2,3 +2,7 @@
 {{#unless _header}}
   {{_column.header}}
 {{/unless}}
+
+{{#if resizable}}
+	{{eg-render/eg-header-resize-handle column=_column}}
+{{/if}}
