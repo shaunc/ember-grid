@@ -6,7 +6,8 @@
       as |row rowIndex|
       }}
     {{#each columns as |column| }}
-      {{eg-render/eg-body-cell rowIndex=rowIndex column=column}}
+      {{eg-render/eg-body-cell 
+        rowIndex=rowIndex column=column rowHeight=attrs.rowHeight}}
     {{/each}}
   {{/ember-collection}}
 {{/if}}

@@ -10,11 +10,12 @@ export default Ember.Component.extend({
   width: Ember.computed.alias('column.width'),
 
   style: Ember.computed('column.offset', 'width', function(){
-    var offset = this.get('column.offset');
-    var width = this.get('width');
+    var {'column.offset': offset, width, rowHeight} = this.getProperties(
+      'column.offset', 'width', 'rowHeight');
     if (!isNaN(offset)) {
       return Ember.String.htmlSafe(
-        'display: inline-block; width: ' + width + 'px;');
+        'display:inline-block; width:' + width + 
+        'px; height:' + rowHeight + 'px');
     }
     else {
       return Ember.String.htmlSafe('display: none;');
