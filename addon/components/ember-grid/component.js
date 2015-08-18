@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from './ember-grid/template';
+import layout from './template';
 
 // XXX this is workaround for "didReceiveAttrs" called out of order.
 var getMutValue = Ember.__loader.require('ember-htmlbars/hooks/get-value')['default'];

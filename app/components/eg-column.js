@@ -1,1 +1,1 @@
-export { default } from 'ember-grid/components/eg-column';
+export { default } from 'ember-grid/components/eg-column/component';
