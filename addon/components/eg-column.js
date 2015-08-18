@@ -12,6 +12,7 @@ export default Ember.Component.extend({
 	init: function() {
 		this._super.apply(this, arguments);
 		this._column = ColumnModel.create({});
+		this._column.key = this.elementId;
 	},
 
 	didReceiveAttrs: function() {
