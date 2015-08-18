@@ -1,13 +1,14 @@
 import Ember from 'ember';
 import layout from './template';
 
-function formatStyle(x, y) {
+function formatStyle(width, x, y) {
   return 'position: absolute; top: 0; left: 0;' +
     ' -webkit-transform: translate('+x+'px, '+y+'px);' + 
     ' -moz-transform: translate('+x+'px, '+y+'px);' + 
     ' -ms-transform: translate('+x+'px, '+y+'px);' + 
     ' -o-transform: translate('+x+'px, '+y+'px);' + 
-    ' transform: translate('+x+'px, '+y+'px);';
+    ' transform: translate('+x+'px, '+y+'px);' +
+    ' width: '+width+'px;';
 }
 
 export default Ember.Component.extend({
@@ -15,10 +16,13 @@ export default Ember.Component.extend({
   classNames: ['cell'],
   attributeBindings: ['style'],
 
-  style: Ember.computed('column.offset', function(){
+  width: Ember.computed.alias('column.width'),
+
+  style: Ember.computed('column.offset', 'width', function(){
     var offset = this.get('column.offset');
+    var width = this.get('width');
     if (!isNaN(offset)) {
-      return formatStyle(offset, 0); 
+      return formatStyle(width, offset, 0); 
     }
     else {
       return 'display: none;';

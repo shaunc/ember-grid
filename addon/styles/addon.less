@@ -6,12 +6,8 @@
 	  border-bottom: 1px solid black;
 	}
 
-	.header, .footer {
-		position: relative;
-
+	.header, .footer, .body {
 		.cell {
-			position: relative;
-    	display: inline-block;
     	border-right: 1px solid black;
     	padding-left: 2px;
     	padding-right: 2px;
@@ -21,6 +17,15 @@
     	&:last-child {
     		border-right: none;
     	}
+		}
+	}
+
+	.header, .footer {
+		position: relative;
+
+		.cell {
+			position: relative;
+    	display: inline-block;
 		}
 
 	}
