@@ -6,11 +6,14 @@ export default Ember.Component.extend({
   classNames: ['ember-grid'],
   attributeBindings: ['style'],
 
+  showHeader: true,
+  showFooter: false,
+
+  columns: null,
+
   style: Ember.computed('bodyWidth', function() {
     return 'width:'+this.get('bodyWidth')+'px;';
   }),
-
-  columns: null,
 
   bodyWidth: Ember.computed.alias('width'),
   contentWidth: Ember.computed( 'columns.[]', function() {
