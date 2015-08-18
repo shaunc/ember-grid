@@ -11,6 +11,12 @@
 	  border-bottom: 1px solid black;
 	}
 
+	.footer, .body {
+		.cell {
+		  overflow: hidden;
+		}
+	}
+
 	.header, .footer, .body {
 		.cell {
     	border-right: 1px solid black;
@@ -18,7 +24,6 @@
     	padding-right: 2px;
     	padding-top: 1px;
     	padding-bottom: 2px;
-      overflow: hidden;
 
     	&:last-child {
     		border-right: none;
@@ -51,5 +56,18 @@
 
 	}
 
+	.body {
+		.ember-list-container {
+		  overflow: auto;
+		  position: relative;
+		  width: 100%;
+
+			.ember-list-item-view {
+			  position: absolute;
+			  overflow: hidden;
+			  font-size: 12px;
+			}
+		}
+	}
 }
 
