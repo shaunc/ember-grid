@@ -13,6 +13,7 @@ export default Ember.Component.extend({
       '_body.data': data, '_body.offset': offset, '_body.limit': limit
     } = this.getProperties(
       '_body.data', '_body.offset', '_body.limit');
+    var column = this.get('_column');
     return (data || []).slice(offset, offset + limit);
   }),
   _requiredPresent: Ember.computed(
@@ -40,6 +41,22 @@ export default Ember.Component.extend({
     var {'_column.key': key, '_body.data': data} = this.getProperties(
       '_column.key', '_body.data');
     return data[rowIndex][key];
+  },
+  /**
+   * Return DOM element for row index if currently rendered or null
+   *
+   * @params rowIndex
+   *
+   */
+  getCellElement(rowIndex) {
+    var element = this.element;
+    if (element == null || element.childNodes == null) {
+      return null;
+    }
+    var {'_body.offset': offset, '_body.limit': limit } = this.getProperties(
+      '_body.offset', '_body.limit');
+    if (rowIndex < offset || rowIndex >= offset + limit) { return null; }
+    return element.getElementsByClassName('eg-body-cell')[rowIndex - offset];
   },
   didReceiveAttrs: function() {
     this._super();
@@ -72,9 +89,11 @@ export default Ember.Component.extend({
           this.set('_body', columnBody);
         }
 	    	Ember.set(columnBody, 'element', this.get('element'));
+        Ember.set(columnBody, 'source', this);
 	    }
-	    //this.get('element').style.display = 'none';
+	    this.get('element').style.display = 'none';
 	  });
 	}
+
 
 });

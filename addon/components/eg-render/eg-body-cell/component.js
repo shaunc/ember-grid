@@ -21,16 +21,30 @@ export default Ember.Component.extend({
     }
   }),
 
-  didInsertElement: function() {
+  willRender: function() {
     this._super.apply(this, arguments);
-    var element = this.element;
-    var sourceElement = this.get('column._zones.body.element');
-    if (sourceElement == null) { return; }
-    var cellElement = $(sourceElement)
-      .find('.eg-body-cell[data-row-index=' + this.get('rowIndex') + ']')[0];
-    if (cellElement == null) { return; }
-    while (cellElement.childNodes.length > 0) {
-      element.appendChild(cellElement.childNodes[0]);
+    if (this.element == null || this._oldRowIndex == null) { return; }
+    var rowIndex = this.get('rowIndex');
+    if (rowIndex !== this._oldRowIndex) {
+      var source = this.get('column._zones.body.source');
+      var sourceElement = source.getCellElement(this._oldRowIndex);
+      this.moveChildren(this.element, sourceElement);
+      this._oldRowIndex = null;
+    }
+  },
+
+  didRender: function() {
+    this._super.apply(this, arguments);
+    var source = this.get('column._zones.body.source');
+    var rowIndex = this.get('rowIndex');
+    this._oldRowIndex = rowIndex;
+    var sourceElement = source.getCellElement(rowIndex);
+    this.moveChildren(sourceElement, this.element);
+  },
+  moveChildren: function (source, target) {
+    if (source == null || target == null) { return; }
+    while (source.childNodes.length > 0) {
+      target.appendChild(source.childNodes[0]);
     }
   }
 });

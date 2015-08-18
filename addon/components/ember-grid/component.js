@@ -7,7 +7,7 @@ export default Ember.Component.extend({
   attributeBindings: ['style'],
 
   style: Ember.computed('bodyWidth', function() {
-    return 'width:'+this.get('bodyWidth')+'px;';
+    return Ember.String.htmlSafe('width:'+this.get('bodyWidth')+'px;');
   }),
 
   columns: null,
@@ -56,7 +56,6 @@ export default Ember.Component.extend({
     }
     var height = this.get('bodyHeight'), 
       limit = Math.ceil(height / this.rowHeight) + 10;
-    console.log("SET DATA", this.data.length);
     body.setProperties({
       height: height,
       width: column.width,

@@ -1,6 +1,6 @@
 {{! eg-render/eg-body-container }}{{#if requiredPresent}}
   {{#ember-collection 
-      items=attrs.data height=attrs.height width=attrs.width 
+      items=attrs.data height=attrs.height width=attrs.width buffer=10
       cell-layout=(fixed-grid-layout attrs.width attrs.rowHeight)
       sliceDidChange=(action "scrollSource")
       as |row rowIndex|
