@@ -29,7 +29,7 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {
     this._super();
-  	Ember.run.next(this, function() {
+  	Ember.run.scheduleOnce('afterRender', this, function() {
       this.set('width', this.constrainDragWidth(this.get('width')));
   		this.renderHeader();
   	});

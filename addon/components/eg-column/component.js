@@ -17,7 +17,7 @@ export default Ember.Component.extend({
 
 	didReceiveAttrs: function() {
 		this._super();
-		Ember.run.next(this, function() {
+		Ember.run.scheduleOnce('afterRender', this, function() {
 			this.get('_column').setProperties(this.attrs);
 		});
 	},
