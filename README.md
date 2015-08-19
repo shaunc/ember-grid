@@ -106,6 +106,8 @@ Use `width` (pixels) and `resizable` to control column width.
 
 Use `align` (`"left"` | `"center"` | `"right"`) to control column alignment.
 
+> **Note:** *the `align` option only applies to auto-generated cells. If you override the rendering then you are in full control of the cell layout.*
+
     {{#ember-grid data=myData }} 
       {{eg-column key="name" width=150 header="Name"}}
       {{eg-column key="age" width=50 resizable=false header="Age" align="right"}}
@@ -114,7 +116,7 @@ Use `align` (`"left"` | `"center"` | `"right"`) to control column alignment.
 
 ### Supply custom header
 
-Place an `eg-header` component inside an `eg-column` to override the default header.
+Place an `eg-header` component inside an `eg-column` to override the default header. 
 
     {{#ember-grid data=myData }} 
 
