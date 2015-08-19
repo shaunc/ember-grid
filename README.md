@@ -158,6 +158,22 @@ Ordering of `eg-header` and `eg-footer` does not affect the output. They are com
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
 
+## Override Styling
+
+Use the following selectors in your css to affect each part of the layout
+| Selector | Target |
+| --- | --- |
+| `.ember-grid` | Outer grid |
+| `.ember-grid .header` | Header row |
+| `.ember-grid .header .cell` | Header cells |
+| `.ember-grid .body` | Body section |
+| `.ember-grid .body .ember-list-item-view` | Body rows |
+| `.ember-grid .body .cell` | Body cells |
+| `.ember-grid .body .cell.odd` | Body cells in odd rows |
+| `.ember-grid .footer` | Footer row |
+| `.ember-grid .footer .cell` | Footer cells |
+| `.ember-grid .cell` | All cells |
+
 ## Running
 
 * `ember server`
