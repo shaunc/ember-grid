@@ -160,7 +160,8 @@ Ordering of `eg-header` and `eg-footer` does not affect the output. They are com
 
 ## Override Styling
 
-Use the following selectors in your css to affect each part of the layout
+Use the following selectors in your css to affect each part of the layout.
+
 | Selector | Target |
 | --- | --- |
 | `.ember-grid` | Outer grid |
