@@ -56,6 +56,16 @@ export default Ember.Component.extend({
 	  }
   },
 
+  text: Ember.computed('_column.header', '_column.key', function() {
+    var result = this.get('_column.header');
+    if (result)
+    {
+      return result;
+    }
+    var key = this.get('_column.key');
+    return key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
+  }),
+
   style: Ember.computed('width', function() {
     return 'width:'+this.get('width')+'px;';
   }),

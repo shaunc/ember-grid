@@ -38,6 +38,15 @@ export default Ember.Component.extend({
 	  }
   },
 
+  text: Ember.computed('_column.footer', function() {
+    var result = this.get('_column.footer');
+    if (result)
+    {
+      return result;
+    }
+    return '';
+  }),
+
   style: Ember.computed('width', function() {
     return 'width:'+this.get('width')+'px;';
   })
