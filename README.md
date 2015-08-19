@@ -6,9 +6,7 @@ A Declarative Data Grid for ember that is scalable to millions of rows. Each cel
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+* `npm install --save ember-grid`
 
 ## Usage
 
