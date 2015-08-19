@@ -11,12 +11,12 @@ export default Ember.Component.extend({
   willInsertElement: function() {
     this._super.apply(this, arguments);
 
-	    var parentView = this.get('parentView');
-	    if (parentView instanceof EmberGridColumn) {
-	    	parentView.set('_column._zones.header', this.attrs);
-	    	parentView.set('_column._zones.header.element', this.get('element'));
-	    }
-		  this.get('element').style.display = 'none';
+    var parentView = this.get('parentView');
+    if (parentView instanceof EmberGridColumn) {
+    	parentView.set('_column._zones.header', this.attrs);
+    	parentView.set('_column._zones.header.element', this.get('element'));
+    }
+	  this.get('element').style.display = 'none';
 	}
 
 });
