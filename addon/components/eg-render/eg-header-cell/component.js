@@ -12,7 +12,7 @@ export default Ember.Component.extend({
   align: Ember.computed.alias('_column.align'),
 
   width: Ember.computed('_column.width', {
-    get(key) {
+    get(/*key*/) {
       return this.get('_column.width');
     },
     set(key, value) {
