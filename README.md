@@ -8,7 +8,7 @@ A Declarative Data Grid for ember that is scalable to millions of rows. Each cel
 
 * `npm install --save ember-grid`
 
-## Usage
+# Usage
 
 ## Defining Grid Layout
 All the below examples use the following model for the data rows
