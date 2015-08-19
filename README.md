@@ -100,6 +100,24 @@ Use `width` (pixels) and `resizable` (boolean) to control column width.
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
 
+### Limit column width
+
+Use css `min-width` and `max-width` on the header cells or specify `min-width` or `max-width` (pixels) on the column. If you specify in the column and in css, the most restrictive one is used.
+
+If the specified `width` of a column lies outside the `min-width`-`max-width` range, it will be brought to the nearest allowable value before displaying the grid.
+
+    .ember-grid .header .cell {
+      min-width: 200px;
+    }
+
+    {{#ember-grid data=myData }} 
+      {{eg-column key="name" width=150 header="Name" min-width=150 max-width=300}}
+      {{eg-column key="age" width=50 resizable=false header="Age"}}
+      {{eg-column key="email" width=250 header="Email Address"}}
+    {{/ember-grid}}
+
+In the above example the name column will have a `min-width` of 200px as the css is more restrictive than the column definition.
+
 ### Specify column alignment
 
 Use `align` (`"left"` | `"center"` | `"right"`) to control column alignment.
