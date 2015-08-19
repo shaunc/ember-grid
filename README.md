@@ -10,45 +10,6 @@ A Declarative Data Grid for ember that is scalable to millions of rows. Each cel
 
 ## Usage
 
-
-    {{#ember-grid data=myData columns=myColumns as |row|}} 
-                                                  // columns may be declared in their entirety
-                                                  // or passed in and annotated.
-
-      {{#eg-column key="name" footer="My Column Footer" cellData=getData}}  // callback called with data row and column
-        {{#eg-header}}
-          <h1>Name</h1>
-        {{/eg-header}}
-
-        // eg-footer is not specified, so the default footer will use column.footer (My Column Footer)
-
-      {{/eg-column}}                   // this column will render with default body cell, defined below
-
-      {{#eg-columns-list as |column|}} // declare annotations for a series of columns
-      
-    	  {{#eg-column key=column.key header="My Column Header" cellData=column.dataKey}}
-    	   
-          // eg-header is not specified, so the default header will use column.header (My Column Header)
-
-          {{#eg-body as |field|}}     // field has already been extracted by the column accessor accessor
-            {{my-component value=field.value}}
-          {{/eg-body}}
-
-          {{#eg-footer value=averagePrice}}  // gets called with column as param
-            {{my-component value=value}}
-          {{/eg-footer}}
-
-    	  {{/eg-column}}
-
-      {{/eg-columns-list}}
-
-      {{! cell definition out side of columns is default }}
-      {{#eg-body as |field column|}}
-        <pre>field</pre>
-      {{/eg-body}}
-
-    {{/ember-grid}}
-
 ## Defining Grid Layout
 All the below examples use the following model for the data rows
 
