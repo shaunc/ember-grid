@@ -1,6 +1,6 @@
 # Ember-Grid
 
-A Declarative data grid for ember.
+A Declarative Data Grid for ember that is scalable to millions of rows. Each cell can be defined simply and quickly or fully customised.
 
 [![Build Status](https://travis-ci.org/shaunc/ember-grid.svg?branch=master)](https://travis-ci.org/shaunc/ember-grid)
 
@@ -94,7 +94,7 @@ All the below examples use the following model for the data rows
 
 ### Specify column width
 
-Use `width` (pixels) and `resizable` to control column width.
+Use `width` (pixels) and `resizable` (boolean) to control column width.
 
     {{#ember-grid data=myData }} 
       {{eg-column key="name" width=150 header="Name"}}
@@ -106,7 +106,7 @@ Use `width` (pixels) and `resizable` to control column width.
 
 Use `align` (`"left"` | `"center"` | `"right"`) to control column alignment.
 
-> **Note:** *the `align` option only applies to auto-generated cells. If you override the rendering then you are in full control of the cell layout.*
+> **Note:** *the `align` option only applies to auto-generated cells. If you override a cell block (see below) then you are in full control of the cell layout.*
 
     {{#ember-grid data=myData }} 
       {{eg-column key="name" width=150 header="Name"}}
