@@ -8,6 +8,11 @@ A Declarative Data Grid for ember that is scalable to millions of rows. Each cel
 
 * `npm install --save ember-grid`
 
+If you have [ember-cli](http://www.ember-cli.com/) installed globally, you can view the sample application by cloning
+the repository and running
+
+* ember serve
+
 # Usage
 
 ## Defining Grid Layout
