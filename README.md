@@ -118,6 +118,8 @@ If the specified `width` of a column lies outside the `min-width`-`max-width` ra
 
 In the above example the name column will have a `min-width` of 200px as the css is more restrictive than the column definition.
 
+> **Note:** *When the `width`, `min-width` or `max-width` is specified in the column, this refers to the inner width of the column, not including padding and borders. A `min-width` specified in the css refers to the outer width and includes padding and borders.*
+
 ### Specify column alignment
 
 Use `align` (`"left"` | `"center"` | `"right"`) to control column alignment.
