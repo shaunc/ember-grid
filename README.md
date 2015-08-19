@@ -49,7 +49,7 @@ A Declarative Data Grid for ember that is scalable to millions of rows. Each cel
 
     {{/ember-grid}}
 
-## Defining columns
+## Defining Grid Layout
 All the below examples use the following model for the data rows
 
     {
@@ -112,7 +112,7 @@ Use `align` (`"left"` | `"center"` | `"right"`) to control column alignment.
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
 
-### Supply custom header
+### Supply a custom header
 
 Place an `eg-header` component inside an `eg-column` to override the default header. 
 
@@ -131,7 +131,7 @@ Place an `eg-header` component inside an `eg-column` to override the default hea
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
 
-### Supply custom footer
+### Supply a custom footer
 
 Place an `eg-footer` component inside an `eg-column` to override the default footer.
 Ordering of `eg-header` and `eg-footer` does not affect the output. They are completely independent.
