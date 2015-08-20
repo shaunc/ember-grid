@@ -1,3 +1,5 @@
+// component eg-footer
+
 import Ember from 'ember';
 import EmberGridColumn from '../eg-column/component';
 import layout from './template';

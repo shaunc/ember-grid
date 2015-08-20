@@ -1,3 +1,5 @@
+// component eg-body
+
 import Ember from 'ember';
 import EmberGridColumn from '../eg-column/component';
 import layout from './template';
@@ -10,7 +12,7 @@ export default Ember.Component.extend({
 
   _data: Ember.computed.alias('_body.data'),
   _column: Ember.computed.alias('parentView._column'),
-  _items: Ember.computed('_body.{data,offset,limit,maxBuffer}', function() {
+  _items: Ember.computed('_body.{data,offset,limit}', function() {
     var body = this.get('_body');
     var {data, offset, limit} = body;
     var {oldOffset, oldLimit, oldItems} = {this};
@@ -19,7 +21,6 @@ export default Ember.Component.extend({
     var jump = Math.max(
       Math.abs(offset - oldOffset), Math.abs(end - oldEnd));
     if (oldItems != null && jump * 4 < oldItems.length) {
-      console.log("old items", oldOffset, oldLimit, oldItems.length)
       return oldItems;
     }
     oldItems = this.oldItems = data.slice(offset, offset + limit);
@@ -44,11 +45,10 @@ export default Ember.Component.extend({
   getCellElement(rowIndex) {
     var element = this.element;
     if (element == null || element.childNodes == null) {
-      self.rerender();
       return null;
     }
     var body = this.get('_body');
-    var {data, offset, limit} = body;
+    var {offset, limit} = body;
     if (rowIndex < offset || rowIndex >= offset + limit) { return null; }
     return element.getElementsByClassName('eg-body-cell')[rowIndex - offset];
   },
