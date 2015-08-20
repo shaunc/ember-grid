@@ -1,3 +1,5 @@
+// componnent eg-render/eg-body
+
 import Ember from 'ember';
 import layout from './template';
 

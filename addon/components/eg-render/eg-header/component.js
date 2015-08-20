@@ -1,3 +1,5 @@
+// component eg-render/eg-header
+
 import Ember from 'ember';
 import layout from './template';
 

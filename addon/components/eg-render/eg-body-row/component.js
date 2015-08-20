@@ -6,12 +6,13 @@ import { copyChildren } from 'ember-grid/utils/dom-util';
 
 export default Ember.Component.extend({
   layout: layout,
+  classNames: ['row'],
 
   didInitAttrs: function() {
     this._super();
     var columns = this.getAttr('columns');
     if ( columns != null ) {
-      this._childrenPresent = columns.map(function(){ false; });
+      this._childrenPresent = columns.map(()=> false);
       this._rowIndex = null;
     }
   },
@@ -22,7 +23,7 @@ export default Ember.Component.extend({
       return;
     }
     var columns = this.get('columns');
-    if (columns == null || columns.length == 0) { return; }
+    if (columns == null || columns.length === 0) { return; }
     var rowIndex = this.get('rowIndex');
     var cellElements = this.element.getElementsByClassName('eg-body-cell');
     var oldRowIndex = this._rowIndex;
@@ -33,7 +34,7 @@ export default Ember.Component.extend({
     if (oldRowIndex === rowIndex ) { 
       if (allPresent()) { return; }
     }
-    var oldChildrenPresent = this._childrenPresent
+    var oldChildrenPresent = this._childrenPresent;
     this._childrenPresent = columns.map(function(column, icol) {
       // we've already got the cell's children -- do nothing
       if (oldRowIndex === rowIndex && oldChildrenPresent[icol]) { 
