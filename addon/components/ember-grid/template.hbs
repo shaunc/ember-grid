@@ -1,16 +1,14 @@
-{{!ember-grid}}
+{{!ember-grid ~}}
 
 {{! yield injects the declarative components}}
 {{yield}}
 
-{{#if showHeader}}
+{{#if false}}
 	{{eg-render/eg-header columns=columns width=bodyWidth}}
-{{/if}}
 
 {{eg-render/eg-body
   data=attrs.data columns=columns height=bodyHeight width=bodyWidth
   contentWidth=contentWidth rowHeight=rowHeight}}
 
-{{#if showFooter}}
 	{{eg-render/eg-footer columns=columns width=bodyWidth}}
 {{/if}}

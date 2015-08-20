@@ -1,6 +1,6 @@
 .ember-grid {
 	
-	border: 1px solid black;
+	border: 1px solid #333;
 
 	.column-def {
 		// always hide declarative components
@@ -8,7 +8,7 @@
 	}
 
 	.header, .body {
-	  border-bottom: 1px solid black;
+	  border-bottom: 1px solid #333;
 	}
 
 	.footer, .body {
@@ -22,16 +22,15 @@
 	  font-size: 0px;
 
 		.cell {
-    	border-right: 1px solid black;
+    	border-right: 1px solid #333;
     	padding-left: 2px;
     	padding-right: 2px;
     	padding-top: 1px;
     	padding-bottom: 2px;
-
     	font-size: 14px;
 
     	&:last-child {
-    		border-right: none;
+    		border-right-color: rgba(200,200,200,.8);
     	}
 
     	.default {
@@ -47,7 +46,7 @@
     	}
 		}
 
-		.resizeHandle {
+		.resize-handle {
 	    position: absolute;
 	    right: -3px;
 	    top: 0px;
@@ -76,16 +75,19 @@
 
 	.body {
 
-		.ember-list-container {
+    .body-collection {
+      background-color: rgba(240,240,240,.5);
+
 		  overflow: auto;
 		  position: relative;
 		  width: 100%;
 
-			.ember-list-item-view {
+			> div {
 			  position: absolute;
 			  overflow: hidden;
 
 			  .cell {
+          background-color: white;
 			  	&.odd {
 			  		background-color: #F1F0F0;
 			  	}

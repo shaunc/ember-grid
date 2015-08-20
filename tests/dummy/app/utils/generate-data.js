@@ -1,5 +1,6 @@
 /* globals Chance, _ */
 // Generate random data
+// See http://chancejs.com/ for details of possible fields.
 
 import Ember from 'ember';
 
