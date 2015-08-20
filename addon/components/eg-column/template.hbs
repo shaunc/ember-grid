@@ -1,10 +1,5 @@
+{{! eg-column ~}}
 {{#if hasBlock}}
   {{yield _column}}
-{{else}}
-  {{#eg-body as |field|}}
-  <div class="default {{_column.align}}">
-  	{{field}}
-  </div>	
-  {{/eg-body}}
 {{/if}}
 
