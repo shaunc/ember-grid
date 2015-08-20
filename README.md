@@ -37,7 +37,7 @@ To specify the window, use the `height` and `width` attributes. The `rowHeight` 
       {{eg-column key="email"}}
     {{/ember-grid}}
 
-If `height` or `width` is not specified, `ember-grid` will read use its actual height on display. If `row-height` is not specified, `ember-grid` will look for a height in css for an element rendered with class `.ember-grid .row`. If none is found, the default is `25` pixels.
+If `height` or `width` is not specified, `ember-grid` will use its actual height on display. If `row-height` is not specified, `ember-grid` will look for a height in css for an element rendered with class `.ember-grid .row`. If none is found, the default is `25` pixels.
 
 ### Simple text columns
 
