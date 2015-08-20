@@ -1,0 +1,5 @@
+{{! eg-render/eg-body-row ~}}
+{{#each columns as |column| }}
+  {{eg-render/eg-body-cell 
+    rowIndex=rowIndex _column=column rowHeight=attrs.rowHeight}}
+{{/each}}

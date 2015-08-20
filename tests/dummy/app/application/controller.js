@@ -5,7 +5,7 @@ import generateData from 'dummy/utils/generate-data';
 
 export default Ember.Controller.extend({
 
-  gridRows: generateData(200, {
+  gridRows: generateData(500, {
     name: 'name', 
     age: {name: 'age', options: {type: 'adult'}},
     salary: {name: 'dollar', options: {max: 200000}},

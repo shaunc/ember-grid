@@ -3,7 +3,7 @@
 
   {{#eg-column key="name" width=250 header="Name" footer="Footer text" min-width=150 max-width=300 align="center"}}
     
-    {{#eg-body as |field column rowIndex|}}
+    {{#eg-body as |field rowIndex column|}}
       [{{rowIndex}}:{{column.key}}] <strong>{{field}}</strong>
     {{/eg-body}}
 
@@ -16,26 +16,9 @@
     {{#eg-header as |column|}}
       <span style="text-align: right;display: block;">{{column.header}}</span>
     {{/eg-header}}
-    
-    {{#eg-body as |field|}}
-      {{field}} 
-    {{/eg-body}}
-    
     {{#eg-footer as |column|}}{{column.footer}}{{/eg-footer}}
 
   {{/eg-column}}
 
   {{eg-column key="email" width=150 header="Email" footer="Email Footer"}}
 {{/ember-grid}}
-
-<table>
-{{#ember-collection items=gridRows width=800 height=200 
-  cell-layout=(fixed-grid-layout 800 25) as |row|}}
-  <tr>
-    <td>{{row.name}}</td>
-    <td>{{row.age}}</td>
-    <td>{{row.salary}}</td>
-    <td>{{row.email}}</td>
-  </tr>
-{{/ember-collection}}
-</table>

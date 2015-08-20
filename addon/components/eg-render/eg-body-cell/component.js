@@ -8,24 +8,21 @@ export default Ember.Component.extend({
   classNameBindings: ['isOddRow:odd'],
   attributeBindings: ['style', 'rowIndex:data-row-index'],
 
-  width: Ember.computed.alias('column.width'),
-  align: Ember.computed.alias('column.align'),
+  _source: Ember.computed.alias('_column._zones.body.source'),
+  _data: Ember.computed.alias('_column._zones.body.data'),
+
+  width: Ember.computed.alias('_column.width'),
+  align: Ember.computed.alias('_column.align'),
 
   isOddRow: Ember.computed('rowIndex', function() {
     return this.get('rowIndex') % 2 === 1;
   }),
 
-  style: Ember.computed('column.offset', 'width', function(){
-    var {'column.offset': offset, width, rowHeight} = this.getProperties(
-      'column.offset', 'width', 'rowHeight');
-    if (!isNaN(offset)) {
-      return Ember.String.htmlSafe(
-        'display:inline-block; width:' + width + 
-        'px; height:' + rowHeight + 'px');
-    }
-    else {
-      return Ember.String.htmlSafe('display: none;');
-    }
+  style: Ember.computed('width', 'rowHeight', function(){
+    var {width, rowHeight} = this.getProperties('width', 'rowHeight');
+    return Ember.String.htmlSafe(
+      'display:inline-block; width:' + width + 
+      'px; height:' + rowHeight + 'px');
   })
 
 });

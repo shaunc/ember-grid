@@ -14,7 +14,7 @@ export default Ember.Component.extend({
   draggingHeaderCell: null,
 
   style: Ember.computed('width', function() {
-    return 'width:'+this.get('width')+'px;';
+    return Ember.String.htmlSafe('width:'+this.get('width')+'px;');
   }),
 
   mouseUp: function() {

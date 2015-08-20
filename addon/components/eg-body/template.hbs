@@ -1,12 +1,10 @@
 {{! eg-body ~}}
 {{#if _requiredPresent ~}}
   {{#each _items as |row rowOffset| ~}}
-
     {{#with (eg-add _body.offset rowOffset) as |rowIndex| ~}}
       <div class='eg-body-cell' data-row-index="{{rowIndex}}">
-        {{~ yield (eg-cell-data this rowIndex) _column rowIndex ~}}
+        {{~ yield (eg-cell-data _data rowIndex _column) rowIndex _column ~}}
       </div>
     {{/with}}
-    
   {{/each}}
 {{/if}}

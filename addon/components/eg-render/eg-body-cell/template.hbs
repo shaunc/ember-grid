@@ -1,1 +1,6 @@
 {{yield}}
+{{#unless _source}}
+  <div class="default {{_column.align}}">
+    {{eg-cell-data _data rowIndex _column}}
+  </div>
+{{/unless}}

@@ -7,40 +7,34 @@ export default Ember.Component.extend({
 	classNames: ['body-def'],
 
   _body: null,
+
+  _data: Ember.computed.alias('_body.data'),
   _column: Ember.computed.alias('parentView._column'),
-  _items: Ember.computed.alias('_body.data'),/*
-  _items: Ember.computed('_body.{data,offset,limit}', function(){
+  _items: Ember.computed('_body.{data,offset,limit,maxBuffer}', function() {
     var body = this.get('_body');
     var {data, offset, limit} = body;
-    return data;
-    return (data || []).slice(offset, offset + limit);
-  }),*/
+    var {oldOffset, oldLimit, oldItems} = {this};
+    var end = offset + limit;
+    var oldEnd = oldOffset + oldLimit;
+    var jump = Math.max(
+      Math.abs(offset - oldOffset), Math.abs(end - oldEnd));
+    if (oldItems != null && jump * 4 < oldItems.length) {
+      console.log("old items", oldOffset, oldLimit, oldItems.length)
+      return oldItems;
+    }
+    oldItems = this.oldItems = data.slice(offset, offset + limit);
+    this.oldOffset = offset;
+    this.oldLimit = limit;
+    return oldItems;
+
+  }),
   _requiredPresent: Ember.computed(
-      '_body.{data,height,width,rowHeight,offset,limit}', function(){
+      '_body.{data,rowHeight,offset,limit}', function() {
     var body = this._body || {};
     var {data, height, width, rowHeight, offset, limit} = body;
     return data != null && height != null && width != null && 
       rowHeight != null && offset != null && limit != null;
-  }),/*
-  contextDidChange: Ember.observer(
-    '_data', '_body.{height,width,rowHeight,offset,limit}', function(){
-      Ember.run.next(this, function(){ 
-        this.rerender();
-      });
-  }),*/
-
-  /**
-   * Return field data for column given row index.
-   *
-   * @method field
-   * @params rowIndex
-   *
-   */
-  field: function(rowIndex) {
-    var {'_column.key': key, '_body.data': data} = this.getProperties(
-      '_column.key', '_body.data');
-    return data[rowIndex][key];
-  },
+  }),
   /**
    * Return DOM element for row index if currently rendered or null
    *
@@ -55,8 +49,8 @@ export default Ember.Component.extend({
     }
     var body = this.get('_body');
     var {data, offset, limit} = body;
-    //if (rowIndex < offset || rowIndex >= offset + limit) { return null; }
-    return element.getElementsByClassName('eg-body-cell')[rowIndex];// - offset];
+    if (rowIndex < offset || rowIndex >= offset + limit) { return null; }
+    return element.getElementsByClassName('eg-body-cell')[rowIndex - offset];
   },
   didReceiveAttrs: function() {
     this._super();
