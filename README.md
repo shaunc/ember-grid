@@ -20,6 +20,7 @@ All the below examples use the following model for the data rows
 
     {
       name: "Steve",
+      lastName: "Fuller",
       age: 32,
       email: "stevey.baby@hotmail.com"
     }
@@ -143,6 +144,63 @@ Ordering of `eg-header` and `eg-footer` does not affect the output. They are com
       {{eg-column key="age" width=50 resizable=false header="Age" align="right"}}
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
+
+## Specifying body cell content
+
+By default, the cell content in the table body is the field in the each row of data corresponding to the column key. To override this specify the `field` in the column:
+
+    {{#ember-grid data=myData }} 
+      {{eg-column key="name" width=150 header="Name" field="email" }}
+      {{eg-column key="age" width=50 resizable=false header="Age" align="right"}}
+      {{eg-column key="email" width=250 header="Email Address"}}
+    {{/ember-grid}}
+
+Providing a string field is of limited utility: this example merely displays the email field twice. However, field can also be passed in as a function from your outer context (controller or enclosing component). For instance, if you have a controller
+that defines:
+
+    function fullName(row) {
+      return row.name + ' ' + row.lastName;
+    }
+
+Then the following table would display both the full name in the first column:
+
+    {{#ember-grid data=myData }} 
+      {{eg-column key="name" width=150 header="Name" field=fullName }}
+      {{eg-column key="age" width=50 resizable=false header="Age" align="right"}}
+      {{eg-column key="email" width=250 header="Email Address"}}
+    {{/ember-grid}}
+
+The full, the accessor is called with `(row, rowIndex, column)`, where `row`
+is the current data row, `rowIndex` is the index of the row, and `column` is the current column.
+
+### Supply a custom body cell
+
+Place a `eg-body` component inside `eg-column` to override the default body cells for the column:
+
+    {{#ember-grid data=myData }} 
+      {{#eg-column key="name" width=150 header="Name" field=fullName }}
+        {{#eg-body as |field rowIndex column|}}
+          <span class="number">{{rowIndex}}</span><strong>{{field}}</field>
+        {{/eg-body}}
+      {{/eg-collumn}}
+      {{eg-column key="age" width=50 resizable=false header="Age" align="right"}}
+      {{eg-column key="email" width=250 header="Email Address"}}
+    {{/ember-grid}}
+
+The `field` yielded by `eg-body` to the content is either the data field corresponding to the current row, or whatever was returned by the custom accessor supplied as `field` to the `eg-column` attribute. For instance, if our
+accessor function was
+
+    function fullName(row) {
+      return {first: row.name, last: row.lastName};
+    }
+
+Then the `eg-body` could be written:
+
+        {{#eg-body as |field|}}
+          <span class="first">{{field.first}}</span><span class="last">{{field.last}}</span>
+        {{/eg-body}}
+
+Note that as displayed above, the current `rowIndex` and `column` are available in the body of `eg-body`, but of course, needn't be referenced if unneeded.
 
 ## Override Styling
 
