@@ -8,27 +8,26 @@ export default Ember.Component.extend({
 
   _body: null,
   _column: Ember.computed.alias('parentView._column'),
+  _items: Ember.computed.alias('_body.data'),/*
   _items: Ember.computed('_body.{data,offset,limit}', function(){
-    var {
-      '_body.data': data, '_body.offset': offset, '_body.limit': limit
-    } = this.getProperties(
-      '_body.data', '_body.offset', '_body.limit');
-    var column = this.get('_column');
+    var body = this.get('_body');
+    var {data, offset, limit} = body;
+    return data;
     return (data || []).slice(offset, offset + limit);
-  }),
+  }),*/
   _requiredPresent: Ember.computed(
       '_body.{data,height,width,rowHeight,offset,limit}', function(){
     var body = this._body || {};
     var {data, height, width, rowHeight, offset, limit} = body;
     return data != null && height != null && width != null && 
       rowHeight != null && offset != null && limit != null;
-  }),
+  }),/*
   contextDidChange: Ember.observer(
     '_data', '_body.{height,width,rowHeight,offset,limit}', function(){
       Ember.run.next(this, function(){ 
         this.rerender();
       });
-  }),
+  }),*/
 
   /**
    * Return field data for column given row index.
@@ -51,12 +50,13 @@ export default Ember.Component.extend({
   getCellElement(rowIndex) {
     var element = this.element;
     if (element == null || element.childNodes == null) {
+      self.rerender();
       return null;
     }
-    var {'_body.offset': offset, '_body.limit': limit } = this.getProperties(
-      '_body.offset', '_body.limit');
-    if (rowIndex < offset || rowIndex >= offset + limit) { return null; }
-    return element.getElementsByClassName('eg-body-cell')[rowIndex - offset];
+    var body = this.get('_body');
+    var {data, offset, limit} = body;
+    //if (rowIndex < offset || rowIndex >= offset + limit) { return null; }
+    return element.getElementsByClassName('eg-body-cell')[rowIndex];// - offset];
   },
   didReceiveAttrs: function() {
     this._super();
