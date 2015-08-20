@@ -25,6 +25,20 @@ All the below examples use the following model for the data rows
       email: "stevey.baby@hotmail.com"
     }
 
+### Defining the window
+
+Ember grid only displays data that fits into a fixed size window. Cells will only be rendered as (or just before) they scroll into view. This makes `ember-grid` is suitable for displaying very large datasets.
+
+To specify the window, use the `height` and `width` attributes. The `rowHeight` attribute specifies the (outer) height of rows in the body of the grid.
+
+    {{#ember-grid data=myData width=800 height=200 rowHeight=25}} 
+      {{eg-column key="name"}}
+      {{eg-column key="age"}}
+      {{eg-column key="email"}}
+    {{/ember-grid}}
+
+If `height` or `width` is not specified, `ember-grid` will read use its actual height on display. If `row-height` is not specified, `ember-grid` will look for a height in css for an element rendered with class `.ember-grid .row`. If none is found, the default is `25` pixels.
+
 ### Simple text columns
 
 `key` is used to lookup data on the row model and to identify the row for glimmer reuse.
@@ -145,7 +159,7 @@ Ordering of `eg-header` and `eg-footer` does not affect the output. They are com
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
 
-## Specifying body cell content
+### Specifying body cell content
 
 By default, the cell content in the table body is the field in the each row of data corresponding to the column key. To override this specify the `field` in the column:
 
