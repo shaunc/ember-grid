@@ -159,7 +159,7 @@ Ordering of `eg-header` and `eg-footer` does not affect the output. They are com
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
 
-### Specifying body cell content
+### Specify body cell content
 
 By default, the cell content in the table body is the field in the each row of data corresponding to the column key. To override this specify the `field` in the column:
 
