@@ -11,7 +11,8 @@ A Declarative Data Grid for ember that is scalable to millions of rows. Each cel
 If you have [ember-cli](http://www.ember-cli.com/) installed globally, you can view the sample application by cloning
 the repository and running
 
-* ember serve
+* `npm install && bower install`
+* `ember serve`
 
 # Usage
 
@@ -169,14 +170,13 @@ By default, the cell content in the table body is the field in the each row of d
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
 
-Providing a string field is of limited utility: this example merely displays the email field twice. However, field can also be passed in as a function from your outer context (controller or enclosing component). For instance, if you have a controller
-that defines:
+Providing a string field is of limited utility. This example merely displays the email field twice. However, field can also be passed in as a function from your outer context (controller or enclosing component). For instance, if you have a controller that defines:
 
     function fullName(row) {
       return row.name + ' ' + row.lastName;
     }
 
-Then the following table would display both the full name in the first column:
+Then the following table would display the full name in the first column:
 
     {{#ember-grid data=myData }} 
       {{eg-column key="name" width=150 header="Name" field=fullName }}
@@ -184,8 +184,8 @@ Then the following table would display both the full name in the first column:
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
 
-The full, the accessor is called with `(row, rowIndex, column)`, where `row`
-is the current data row, `rowIndex` is the index of the row, and `column` is the current column.
+The `fullName` accessor is called with `(row, rowIndex, column)`, where `row`
+is the current data row, `rowIndex` is the index of the row, and `column` is the current column object. The column object has the properties passed in by you as attributes to the `eg-column`.
 
 ### Supply a custom body cell
 
@@ -194,9 +194,10 @@ Place a `eg-body` component inside `eg-column` to override the default body cell
     {{#ember-grid data=myData }} 
       {{#eg-column key="name" width=150 header="Name" field=fullName }}
         {{#eg-body as |field rowIndex column|}}
-          <span class="number">{{rowIndex}}</span><strong>{{field}}</field>
+          <span class="number">{{rowIndex}}</span>
+          <strong>{{field}}</strong>
         {{/eg-body}}
-      {{/eg-collumn}}
+      {{/eg-column}}
       {{eg-column key="age" width=50 resizable=false header="Age" align="right"}}
       {{eg-column key="email" width=250 header="Email Address"}}
     {{/ember-grid}}
@@ -211,10 +212,11 @@ accessor function was
 Then the `eg-body` could be written:
 
         {{#eg-body as |field|}}
-          <span class="first">{{field.first}}</span><span class="last">{{field.last}}</span>
+          <span class="first">{{field.first}}</span>
+          <span class="last">{{field.last}}</span>
         {{/eg-body}}
 
-Note that as displayed above, the current `rowIndex` and `column` are available in the body of `eg-body`, but of course, needn't be referenced if unneeded.
+Note that as displayed above, the current `rowIndex` and `column` are available in the body of `eg-body`, but of course, needn't be referenced if not required by the calculation.
 
 ## Override Styling
 
