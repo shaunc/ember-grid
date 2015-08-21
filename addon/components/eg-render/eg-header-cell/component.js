@@ -2,6 +2,7 @@
 
 import Ember from 'ember';
 import layout from './template';
+import { moveChildren } from 'ember-grid/utils/dom-util';
 
 export default Ember.Component.extend({
   layout: layout,
@@ -49,12 +50,7 @@ export default Ember.Component.extend({
   	{
 	    var sourceElement = header.element;
 	    var destinationElement = this.get('element');
-	    var node = sourceElement.firstChild;
-	    var lastNode = sourceElement.lastChild;
-	    while(node) {
-	      destinationElement.insertBefore(node, null);
-	      node = node !== lastNode ? lastNode.parentNode.firstChild : null;
-	    }
+      moveChildren(sourceElement, destinationElement);
 	  }
   },
 
