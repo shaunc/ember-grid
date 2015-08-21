@@ -38,7 +38,7 @@ module.exports = function(environment) {
 
   // settings for gh-pages
   if (environment === 'production') {
-    ENV.baseURL = '/ember-grid'
+    ENV.baseURL = '/ember-grid/'
   }
 
   if (environment === 'test') {
