@@ -15,7 +15,7 @@ export default Ember.Component.extend({
   _items: Ember.computed('_body.{data,offset,limit}', function() {
     var body = this.get('_body');
     var {data, offset, limit} = body;
-    var {oldOffset, oldLimit, oldItems} = {this};
+    var {oldOffset, oldLimit, oldItems} = this;
     var end = offset + limit;
     var oldEnd = oldOffset + oldLimit;
     var jump = Math.max(

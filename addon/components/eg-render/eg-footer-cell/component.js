@@ -32,7 +32,7 @@ export default Ember.Component.extend({
   	{
 	    var sourceElement = footer.element;
 	    var destinationElement = this.get('element');
-      //debugger;
+      debugger;
       if (destinationElement.firstChild == null) {
         sourceElement.createTextNode('&nbsp;');
       } else {

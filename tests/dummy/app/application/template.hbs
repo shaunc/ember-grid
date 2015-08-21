@@ -1,7 +1,9 @@
 <h2 id="title">Ember Grid</h2>
 {{#ember-grid width=800 height=200 rowHeight=25 data=gridRows showFooter=true }}
 
-  {{#eg-column key="name" width=250 header="Name" footer="Footer text" min-width=150 max-width=300 align="center"}}
+  {{#eg-column 
+      key="name" width=250 header="Name" footer="Footer text" 
+      min-width=150 max-width=300 align="center"}}
     
     {{#eg-body as |field rowIndex column|}}
       [{{rowIndex}}:{{column.key}}] <strong>{{field}}</strong>
@@ -16,7 +18,7 @@
     {{#eg-header as |column|}}
       <span style="text-align: right;display: block;">{{column.header}}</span>
     {{/eg-header}}
-    {{#eg-footer as |column|}}{{column.footer}}{{/eg-footer}}
+    {{#eg-footer as |column|}}{{column.header}}{{/eg-footer}}
 
   {{/eg-column}}
 
