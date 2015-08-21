@@ -6,7 +6,7 @@ A Declarative Data Grid for ember that is scalable to millions of rows. Each cel
 
 ## Demo
 
-<iframe src="http://shaunc.github.io/ember-grid/" width="100%" height="300"> </iframe>
+<http://shaunc.github.io/ember-grid/>
 
 ## Installation
 
