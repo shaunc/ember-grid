@@ -1,0 +1,31 @@
+.ember-grid {
+  border-radius: 7px;
+  /*
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  */
+}
+.ember-grid .cell {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.ember-grid .header {
+  color: white;
+  background-color: navy;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+.ember-grid .header .cell {
+  border-color: white;
+  max-width: 200px;
+}
+.ember-grid .footer {
+  background-color: navy;
+  color: white;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.ember-grid .body .cell {
+  transition: opacity 0.1s;
+}
+/*# sourceMappingURL=/assets/dummy.css.map */

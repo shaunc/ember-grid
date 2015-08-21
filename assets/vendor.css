@@ -1,0 +1,88 @@
+.ember-grid {
+  border: 1px solid #333;
+}
+.ember-grid .column-def {
+  display: none;
+}
+.ember-grid .header,
+.ember-grid .body {
+  border-bottom: 1px solid #333;
+}
+.ember-grid .footer .cell,
+.ember-grid .body .cell {
+  overflow: hidden;
+}
+.ember-grid .header,
+.ember-grid .footer,
+.ember-grid .body {
+  font-size: 0px;
+}
+.ember-grid .header .cell,
+.ember-grid .footer .cell,
+.ember-grid .body .cell {
+  border-right: 1px solid #333;
+  padding-left: 2px;
+  padding-right: 2px;
+  padding-top: 1px;
+  padding-bottom: 2px;
+  font-size: 14px;
+}
+.ember-grid .header .cell:last-child,
+.ember-grid .footer .cell:last-child,
+.ember-grid .body .cell:last-child {
+  border-right-color: rgba(200, 200, 200, 0.8);
+}
+.ember-grid .header .cell .default.left,
+.ember-grid .footer .cell .default.left,
+.ember-grid .body .cell .default.left {
+  text-align: left;
+}
+.ember-grid .header .cell .default.center,
+.ember-grid .footer .cell .default.center,
+.ember-grid .body .cell .default.center {
+  text-align: center;
+}
+.ember-grid .header .cell .default.right,
+.ember-grid .footer .cell .default.right,
+.ember-grid .body .cell .default.right {
+  text-align: right;
+}
+.ember-grid .header .resize-handle,
+.ember-grid .footer .resize-handle,
+.ember-grid .body .resize-handle {
+  position: absolute;
+  right: -3px;
+  top: 0px;
+  bottom: 0px;
+  width: 5px;
+  cursor: ew-resize;
+}
+.ember-grid .header .dragging {
+  cursor: ew-resize;
+}
+.ember-grid .header,
+.ember-grid .footer {
+  position: relative;
+}
+.ember-grid .header .cell,
+.ember-grid .footer .cell {
+  position: relative;
+  display: inline-block;
+}
+.ember-grid .body .body-collection {
+  background-color: rgba(240, 240, 240, 0.5);
+  overflow: auto;
+  position: relative;
+  width: 100%;
+}
+.ember-grid .body .body-collection > div {
+  position: absolute;
+  overflow: hidden;
+}
+.ember-grid .body .body-collection > div .cell {
+  background-color: white;
+}
+.ember-grid .body .body-collection > div .cell.odd {
+  background-color: #F1F0F0;
+}
+/*# sourceMappingURL=ember-grid.css.map */
