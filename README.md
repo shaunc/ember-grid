@@ -4,6 +4,10 @@ A Declarative Data Grid for ember that is scalable to millions of rows. Each cel
 
 [![Build Status](https://travis-ci.org/shaunc/ember-grid.svg?branch=master)](https://travis-ci.org/shaunc/ember-grid)
 
+## Demo
+
+<iframe src="http://shaunc.github.io/ember-grid/" width="100%" height="300"></iframe>
+
 ## Installation
 
 * `npm install --save ember-grid`
