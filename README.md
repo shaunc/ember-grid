@@ -228,7 +228,7 @@ Use the following selectors in your css to affect each part of the layout.
 | `.ember-grid .header` | Header row |
 | `.ember-grid .header .cell` | Header cells |
 | `.ember-grid .body` | Body section |
-| `.ember-grid .body .ember-list-item-view` | Body rows |
+| `.ember-grid .body .row` | Body rows |
 | `.ember-grid .body .cell` | Body cells |
 | `.ember-grid .body .cell.odd` | Body cells in odd rows |
 | `.ember-grid .footer` | Footer row |
