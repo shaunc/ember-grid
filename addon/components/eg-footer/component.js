@@ -16,7 +16,6 @@ export default Ember.Component.extend({
   	Ember.run.scheduleOnce('afterRender', this, function() {
 	    var parentView = this.get('parentView');
 	    if (parentView instanceof EmberGridColumn) {
-       console.log("FOOTER", this.get('_column').key);
 	    	parentView.set('_column._zones.footer', this.attrs);
 	    	parentView.set('_column._zones.footer.element', this.get('element'));
 	    }

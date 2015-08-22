@@ -1,6 +1,7 @@
 .ember-grid {
 	
 	border: 1px solid #333;
+  overflow: hidden;
 
 	.column-def {
 		// always hide declarative components
@@ -28,6 +29,8 @@
     	padding-top: 1px;
     	padding-bottom: 2px;
     	font-size: 14px;
+      box-sizing: border-box;
+      margin: 0;
 
     	&:last-child {
     		border-right-color: rgba(200,200,200,.8);
@@ -79,6 +82,7 @@
       background-color: rgba(240,240,240,.5);
 
 		  overflow: auto;
+      overflow-x: hidden;
 		  position: relative;
 		  width: 100%;
 

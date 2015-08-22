@@ -7,6 +7,26 @@ import { copyChildren } from 'ember-grid/utils/dom-util';
 export default Ember.Component.extend({
   layout: layout,
   classNames: ['row'],
+  classNameBindings: [ 'isFirstInWindow:first', 'isLastInWindow:last' ],
+
+  windowIndex: Ember.computed('parentView.offset', 'rowIndex', function() { 
+    var offset = this.get('parentView.offset');
+    var rowIndex = this.get('rowIndex');
+    console.log("row", rowIndex, offset, rowIndex - offset);
+    return rowIndex - offset;
+  }),
+
+  isFirstInWindow: Ember.computed.equal('windowIndex', 0),
+
+  isLastInWindow: Ember.computed(
+      'rowIndex', function (){
+    var parentView = this.get('parentView');
+    var {offset, limit} = parentView;
+    if (offset != null && limit != null) {
+      var rowIndex = this.get('rowIndex');
+      return offset + limit == rowIndex - 1;
+    }
+  }),
 
   didInitAttrs: function() {
     this._super();

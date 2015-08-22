@@ -20,7 +20,10 @@ export default Ember.Component.extend({
 	didReceiveAttrs: function() {
 		this._super();
 		Ember.run.scheduleOnce('afterRender', this, function() {
-			this.get('_column').setProperties(this.attrs);
+			var column = this.get('_column');
+			for(let key in this.attrs) {
+				column.set(key, this.getAttr(key));
+			}
 		});
 	},
 

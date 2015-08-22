@@ -1,15 +1,27 @@
-// Dummy Application Controller.
+// dummy/app/application/controller
 
 import Ember from 'ember';
-import generateData from 'dummy/utils/generate-data';
 
 export default Ember.Controller.extend({
-
-  gridRows: generateData(500, {
-    name: 'name', 
-    age: {name: 'age', options: {type: 'adult'}},
-    salary: {name: 'dollar', options: {max: 200000}},
-    email: {name: 'email', options: {domain: 'example.com'}}
-    }, 4359)
-
+  gallery: [
+    { section: 'General', examples: ['simple']},
+    { section: 'Layout & Scrolling', examples: [] },
+    { section: 'Text columns', examples: [] },
+    { section: 'Header & footer', examples: [] },
+    { section: 'Column Attributes', examples: [] },
+    { section: 'Body', examples: [] },
+  ],
+  columns: [1, 2, 3],
+  getRoute(row, rowIndex, {key}) {
+    var example = row.examples[key];
+    if (example == null) { return null; }
+    if (typeof example === 'string') {
+      example = { name: example };
+    }
+    if (example.title == null) {
+      example.title = example.toUpperCase() + example.slice(1);
+    }
+    return example;
+  }
 });
+

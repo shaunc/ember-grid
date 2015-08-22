@@ -1,26 +1,19 @@
-<h2 id="title">Ember Grid</h2>
-{{#ember-grid width=800 height=200 rowHeight=25 data=gridRows showFooter=true }}
-
-  {{#eg-column 
-      key="name" width=250 header="Name" footer="Footer text" 
-      min-width=150 max-width=300 align="center"}}
-    
-    {{#eg-body as |field rowIndex column|}}
-      [{{rowIndex}}:{{column.key}}] <strong>{{field}}</strong>
+<div class="banner"><h2 id="title">Ember Grid</h2></div>
+{{#ember-grid class="gallery" data=gallery showHeader=false}}
+  {{#eg-column key="section" width=150 }}
+    {{#eg-body as |field|}}
+      <strong>{{field}}</strong>
     {{/eg-body}}
-
   {{/eg-column}}
-
-  {{eg-column key="age" width=50 footer="Age Footer" resizable=false align="center"}}
-
-  {{#eg-column key="salary" width=80 header="Salary"}}
-    
-    {{#eg-header as |column|}}
-      <span style="text-align: right;display: block;">{{column.header}}</span>
-    {{/eg-header}}
-    {{#eg-footer as |column|}}{{column.header}}{{/eg-footer}}
-
-  {{/eg-column}}
-
-  {{eg-column key="email" width=150 header="Email" footer="Email Footer"}}
+  {{#each columns as |col|}}
+    {{#eg-column key=col field=getRoute width=100 }}
+      {{#eg-body as |example|}}
+        {{#if example}}
+          <span>{{#link-to example.route}}{{example.name}}{{/link-to}}</span>
+        {{/if}}
+      {{/eg-body}}
+    {{/eg-column}}
+  {{/each}}
 {{/ember-grid}}
+
+{{outlet}}

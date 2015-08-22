@@ -1,3 +1,5 @@
+// component ember-grid
+
 import Ember from 'ember';
 import layout from './template';
 
@@ -19,7 +21,7 @@ export default Ember.Component.extend({
   contentWidth: Ember.computed( 'columns.[]', function() {
     var columns = this.get('columns');
     if (columns == null || columns.length === 0) { return 0; }
-    return columns.slice(-1)[0].offset;
+    return columns.reduce(((r,col)=> r + col.width), 0);
   }),
   init: function() {
     this._super();
@@ -31,22 +33,46 @@ export default Ember.Component.extend({
     if (this.columns == null) {
       this.columns = new Ember.A();
     }
-    this.height = this.getAttr('height') |  0;
-    this.width = this.getAttr('width') |  0;
-    this.rowHeight = this.getAttr('rowHeight') |  0;
-    this.headerHeight = this.getAttr('headerHeight') |  0;
-    this.footerHeight = this.getAttr('footerHeight') |  0;
-    this.bodyHeight = this.height - this.headerHeight - this.footerHeight;
+    this.height = this.getAttr('height');
+    this.width = this.getAttr('width');
+    this.rowHeight = this.getAttr('rowHeight') |  25;
+    this.headerHeight = this.getAttr('headerHeight') | (
+      this.showHeader ? 25 : 0);
+    this.footerHeight = this.getAttr('footerHeight') |  (
+      this.showFooter ? 25 : 0);
+    this.scrollX = this.getAttr('scroll-x');
+    this.scrollY = this.getAttr('scroll-y');
+
     this.data = this.getAttr('data') ||  Ember.A([]);
+    this._setupLayout();
     var self = this;
-    var offset = 0;
     this.columns.forEach(function(column) { 
-      offset = self._refreshColumn(column, offset); });
+      self._refreshColumn(column, offset); });
   },
-  _refreshColumn: function(column, offset) {
+  _setupLayout() {
+    var { height, width, headerHeight, footerHeight, scrollX, scrollY } =
+      this.getProperties(
+        'height', 'width', 'headerHeight', 'footerHeight',
+        'scrollX', 'scrollY');
+    if (height == null) {
+      if (scrollY == null) {
+        this.set('scrollY', false);
+      }
+      var {data, rowHeight} = this.getProperties('data','rowHeight');
+      var bodyHeight = this.bodyHeight = rowHeight * data.length;
+      this.height = bodyHeight + headerHeight + footerHeight;
+    } else {
+      this.bodyHeight = height - headerHeight - footerHeight;
+    }
+    if (width == null) {
+      if (scrollX == null) {
+        this.set('scrollX', false);
+      }
+    }
+  },
+
+  _refreshColumn(column) {
     var body;
-    Ember.set(column, 'offset', offset);
-    offset += (column.width | 0);
     if (column._zones == null) {
       Ember.set(column, '_zones', Ember.Object.create({}));
     }
@@ -64,19 +90,17 @@ export default Ember.Component.extend({
       width: column.width,
       rowHeight: this.rowHeight,
       data: this.data,
-      offset: 0,
       limit: limit
     });
-    return offset;
+    if(this.scrollX === false) {
+      Ember.run.scheduleOnce(
+        'afterRender', this, ()=>this.set('width', this.get('contentWidth'))
+      );
+    }
   },
 
   _addColumn: function(column) {
-    var lastColumn = this.columns.slice(-1)[0];
-    var lastOffset = 0;
-    if (lastColumn != null) {
-      lastOffset = lastColumn.offset + (lastColumn.width | 0);
-    }
    	this.columns.pushObject(column);
-    this._refreshColumn(column, lastOffset);
+    this._refreshColumn(column);
   }
 });

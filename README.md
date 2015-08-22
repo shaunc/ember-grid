@@ -24,6 +24,10 @@ All the below examples use the following model for the data rows
       lastName: "Fuller",
       age: 32,
       email: "stevey.baby@hotmail.com"
+      nightlySleep: {
+        '2015-01-01': 24,
+        ...
+      }
     }
 
 ### Defining the window
@@ -38,7 +42,7 @@ To specify the window, use the `height` and `width` attributes. The `rowHeight` 
       {{eg-column key="email"}}
     {{/ember-grid}}
 
-If `height` or `width` is not specified, `ember-grid` will use its actual height on display. If `row-height` is not specified, `ember-grid` will look for a height in css for an element rendered with class `.ember-grid .row`. If none is found, the default is `25` pixels.
+If `height` is not specified, `ember-grid` or `width` is not specified, `ember-grid` will use its actual height and width on display. (See **Control Scrolling**, below, for more details.)  If `row-height` is not specified, `ember-grid` will look for a height in css for an element rendered with class `.ember-grid .row`. If none is found, the default is `25` pixels.
 
 ### Simple text columns
 
@@ -217,6 +221,17 @@ Then the `eg-body` could be written:
         {{/eg-body}}
 
 Note that as displayed above, the current `rowIndex` and `column` are available in the body of `eg-body`, but of course, needn't be referenced if not required by the calculation.
+
+## Control Scrolling
+
+Use `scroll-y` and `scroll-x` to control whether `ember-grid` will enable
+scrolling over rows and columns (respectively). Possible settings are `true`,
+`false` and `"auto"`. The default behavior, if `width` and `height` are
+specified, is `scroll-x="auto" scroll-y="auto"`: scroll if the rows or 
+columns do not fit in the window. If either `width` and `scroll-y` are
+both not specified, or if `height` and `scroll-x` are both not specified,
+then `ember-grid` sets scrolling to false displays all columns or rows
+(respectively).
 
 ## Override Styling
 

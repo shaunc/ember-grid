@@ -7,6 +7,7 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
+      EXTEND_PROTOTYPES: false,
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
@@ -27,7 +28,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV.contentSecurityPolicy = {
       'default-src': "'none'",
-      'script-src': "'self' ",
+      'script-src': "'self' 'unsafe-eval'",
       'font-src': "'self'",
       'connect-src': "'self'",
       'img-src': "'self'",

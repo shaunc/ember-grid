@@ -25,6 +25,7 @@ export default Ember.Component.extend({
   actions: {
     scrollSource: function (offset, limit) {
       var bodies = this.get('sourceBodies') || [];
+      Ember.setProperties({offset, limit});
       Ember.run.debounce(function() { 
         bodies.map( function(body){
           if (body != null) {
