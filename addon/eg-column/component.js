@@ -3,7 +3,7 @@
 import Ember from 'ember';
 import EmberGrid from '../ember-grid/component';
 import layout from './template';
-import ColumnModel from '../../eg-column/model';
+import ColumnModel from './model';
 
 export default Ember.Component.extend({
   layout: layout,

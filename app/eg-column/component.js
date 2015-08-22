@@ -1,0 +1,1 @@
+export { default } from 'ember-grid/eg-column/component';
