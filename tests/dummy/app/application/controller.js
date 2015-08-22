@@ -17,8 +17,16 @@ export default Ember.Controller.extend({
   },
 
   averageSalary: Ember.computed('gridRows.@each.salary', function() {
-  	return this.averag
-  }),
-  averageAge: Ember.computed('gridRows.@each.age')
+  	var salaries = this.get('gridRows').map(function(row) {return row.salary;});
+  	if (salaries)
+  	{
+	  	var sum = salaries.reduce(function(a, b){return a+b;});
+	  	return 'AVG $' + (sum / salaries.length).toFixed(2);
+	  }
+	  else
+	  {
+	  	return null;
+	  }
+  })
 
 });

@@ -13,12 +13,11 @@
 
   {{eg-column key="age" width=50 footer="Age Footer" resizable=false align="center"}}
 
-  {{#eg-column key="salary" field=dollarSalary width=80 header="Salary" align="right"}}
+  {{#eg-column key="salary" field=dollarSalary width=80 header="Salary" footer=averageSalary align="right"}}
     
     {{#eg-header as |column|}}
       <span style="text-align: right;display: block; color:yellow">{{column.header}}</span>
     {{/eg-header}}
-    {{#eg-footer as |column|}}{{column.header}}{{/eg-footer}}
 
   {{/eg-column}}
 
