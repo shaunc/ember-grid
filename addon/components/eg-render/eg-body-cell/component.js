@@ -23,7 +23,7 @@ export default Ember.Component.extend({
   style: Ember.computed('width', 'rowHeight', function(){
     var {width, rowHeight} = this.getProperties('width', 'rowHeight');
     return Ember.String.htmlSafe(
-      'display:inline-block; width:' + width + 
+      'width:' + width + 
       'px; height:' + rowHeight + 'px');
   })
 
