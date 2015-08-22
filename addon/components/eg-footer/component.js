@@ -6,7 +6,6 @@ import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
-	classNames: ['footer-def'],
 
   _column: Ember.computed.alias('parentView._column'),
 
@@ -19,7 +18,6 @@ export default Ember.Component.extend({
 	    	parentView.set('_column._zones.footer', this.attrs);
 	    	parentView.set('_column._zones.footer.element', this.get('element'));
 	    }
-	  	this.get('element').style.display = 'none';
 		});
 	}
 

@@ -1,7 +1,9 @@
 {{!ember-grid}}
 
-{{! yield injects the declarative components}}
-{{yield}}
+<div class='declarative'>
+  {{! yield injects the declarative components}}
+  {{yield}}
+</div>
 
 {{#if showHeader}}
 	{{eg-render/eg-header columns=columns width=bodyWidth}}

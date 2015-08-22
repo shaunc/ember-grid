@@ -7,7 +7,6 @@ import ColumnModel from '../../eg-column/model';
 
 export default Ember.Component.extend({
   layout: layout,
-	classNames: ['column-def'],
 
 	_column: null,
 

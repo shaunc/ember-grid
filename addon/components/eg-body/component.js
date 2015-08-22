@@ -6,7 +6,6 @@ import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
-	classNames: ['body-def'],
 
   _body: null,
 
@@ -85,7 +84,6 @@ export default Ember.Component.extend({
 	    	Ember.set(columnBody, 'element', this.get('element'));
         Ember.set(columnBody, 'source', this);
 	    }
-	    this.get('element').style.display = 'none';
 	  });
 	}
 

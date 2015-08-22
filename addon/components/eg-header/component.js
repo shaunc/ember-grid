@@ -6,7 +6,6 @@ import layout from './template';
 
 export default Ember.Component.extend({
   layout: layout,
-  classNames: ['header-def'],
 
   _column: Ember.computed.alias('parentView._column'),
 
@@ -18,7 +17,6 @@ export default Ember.Component.extend({
     	parentView.set('_column._zones.header', this.attrs);
     	parentView.set('_column._zones.header.element', this.get('element'));
     }
-	  this.get('element').style.display = 'none';
 	}
 
 });

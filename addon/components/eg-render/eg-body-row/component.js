@@ -68,7 +68,7 @@ export default Ember.Component.extend({
       this.element.style.opacity = '0';
       Ember.run.next(this, function() {
         if (!this.get('isDestroying')) {
-          this.element.style.opacity = '';
+          this.element.style.opacity = null;
           this.rerender();
         }
       });
