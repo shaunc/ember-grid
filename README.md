@@ -4,6 +4,10 @@ A Declarative Data Grid for ember that is scalable to millions of rows. Each cel
 
 [![Build Status](https://travis-ci.org/shaunc/ember-grid.svg?branch=master)](https://travis-ci.org/shaunc/ember-grid)
 
+## Demo
+
+<http://shaunc.github.io/ember-grid/>
+
 ## Installation
 
 * `npm install --save ember-grid`
@@ -243,7 +247,7 @@ Use the following selectors in your css to affect each part of the layout.
 | `.ember-grid .header` | Header row |
 | `.ember-grid .header .cell` | Header cells |
 | `.ember-grid .body` | Body section |
-| `.ember-grid .body .ember-list-item-view` | Body rows |
+| `.ember-grid .body .row` | Body rows |
 | `.ember-grid .body .cell` | Body cells |
 | `.ember-grid .body .cell.odd` | Body cells in odd rows |
 | `.ember-grid .footer` | Footer row |
