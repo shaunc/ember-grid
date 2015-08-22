@@ -1,5 +1,5 @@
-import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import { moduleForComponent, test } from 'ember-qunit';
 
 import ColumnModel from 'ember-grid/eg-column/model';
 
@@ -16,8 +16,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{eg-render/eg-body-cell column=column}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
   // Template block usage:
   this.render(hbs`
     {{#eg-render/eg-body-cell}}
@@ -25,5 +23,5 @@ test('it renders', function(assert) {
     {{/eg-render/eg-body-cell}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  expectElement('.cell', 1, {contains: 'template block text'});
 });
