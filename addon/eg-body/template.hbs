@@ -1,13 +1,10 @@
-{{! eg-render/eg-body ~}}
-{{#if requiredPresent}}
-  {{#ember-collection 
-      items=attrs.data height=attrs.height width=attrs.width buffer=20
-      cell-layout=(fixed-grid-layout attrs.width attrs.rowHeight)
-      sliceDidChange=(action "scrollSource")
-      class="body-collection"
-      as |row rowIndex|
-      }}
-    {{eg-render/eg-body-row 
-      rowIndex=rowIndex columns=columns rowHeight=attrs.rowHeight}}
-  {{/ember-collection}}
+{{! eg-body ~}}
+{{#if _requiredPresent ~}}
+  {{#each _items as |row rowOffset| ~}}
+    {{#with (eg-add _body.offset rowOffset) as |rowIndex| ~}}
+      <div class='eg-body-cell' data-row-index="{{rowIndex}}">
+        {{~ yield (eg-cell-data _data rowIndex _column) rowIndex _column ~}}
+      </div>
+    {{/with}}
+  {{/each}}
 {{/if}}

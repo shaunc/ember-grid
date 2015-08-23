@@ -21,13 +21,11 @@ export default Ember.Component.extend({
     var jump = Math.max(
       Math.abs(offset - oldOffset), Math.abs(end - oldEnd));
     if (oldItems != null && jump * 4 < oldItems.length) {
-      console.log("OLD", oldOffset);
       return oldItems;
     }
     oldItems = this.oldItems = data.slice(offset, offset + limit);
     this.oldOffset = offset;
     this.oldLimit = limit;
-    console.log("NEW", oldOffset);
     return oldItems;
 
   }),
@@ -35,7 +33,6 @@ export default Ember.Component.extend({
       '_body.{data,rowHeight,offset,limit}', function() {
     var body = this._body || {};
     var {data, height, width, rowHeight, offset, limit} = body;
-    console.log("RP", Ember.guidFor(body));
     return data != null && height != null && width != null && 
       rowHeight != null && offset != null && limit != null;
   }),
@@ -88,7 +85,6 @@ export default Ember.Component.extend({
 	    	Ember.set(columnBody, 'element', this.get('element'));
         Ember.set(columnBody, 'source', this);
 	    }
-      console.log("SET BODY", Ember.guidFor(this._body));
 	    this.get('element').style.display = 'none';
 	  });
 	}

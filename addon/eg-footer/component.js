@@ -15,6 +15,10 @@ export default Ember.Component.extend({
   	Ember.run.scheduleOnce('afterRender', this, function() {
 	    var parentView = this.get('parentView');
 	    if (parentView instanceof EmberGridColumn) {
+        var footer = Ember.Object.create({});
+        for (let key in this.attrs) {
+          footer[key] = this.getAttr(key);
+        }
 	    	parentView.set('_column._zones.footer', this.attrs);
 	    	parentView.set('_column._zones.footer.element', this.get('element'));
 	    }

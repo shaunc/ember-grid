@@ -1,6 +1,10 @@
 {{! dummy/components/display-template/template }}
 
 <div class="template">
-  <a class="button" target="#"><h4>Template</h4></a>
-  <pre>{{template}}</pre>
+  <a class="button" target="#">
+    <h4 {{action "toggle"}}>Template
+    <span class='arrow'>&#x25BC;</span></h4></a>
+  <div class="body">
+    <pre>{{template}}</pre>
+  </div>
 </div>

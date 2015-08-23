@@ -1,4 +1,4 @@
-// Dummy Application Controller.
+// controller for examples
 
 import Ember from 'ember';
 import generateData from 'dummy/utils/generate-data';
@@ -6,10 +6,15 @@ import generateData from 'dummy/utils/generate-data';
 export default Ember.Controller.extend({
   queryParams: ['name'],
 
+  title: Ember.computed('name', function(){
+    var name = this.get('name');
+    return name[0].toUpperCase() + name.slice(1);
+  }),
+
   data: generateData(500, {
     name: 'name', 
     age: {name: 'age', options: {type: 'adult'}},
-    salary: {name: 'dollar', options: {min: 0, max: 200000, fixed: 2}},
+    salary: {name: 'floating', options: {min: 0, max: 200000, fixed: 2}},
     email: {name: 'email', options: {domain: 'example.com'}}
     }, 4359),
 
@@ -18,7 +23,7 @@ export default Ember.Controller.extend({
   },
 
   averageSalary: Ember.computed('gridRows.@each.salary', function() {
-    var salaries = this.get('gridRows').map(function(row) {return row.salary;});
+    var salaries = this.get('data').map(function(row) {return row.salary;});
     if (salaries)
     {
       var sum = salaries.reduce(function(a, b){return a+b;});
@@ -29,13 +34,20 @@ export default Ember.Controller.extend({
       return null;
     }
   }),
+  options: Ember.computed('data', function(){
+    var options = {
+      dollarSalary: this.get('dollarSalary'),
+      averageSalary: this.get('averageSalary')
+    };
+    return options;
+  }),
 
   template: Ember.computed('name', function() {
-    this.get(this._templates[this.get('name')]);
+    return this._templates[this.get('name')];
   }),
 
   _templates: {
-    simple: `
+    overview: `
       {{#ember-grid width=800 height=200 rowHeight=25 data=data showFooter=true }}
 
         {{#eg-column 
@@ -50,19 +62,17 @@ export default Ember.Controller.extend({
 
         {{eg-column key="age" width=50 footer="Age Footer" resizable=false align="center"}}
 
-        {{eg-column key="age" width=50 footer="Age Footer" resizable=false align="center"}}
-
-        {{#eg-column key="salary" field=dollarSalary width=80 header="Salary" footer=averageSalary align="right"}}
+        {{#eg-column key="salary" field=dollarSalary width=100 header="Salary" footer=averageSalary align="right"}}
           
           {{#eg-header as |column|}}
             <span style="text-align: right;display: block; color:yellow">{{column.header}}</span>
           {{/eg-header}}
-          {{#eg-footer as |column|}}{{column.header}}{{/eg-footer}}
 
         {{/eg-column}}
 
         {{eg-column key="email" width=150 header="Email" footer="Email Footer"}}
       {{/ember-grid}}`  
+
    }
 });
 

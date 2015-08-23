@@ -1,5 +1,4 @@
 {{! eg-render/eg-body ~}}
-RP {{requiredPresent}}
 {{#if requiredPresent}}
   {{#ember-collection 
       items=attrs.data height=attrs.height width=attrs.width buffer=20
@@ -9,6 +8,6 @@ RP {{requiredPresent}}
       as |row rowIndex|
       }}
     {{eg-render/eg-body-row 
-      rowIndex=rowIndex columns=columns rowHeight=attrs.rowHeight}}
+      rowIndex=rowIndex columns=columns rowHeight=attrs.rowHeight offset=offset limit=limit}}
   {{/ember-collection}}
 {{/if}}

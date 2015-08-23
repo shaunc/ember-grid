@@ -35,7 +35,7 @@ export default Ember.Component.extend({
     }
     this.height = this.getAttr('height');
     this.width = this.getAttr('width');
-    this.rowHeight = this.getAttr('rowHeight') |  25;
+    this.rowHeight = this.getAttr('rowHeight') ||  25;
     this.headerHeight = this.getAttr('headerHeight') | (
       this.showHeader ? 25 : 0);
     this.footerHeight = this.getAttr('footerHeight') |  (
@@ -46,8 +46,7 @@ export default Ember.Component.extend({
     this.data = this.getAttr('data') ||  Ember.A([]);
     this._setupLayout();
     var self = this;
-    this.columns.forEach(function(column) { 
-      self._refreshColumn(column, offset); });
+    this.columns.forEach( column => { self._refreshColumn(column); });
   },
   _setupLayout() {
     var { height, width, headerHeight, footerHeight, scrollX, scrollY } =

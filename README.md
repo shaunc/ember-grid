@@ -248,6 +248,8 @@ Use the following selectors in your css to affect each part of the layout.
 | `.ember-grid .header .cell` | Header cells |
 | `.ember-grid .body` | Body section |
 | `.ember-grid .body .row` | Body rows |
+| `.ember-grid .body .row.first` | First body row displayed |
+| `.ember-grid .body .row.last` | Last body row displayed |
 | `.ember-grid .body .cell` | Body cells |
 | `.ember-grid .body .cell.odd` | Body cells in odd rows |
 | `.ember-grid .footer` | Footer row |

@@ -4,14 +4,14 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   gallery: [
-    { section: 'General', examples: ['simple']},
-    { section: 'Layout & Scrolling', examples: [] },
+    { section: 'General', examples: ['overview']},
+    { section: 'Layout & scrolling', examples: [] },
     { section: 'Text columns', examples: [] },
     { section: 'Header & footer', examples: [] },
-    { section: 'Column Attributes', examples: [] },
+    { section: 'Column attributes', examples: [] },
     { section: 'Body', examples: [] },
   ],
-  columns: [1, 2, 3],
+  columns: [0, 1, 2],
   getRoute(row, rowIndex, {key}) {
     var example = row.examples[key];
     if (example == null) { return null; }
@@ -19,7 +19,7 @@ export default Ember.Controller.extend({
       example = { name: example };
     }
     if (example.title == null) {
-      example.title = example.toUpperCase() + example.slice(1);
+      example.title = example.name[0].toUpperCase() + example.name.slice(1);
     }
     return example;
   }

@@ -9,32 +9,30 @@ export default Ember.Component.extend({
   classNames: ['row'],
   classNameBindings: [ 'isFirstInWindow:first', 'isLastInWindow:last' ],
 
-  windowIndex: Ember.computed('parentView.offset', 'rowIndex', function() { 
-    var offset = this.get('parentView.offset');
+  windowIndex: Ember.computed('offset', 'rowIndex', function() { 
     var rowIndex = this.getAttr('rowIndex');
-    console.log("row", rowIndex, offset, rowIndex - offset);
-    return rowIndex - offset;
+    return rowIndex - this.offset;
   }),
 
   isFirstInWindow: Ember.computed.equal('windowIndex', 0),
 
-  isLastInWindow: Ember.computed(
-      'rowIndex', function (){
-    var parentView = this.get('parentView');
-    var {offset, limit} = parentView;
-    if (offset != null && limit != null) {
-      var rowIndex = this.get('rowIndex');
-      return offset + limit == rowIndex - 1;
-    }
+  isLastInWindow: Ember.computed('offset', 'limit', 'rowIndex', function(){
+    var rowIndex = this.get('rowIndex');
+    return this.offset + this.limit === rowIndex + 1;
   }),
 
-  didInitAttrs: function() {
+  didInitAttrs() {
     this._super();
     var columns = this.getAttr('columns');
     if ( columns != null ) {
       this._childrenPresent = columns.map(()=> false);
       this._rowIndex = null;
     }
+  },
+  didReceiveAttrs() {
+    this._super();
+    this.set('offset', this.getAttr('offset'));
+    this.set('limit', this.getAttr('limit'));
   },
 
   didRender: function() {

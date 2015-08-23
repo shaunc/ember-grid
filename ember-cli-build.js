@@ -1,5 +1,6 @@
 /* global require, module */
 var EmberApp = require('ember-cli/lib/broccoli/ember-addon');
+var Funnel = require('broccoli-funnel');
 
 module.exports = function(defaults) {
   var app = new EmberApp(defaults, {
@@ -14,6 +15,13 @@ module.exports = function(defaults) {
   */
   app.import( app.bowerDirectory + '/chance/chance.js', {test: true});
   app.import( app.bowerDirectory + '/lodash/lodash.js', {test: true});
+
+  var extraAssets = new Funnel('public/fonts/maven-pro', {
+    srcDir: '/',
+    include: ['**/*.woff', '**/stylesheet.css'],
+    destDir: '/assets/fonts'
+  });
+ 
 
   return app.toTree();
 };

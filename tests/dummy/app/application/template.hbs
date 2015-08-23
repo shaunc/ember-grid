@@ -1,19 +1,24 @@
-<div class="banner"><h2 id="title">Ember Grid</h2></div>
-{{#ember-grid class="gallery" data=gallery showHeader=false}}
-  {{#eg-column key="section" width=150 }}
-    {{#eg-body as |field|}}
-      <strong>{{field}}</strong>
-    {{/eg-body}}
-  {{/eg-column}}
-  {{#each columns as |col|}}
-    {{#eg-column key=col field=getRoute width=100 }}
-      {{#eg-body as |example|}}
-        {{#if example}}
-          <span>{{#link-to example.route}}{{example.name}}{{/link-to}}</span>
-        {{/if}}
+<div id="banner"><h2 id="title">Ember Grid</h2></div>
+<div id="nav">
+  {{#ember-grid id="gallery" data=gallery showHeader=false rowHeight=20}}
+    {{#eg-column key="section" width=150 }}
+      {{#eg-body as |field|}}
+        <strong>{{field}}</strong>
       {{/eg-body}}
     {{/eg-column}}
-  {{/each}}
-{{/ember-grid}}
-
-{{outlet}}
+    {{#each columns as |col|}}
+      {{#eg-column key=col field=getRoute width=150 }}
+        {{#eg-body as |example|}}
+          {{#if example}}
+            <span>{{#link-to 'example' (query-params name=example.name)}}
+              {{example.title}}
+            {{/link-to}}</span>
+          {{/if}}
+        {{/eg-body}}
+      {{/eg-column}}
+    {{/each}}
+  {{/ember-grid}}
+</div>
+<div id="content">
+  {{outlet}}
+</div>
