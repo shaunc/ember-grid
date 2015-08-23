@@ -1,4 +1,4 @@
-// component ember-grid
+// ember-grid
 
 import Ember from 'ember';
 import layout from './template';

@@ -1,4 +1,4 @@
-// componnent eg-render/eg-body
+// eg-render/eg-body
 
 import Ember from 'ember';
 import layout from './template';
@@ -29,6 +29,7 @@ export default Ember.Component.extend({
       Ember.run.debounce(function() { 
         bodies.map( function(body){
           if (body != null) {
+            console.log("SET BODY OFF", Ember.guidFor(body));
             Ember.set(body, 'offset', Math.max(offset - 60, 0));
             Ember.set(body, 'limit', limit + 60);
           }

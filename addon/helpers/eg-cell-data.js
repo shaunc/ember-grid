@@ -11,8 +11,8 @@ export function egCellData(params/*, hash*/) {
   var [data, rowIndex, column] = params;
   var {key, field} = column;
   var row = data[rowIndex];
-  if (typeof field === 'object' && typeof field.value === 'function') {
-    return field.value(row, rowIndex, column);
+  if (typeof field === 'function') {
+    return field(row, rowIndex, column);
   } else if (field === '@row') {
     return row;
   } else if (field === '@rowIndex') {

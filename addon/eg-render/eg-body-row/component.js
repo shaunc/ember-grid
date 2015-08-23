@@ -1,4 +1,4 @@
-// component eg-render/eg-body-row
+// eg-render/eg-body-row
 
 import Ember from 'ember';
 import layout from './template';
@@ -11,7 +11,7 @@ export default Ember.Component.extend({
 
   windowIndex: Ember.computed('parentView.offset', 'rowIndex', function() { 
     var offset = this.get('parentView.offset');
-    var rowIndex = this.get('rowIndex');
+    var rowIndex = this.getAttr('rowIndex');
     console.log("row", rowIndex, offset, rowIndex - offset);
     return rowIndex - offset;
   }),

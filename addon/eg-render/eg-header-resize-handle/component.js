@@ -1,4 +1,4 @@
-// component eg-render/eg-header-resize-handle
+// eg-render/eg-header-resize-handle
 
 import Ember from 'ember';
 import layout from './template';

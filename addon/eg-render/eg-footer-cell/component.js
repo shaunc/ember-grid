@@ -1,4 +1,4 @@
-// component eg-render/eg-footer-cell
+// eg-render/eg-footer-cell
 
 import Ember from 'ember';
 import layout from './template';

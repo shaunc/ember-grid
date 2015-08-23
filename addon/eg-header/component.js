@@ -1,4 +1,4 @@
-// component eg-header
+// eg-header
 
 import Ember from 'ember';
 import EmberGridColumn from '../eg-column/component';
