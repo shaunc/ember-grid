@@ -51,7 +51,7 @@ export default Ember.Controller.extend({
       {{#ember-grid width=800 height=200 rowHeight=25 data=data showFooter=true }}
 
         {{#eg-column 
-            key="name" width=250 header="Name" footer="Footer text" 
+            key="name" width=250 header="Name" footer="Name Footer Here" 
             min-width=150 max-width=300 align="center"}}
           
           {{#eg-body as |field rowIndex column|}}
@@ -60,7 +60,7 @@ export default Ember.Controller.extend({
 
         {{/eg-column}}
 
-        {{eg-column key="age" width=50 footer="Age Footer" resizable=false align="center"}}
+        {{eg-column key="age" width=50 resizable=false align="center"}}
 
         {{#eg-column key="salary" field=dollarSalary width=100 header="Salary" footer=averageSalary align="right"}}
           
@@ -70,7 +70,7 @@ export default Ember.Controller.extend({
 
         {{/eg-column}}
 
-        {{eg-column key="email" width=150 header="Email" footer="Email Footer"}}
+        {{eg-column key="email" width=150}}
       {{/ember-grid}}`  
 
    }

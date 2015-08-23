@@ -1,6 +1,8 @@
+@ember-grid-color: #5B83AD;
+
 .ember-grid {
 	
-	border: 1px solid #333;
+	border: 2px solid @ember-grid-color;
   overflow: hidden;
 
 	.declarative {
@@ -9,7 +11,7 @@
 	}
 
 	.header, .body {
-	  border-bottom: 1px solid #333;
+	  border-bottom: 1px solid @ember-grid-color;
 	}
 
 	.footer, .body {
@@ -23,7 +25,7 @@
 	  font-size: 0px;
 
 		.cell {
-    	border-right: 1px solid #333;
+    	border-right: 1px solid @ember-grid-color;
     	padding-left: 2px;
     	padding-right: 2px;
     	padding-top: 1px;
@@ -34,7 +36,7 @@
     	display: inline-block;
 
     	&:last-child {
-    		border-right-color: rgba(200,200,200,.8);
+    		border-right-color: @ember-grid-color;
     	}
 
     	.default {

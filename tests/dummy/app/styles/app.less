@@ -31,54 +31,56 @@ body * {
   }
 }
 
-.ember-grid {
 
-  border-radius: 7px;
-
-  .cell {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-
-	.header {
-	  color: white;
-	  background-color: navy;
-	  border-top-left-radius: 6px;
-	  border-top-right-radius: 6px;
-
-	  .cell {
-	    border-color: white;
-	    max-width: 200px;
-	  }
-  }
-  .footer {
-    background-color: navy;
-    color: white;
-    border-bottom-left-radius: 6px;
-    border-bottom-right-radius: 6px;
-  }
-  .body .cell {
-    transition: opacity 0.1s;
-  }
-  .body .row.first {
-    .cell:first-child {
-      border-top-left-radius: 6px;
-    }
-    .cell:last-child {
-      border-top-right-radius: 6px;
-    }
-  }
-  .body .row.last {
-    .cell:first-child {
-      border-bottom-left-radius: 6px;
-    }
-    .cell:last-child {
-      border-bottom-right-radius: 6px;
-    }
-  }
-
-}
 .example {
+
+  @example-ember-grid-color: #5B83AD;
+
+  .ember-grid {
+
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+
+    .cell {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .header {
+      color: white;
+      background-color: @example-ember-grid-color;
+
+      .cell {
+        border-color: white;
+        max-width: 275px;
+      }
+    }
+    .footer {
+      background-color: @example-ember-grid-color;
+      color: white;
+    }
+    .body .cell {
+      transition: opacity 0.1s;
+    }
+    .body .row.first {
+      .cell:first-child {
+        border-top-left-radius: 6px;
+      }
+      .cell:last-child {
+        border-top-right-radius: 6px;
+      }
+    }
+    .body .row.last {
+      .cell:first-child {
+        border-bottom-left-radius: 6px;
+      }
+      .cell:last-child {
+        border-bottom-right-radius: 6px;
+      }
+    }
+
+  }
+
   position: relative;
   .display-template {
     h4 {
