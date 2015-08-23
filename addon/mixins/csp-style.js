@@ -27,7 +27,7 @@ var StyleObserver = Ember.Object.extend({
 		this.get('target').removeObserver(this.get('property'), this, '_propertyDidChange');
 	},
 
-	_propertyDidChange: function (target, property) {
+	_propertyDidChange: function (/*target, property*/) {
 		this._setStyle();
 	},
 
@@ -69,7 +69,6 @@ var StyleObserver = Ember.Object.extend({
 
 export default Ember.Mixin.create({
 	
-	_oldBindings: [],
 	_styleObservers: [],
 
 	_regex: /^(([^\?:]+):)?([a-z0-9_\.-]+)(\[([a-z%]+)\])?(\?([a-z0-9_\.\-]*):([a-z0-9_\.\-]*))?$/i,
@@ -83,14 +82,13 @@ export default Ember.Mixin.create({
 	}),
 
 	_refreshBindings: function() {
-		var oldBindings = this.get('_oldBindings');
-		var newBindings = this.get('styleBindings');
-		if (!newBindings) { 
-			newBindings = []; 
-		};
+		var styleBindings = this.get('styleBindings');
+		if (!styleBindings) { 
+			styleBindings = []; 
+		}
 		var observers = [];
-		for (var i=0; i< newBindings.length; i++) {
-			var binding = newBindings[i];
+		for (var i=0; i< styleBindings.length; i++) {
+			var binding = styleBindings[i];
 
 			var match = binding.match(this.get('_regex'));
 			if (match) {
@@ -109,7 +107,7 @@ export default Ember.Mixin.create({
 	        observer.yesNo.no = match[8];
 	      }
 				observers.push(observer);
-	    };
+	    }
 		}
 		this.set('_styleObservers', observers);
 	}
