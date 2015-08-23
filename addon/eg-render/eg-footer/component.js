@@ -3,12 +3,10 @@
 import Ember from 'ember';
 import layout from './template';
 
-export default Ember.Component.extend({
+import CspStyleMixin from 'ember-grid/mixins/csp-style';
+
+export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   classNames: ['footer'],
-  attributeBindings: ['style'],
-
-  style: Ember.computed('width', function() {
-    return Ember.String.htmlSafe('width:'+this.get('width')+'px;');
-  })
+  styleBindings: ['width[px]']
 });

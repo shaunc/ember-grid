@@ -3,21 +3,19 @@
 import Ember from 'ember';
 import layout from './template';
 
-export default Ember.Component.extend({
+import CspStyleMixin from 'ember-grid/mixins/csp-style';
+
+export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   classNames: ['header'],
-  attributeBindings: ['style'],
 	classNameBindings: ['isDragging:dragging'],
+  styleBindings: ['width[px]'],
 	
   isDragging: Ember.computed('draggingHeaderCell', function() {
   	return this.get('draggingHeaderCell') !== null;
   }),
 
   draggingHeaderCell: null,
-
-  style: Ember.computed('width', function() {
-    return Ember.String.htmlSafe('width:'+this.get('width')+'px;');
-  }),
 
   mouseUp: function() {
     this.set('draggingHeaderCell', null);

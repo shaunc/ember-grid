@@ -4,12 +4,14 @@ import Ember from 'ember';
 import layout from './template';
 import { moveChildren } from 'ember-grid/utils/dom-util';
 
-export default Ember.Component.extend({
+import CspStyleMixin from 'ember-grid/mixins/csp-style';
+
+export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
 
   classNames: ['cell'],
-  attributeBindings: ['style'],
   classNameBindings: ['isDragging:dragging'],
+  styleBindings: ['width[px]'],
 
   _header: Ember.computed.alias('_column._zones.header'),
   align: Ember.computed.alias('_column.align'),
@@ -62,10 +64,6 @@ export default Ember.Component.extend({
     }
     var key = this.get('_column.key');
     return key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
-  }),
-
-  style: Ember.computed('width', function() {
-    return 'width:'+this.get('width')+'px;';
   }),
 
   startDragging: function() {
