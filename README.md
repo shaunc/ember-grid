@@ -271,3 +271,12 @@ Use the following selectors in your css to affect each part of the layout.
 * `ember build`
 
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+
+## Authors
+
+- [Shaun Cutts](https://twitter.com/shauncutts)
+- [Bryan Crotaz](https://twitter.com/bryancrotaz)
+
+## Legal
+
+[Licensed under the MIT license](http://www.opensource.org/licenses/mit-license.php)
