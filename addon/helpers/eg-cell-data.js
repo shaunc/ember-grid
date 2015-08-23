@@ -9,6 +9,9 @@ import Ember from 'ember';
  */
 export function egCellData(params/*, hash*/) {
   var [data, rowIndex, column] = params;
+  if (column == null) {
+    debugger
+  }
   var {key, field} = column;
   var row = data[rowIndex];
   if (typeof field === 'function') {

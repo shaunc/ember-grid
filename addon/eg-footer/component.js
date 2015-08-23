@@ -19,7 +19,7 @@ export default Ember.Component.extend({
         for (let key in this.attrs) {
           footer[key] = this.getAttr(key);
         }
-	    	parentView.set('_column._zones.footer', this.attrs);
+	    	parentView.set('_column._zones.footer', footer);
 	    	parentView.set('_column._zones.footer.element', this.get('element'));
 	    }
 		});

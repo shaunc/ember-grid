@@ -41,7 +41,7 @@ export default Ember.Component.extend({
 
   didReceiveAttrs: function() {
     this._super();
-  	this.set('_column', this.attrs.column.value);
+  	this.set('_column', this.getAttr('column'));
   },
 
   renderHeader: function() {
