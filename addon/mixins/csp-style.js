@@ -5,7 +5,6 @@ var StyleObserver = Ember.Object.extend({
 	property: null,
 	cssName: null,
 	unit: null,
-	yesNo: null,
 	_cssStyle: null,
 
 	_setup: Ember.on('init', function() {
@@ -33,15 +32,9 @@ var StyleObserver = Ember.Object.extend({
 
 	_setStyle: function() {
 		var name = this.get('cssName');
-		var property = this.get('property');
 		var unit = this.get('unit');
-		var value = this.get('target.'+property);
+		var value = this._getValue();
 		var cssStyle = this.get('_cssStyle');
-		var yesNo = this.get('yesNo');
-		if (yesNo)
-		{
-			value = value ? yesNo.yes : yesNo.no;
-		}
 		// add units to numeric value
 		if (!isNaN(parseFloat(value)) && isFinite(value)) {
 			value = value + unit;
@@ -60,10 +53,29 @@ var StyleObserver = Ember.Object.extend({
 		}
 	},
 
+	_getValue: function() {
+		var property = this.get('property');
+		return this.get('target.'+property);
+	},
+
 	_removeStyle: function() {
 		var name = this.get('cssName');
 		var cssStyle = this.get('_cssStyle');
 		cssStyle.removeProperty(name);
+	}
+});
+
+var YesNoStyleObserver = Ember.Object.extend({
+	yesNo: null,
+
+	_getValue: function() {
+		var value = this._super();
+		var yesNo = this.get('yesNo');
+		if (yesNo)
+		{
+			value = value ? yesNo.yes : yesNo.no;
+		}
+		return value;
 	}
 });
 
@@ -95,17 +107,21 @@ export default Ember.Mixin.create({
 	      var cssProp = match[3];
 	      var emberProp = match[2] || Ember.String.camelize(cssProp);
 	      var unit = match[5];
-	      var observer = StyleObserver.create({
+	      var type = StyleObserver;
+	      var properties = {
 					target: this,
 					property: emberProp,
 					cssName: cssProp,
 					unit: unit
-				});
+				};
 	      if (match[6]) {
-	        observer.yesNo = Object.create(null);
-	        observer.yesNo.yes = match[7];
-	        observer.yesNo.no = match[8];
+	      	type = YesNoStyleObserver;
+	        properties.yesNo = {
+	        	yes: match[7],
+	        	no: match[8]
+	        };
 	      }
+	      var observer = type.create(properties);
 				observers.push(observer);
 	    }
 		}
