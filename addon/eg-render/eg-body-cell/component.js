@@ -10,11 +10,11 @@ export default Ember.Component.extend({
   classNameBindings: ['isOddRow:odd'],
   attributeBindings: ['style', 'rowIndex:data-row-index'],
 
-  _source: Ember.computed.alias('_column._zones.body.source'),
-  _data: Ember.computed.alias('_column._zones.body.data'),
+  _source: Ember.computed.alias('column._zones.body.source'),
+  _data: Ember.computed.alias('column._zones.body.data'),
 
-  width: Ember.computed.alias('_column.width'),
-  align: Ember.computed.alias('_column.align'),
+  width: Ember.computed.alias('column.width'),
+  align: Ember.computed.alias('column.align'),
 
   isOddRow: Ember.computed('rowIndex', function() {
     return this.get('rowIndex') % 2 === 1;
