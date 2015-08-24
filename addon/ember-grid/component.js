@@ -3,22 +3,17 @@
 import Ember from 'ember';
 import layout from './template';
 import Column from '../eg-column/model';
+import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   classNames: ['ember-grid'],
-  attributeBindings: ['style'],
+  styleBindings: ['width[px]'],
 
   showHeader: true,
   showFooter: false,
 
   columns: null,
-
-  style: Ember.computed('bodyWidth', function() {
-    var bodyWidth = this.get('bodyWidth');
-    if (bodyWidth == null) { return null; }
-    return Ember.String.htmlSafe('width:'+bodyWidth+'px;');
-  }),
 
   bodyWidth: Ember.computed.alias('width'),
   contentWidth: Ember.computed( 'columns.[]', 'columns.{width}', {
