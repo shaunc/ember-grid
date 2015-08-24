@@ -232,14 +232,13 @@ Use `scroll-y` and `scroll-x` to control whether `ember-grid` will enable
 scrolling over rows and columns (respectively). Possible settings are `true`,
 `false` and `"auto"`. The default behavior, if `width` and `height` are
 specified, is `scroll-x="auto" scroll-y="auto"`: scroll if the rows or 
-columns do not fit in the window. Currently, setting scrolling to
-`true` accomplishes the same thing as `auto`.
+columns do not fit in the window.
 
-If either `width` and `scroll-y` are both not specified, `ember-scroll` will display 
+If `width` and `scroll-x` are both not specified, `ember-scroll` will display 
 all columns. In this case, if column widths are specified, then their sum will be 
-the width used; if widths are not specified, then `ember-grid` renders itself
-to take up all available space, and divides the space evenly among rows. Thus,
-the grid: 
+the width used. If column widths are also not specified, then `ember-grid` renders 
+itself to take up all available space (testing, using style `width:100%`), and 
+divides the space evenly among rows. Thus, the grid:
 
     {{#ember-grid data=myData }} 
       {{#eg-column key="name" width=150 }}
@@ -249,7 +248,7 @@ the grid:
 
 has width 500, and all columns will display without scrolling. The grid:
 
-    {{#ember-grid data=myData width="400" }} 
+    {{#ember-grid data=myData width=400 }} 
       {{#eg-column key="name" width=150 }}
       {{eg-column key="age" width=50 }}
       {{eg-column key="email" width=250 }}
