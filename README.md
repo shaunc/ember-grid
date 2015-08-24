@@ -241,7 +241,7 @@ itself to take up all available space (testing, using style `width:100%`), and
 divides the space evenly among rows. Thus, the grid:
 
     {{#ember-grid data=myData }} 
-      {{#eg-column key="name" width=150 }}
+      {{eg-column key="name" width=150 }}
       {{eg-column key="age" width=50 }}
       {{eg-column key="email" width=250 }}
     {{/ember-grid}}
@@ -249,7 +249,7 @@ divides the space evenly among rows. Thus, the grid:
 has width 500, and all columns will display without scrolling. The grid:
 
     {{#ember-grid data=myData width=400 }} 
-      {{#eg-column key="name" width=150 }}
+      {{eg-column key="name" width=150 }}
       {{eg-column key="age" width=50 }}
       {{eg-column key="email" width=250 }}
     {{/ember-grid}}
@@ -258,7 +258,7 @@ has horizontal scrolling turned on, as the sum of the column widths is
 greater than the total width. The grid:
 
     {{#ember-grid data=myData width="600" }} 
-      {{#eg-column key="name"  }}
+      {{eg-column key="name"  }}
       {{eg-column key="age" }}
       {{eg-column key="email" }}
     {{/ember-grid}}
@@ -269,7 +269,7 @@ the width out of the example above would have the same effect:
 
     <div style="width: 600px">
       {{#ember-grid data=myData }} 
-        {{#eg-column key="name"  }}
+        {{eg-column key="name"  }}
         {{eg-column key="age" }}
         {{eg-column key="email" }}
       {{/ember-grid}}
