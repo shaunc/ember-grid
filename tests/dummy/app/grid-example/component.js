@@ -4,7 +4,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   layout: Ember.computed('layoutString', 'options', function(){
-    return Ember.Handlebars.compile(this.get('layoutString'))
+    return Ember.Handlebars.compile(this.get('layoutString'));
   }),
   didReceiveAttrs() {
     this._super();
@@ -19,6 +19,6 @@ export default Ember.Component.extend({
     }
     this.set('layoutString', templateString);
   }
-})
+});
 
 

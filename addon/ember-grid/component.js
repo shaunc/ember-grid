@@ -2,7 +2,7 @@
 
 import Ember from 'ember';
 import layout from './template';
-import Column from '../eg-column/model'
+import Column from '../eg-column/model';
 
 export default Ember.Component.extend({
   layout: layout,
@@ -47,7 +47,7 @@ export default Ember.Component.extend({
     this._super();
     var columns = this.getAttr('columns');
     if (typeof columns === 'string') {
-      columns = columns.split(',').map( name => {return {key: name}}  );
+      columns = columns.split(',').map( name => {return {key: name};}  );
     }
     if (columns == null) {
       this.set('columns', new Ember.A());
@@ -129,15 +129,13 @@ export default Ember.Component.extend({
     this._refreshColumn(column);
   },
   didRender() {
-    var {width, columnsWithoutWidth, scrollX} = this.getProperties(
-      'width', 'columnsWithoutWidth');
+    var {width, columnsWithoutWidth} = this.getProperties('width', 'columnsWithoutWidth');
     if(width == null || columnsWithoutWidth > 0) {
       Ember.run.next(this, 'adjustWidth');
     }
   },
   adjustWidth() {
-    var {width, columnsWithoutWidth} = this.getProperties(
-      'width', 'columnsWithoutWidth');
+    var {width, columnsWithoutWidth} = this.getProperties('width', 'columnsWithoutWidth');
     if (columnsWithoutWidth > 0) {
       this.calcContentWidth(width, columnsWithoutWidth);
     }
@@ -162,6 +160,7 @@ export default Ember.Component.extend({
     });
     this.set('contentWidth', contentWidth);
   },
+  
   readElementWidth() {
     var element = this.element;
     if (element == null) { return; }
