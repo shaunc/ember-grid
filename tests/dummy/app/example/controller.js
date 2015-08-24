@@ -4,19 +4,50 @@ import Ember from 'ember';
 import generateData from 'dummy/utils/generate-data';
 
 export default Ember.Controller.extend({
-  queryParams: ['name'],
+  queryParams: ['name', 'next'],
 
   title: Ember.computed('name', function(){
     var name = this.get('name');
     return name[0].toUpperCase() + name.slice(1);
   }),
-
-  data: generateData(500, {
-    name: 'name', 
-    age: {name: 'age', options: {type: 'adult'}},
-    salary: {name: 'floating', options: {min: 0, max: 200000, fixed: 2}},
-    email: {name: 'email', options: {domain: 'example.com'}}
-    }, 4359),
+  // XXX rerender dynamically causes problems, perhaps because
+  // we are changing the layout of the `grid-example` component.
+  // explicitly transition through a blank state to
+  // clear away old `grid-example` object.
+  //
+  // This is an ugly hack. A different solution would
+  // be better.
+  nextDidChange: Ember.observer('next', function(){ 
+    if (this.get('next') != null) {
+      var next = this.get('next');
+      this.set('name', undefined);
+      this.set('next', undefined);
+      Ember.run.scheduleOnce('afterRender', ()=>{
+        this.transitionToRoute(`/example?name=${next}`);
+      });
+    }
+  }),
+  _data: {
+    default: generateData(500, {
+      name: 'name', 
+      age: {name: 'age', options: {type: 'adult'}},
+      salary: {name: 'floating', options: {min: 0, max: 200000, fixed: 2}},
+      email: {name: 'email', options: {domain: 'example.com'}}
+      }, 4359),
+      small: generateData(50, {
+      name: 'name', 
+      age: {name: 'age', options: {type: 'adult'}},
+      salary: {name: 'floating', options: {min: 0, max: 200000, fixed: 2}},
+      email: {name: 'email', options: {domain: 'example.com'}}
+      }, 2349)
+  },
+  exampleDatasets: {
+    minimal: 'small'
+  },
+  data: Ember.computed('name', '_data', 'exampleDatasets', function(){
+    var dataset = this.exampleDatasets[this.get('name')] || 'default';
+    return this._data[dataset];
+  }),
 
   dollarSalary: function(row) {
     return '$'+row.salary.toFixed(2);
@@ -36,13 +67,15 @@ export default Ember.Controller.extend({
   }),
   options: Ember.computed('data', function(){
     var options = {
+      data: this.get('data'),
       dollarSalary: this.get('dollarSalary'),
       averageSalary: this.get('averageSalary')
     };
     return options;
   }),
 
-  template: Ember.computed('name', function() {
+  templateString: Ember.computed('name', function() {
+    if (this.get('name') == null) { return; }
     return this._templates[this.get('name')];
   }),
 
@@ -71,7 +104,10 @@ export default Ember.Controller.extend({
         {{/eg-column}}
 
         {{eg-column key="email" width=150 header="Email" footer="Email Footer"}}
-      {{/ember-grid}}`  
+      {{/ember-grid}}`,
+
+    minimal: `{{ember-grid data=data columns="name,age,salary,email"}}`
+
 
    }
 });

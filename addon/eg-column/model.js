@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Object.extend({
 	init: function() {
 		this.setProperties({
-			width: 0,
+			width: null,
 		  resizable: true,
 		  align: 'left',
 		  _zones: {}

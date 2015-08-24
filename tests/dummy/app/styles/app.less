@@ -95,10 +95,14 @@ body * {
     }
 
     &.open .body {
-      height: 300px;
+      height: inherit;
+      max-height: 300px;
       overflow: auto;
+      background-color: #F7F7ED;
       pre {
         font-size: 12px;
+        line-height: 1em;
+        padding: 5px;
       }
     }
     .arrow {
@@ -109,6 +113,12 @@ body * {
     }
     &.open .arrow {
       opacity: 0;
+    }
+  }
+  .display {
+    padding: 10px;
+    .ember-grid {
+      margin: auto;
     }
   }
 }

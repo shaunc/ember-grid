@@ -3,9 +3,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  
   gallery: [
     { section: 'General', examples: ['overview']},
-    { section: 'Layout & scrolling', examples: [] },
+    { section: 'Layout & scrolling', examples: ['minimal'] },
     { section: 'Text columns', examples: [] },
     { section: 'Header & footer', examples: [] },
     { section: 'Column attributes', examples: [] },

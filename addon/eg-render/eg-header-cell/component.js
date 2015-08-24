@@ -65,7 +65,7 @@ export default Ember.Component.extend({
   }),
 
   style: Ember.computed('width', function() {
-    return 'width:'+this.get('width')+'px;';
+    return Ember.string.htmlSafe('width:'+this.get('width')+'px;');
   }),
 
   startDragging: function() {

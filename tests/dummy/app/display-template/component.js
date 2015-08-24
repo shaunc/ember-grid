@@ -13,14 +13,17 @@ export default Ember.Component.extend({
     for (let key in this.attrs) {
       this.set(key, this.getAttr(key));
     }
-    var template = this.getAttr('template');
+    var template = this.getAttr('templateString');
     if (template == null) { 
       template = '(missing template)';
     }
     else {
+      if (template.string != null) {
+        template = template.string;
+      }
       template = template.replace(/</g, '&gt;');
     }
-    this.set('template', Ember.String.htmlSafe(template));
+    this.set('templateString', Ember.String.htmlSafe(template));
   },
   actions: {
     toggle() {

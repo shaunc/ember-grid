@@ -1,6 +1,11 @@
 {{! dummy/example template }}
 
-<div class="example">
-  <h3>{{title}}</h3>
-  {{display-grid template=template data=data title=title options=options}}
-</div>
+{{#if name}}
+  <div class="example">
+    <h3>{{title}}</h3>
+    {{display-template templateString=templateString}}
+    <div class='display'>
+      {{grid-example layoutString=templateString options=options}}
+    </div>
+  </div>
+{{/if}}

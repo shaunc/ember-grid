@@ -10,7 +10,7 @@
       {{#eg-column key=col field=getRoute width=150 }}
         {{#eg-body as |example|}}
           {{#if example}}
-            <span>{{#link-to 'example' (query-params name=example.name)}}
+            <span>{{#link-to 'example' (query-params next=example.name)}}
               {{example.title}}
             {{/link-to}}</span>
           {{/if}}
