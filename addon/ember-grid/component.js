@@ -46,8 +46,8 @@ export default Ember.Component.extend({
   didReceiveAttrs() {
     this._super();
     var columns = this.getAttr('columns');
-    if (typeof columns == 'string') {
-      columns = columns.split(',').map( name => {key: name});
+    if (typeof columns === 'string') {
+      columns = columns.split(',').map( name => {return {key: name}}  );
     }
     if (columns == null) {
       this.set('columns', new Ember.A());
@@ -168,8 +168,10 @@ export default Ember.Component.extend({
     var width = this.element.width;
     if (!width) {
       this.element.style.width = '100%';
-      width = this.element.getBoundingClientRect().width;
+      this.element.style.boxSizing = 'border-box';
+      width = this.element.offsetWidth;
       this.element.style.width = null;
+      this.element.style.boxSizing = null;
     }
     return width;
   }

@@ -16,12 +16,5 @@ module.exports = function(defaults) {
   app.import( app.bowerDirectory + '/chance/chance.js', {test: true});
   app.import( app.bowerDirectory + '/lodash/lodash.js', {test: true});
 
-  var extraAssets = new Funnel('public/fonts/maven-pro', {
-    srcDir: '/',
-    include: ['**/*.woff', '**/stylesheet.css'],
-    destDir: '/assets/fonts'
-  });
- 
-
   return app.toTree();
 };
