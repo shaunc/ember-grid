@@ -4,11 +4,13 @@ import Ember from 'ember';
 import layout from './template';
 import { moveChildren } from 'ember-grid/utils/dom-util';
 
-export default Ember.Component.extend({
+import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
+
+export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
 
   classNames: ['cell'],
-  attributeBindings: ['style'],
+  styleBindings: ['width[px]'],
 
   _footer: Ember.computed.alias('_column._zones.footer'),
   align: Ember.computed.alias('_column.align'),
@@ -43,9 +45,5 @@ export default Ember.Component.extend({
       return result;
     }
     return '';
-  }),
-
-  style: Ember.computed('width', function() {
-    return Ember.String.htmlSafe('width:'+this.get('width')+'px;');
   })
 });

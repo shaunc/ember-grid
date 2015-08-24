@@ -197,7 +197,7 @@ is the current data row, `rowIndex` is the index of the row, and `column` is the
 
 ### Supply a custom body cell
 
-Place a `eg-body` component inside `eg-column` to override the default body cells for the column:
+Place an `eg-body` component inside `eg-column` to override the default body cells for the column:
 
     {{#ember-grid data=myData }} 
       {{#eg-column key="name" width=150 header="Name" field=fullName }}

@@ -3,12 +3,14 @@
 import Ember from 'ember';
 import layout from './template';
 
+import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   classNames: ['cell', 'eg-body-cell'],
   classNameBindings: ['isOddRow:odd'],
-  attributeBindings: ['style', 'rowIndex:data-row-index'],
+  attributeBindings: ['rowIndex:data-row-index'],
+  styleBindings: ['width[px]', 'rowHeight:height[px]'],
 
   _source: Ember.computed.alias('column._zones.body.source'),
   _data: Ember.computed.alias('column._zones.body.data'),
@@ -18,13 +20,5 @@ export default Ember.Component.extend({
 
   isOddRow: Ember.computed('rowIndex', function() {
     return this.get('rowIndex') % 2 === 1;
-  }),
-
-  style: Ember.computed('width', 'rowHeight', function(){
-    var {width, rowHeight} = this.getProperties('width', 'rowHeight');
-    return Ember.String.htmlSafe(
-      'width:' + width + 
-      'px; height:' + rowHeight + 'px');
   })
-
 });
