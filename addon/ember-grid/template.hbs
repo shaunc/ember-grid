@@ -6,13 +6,13 @@
 </div>
 
 {{#if showHeader}}
-	{{eg-render/eg-header columns=columns width=bodyWidth}}
+	{{eg-render/eg-header columns=_columns width=bodyWidth}}
 {{/if}}
 
 {{eg-render/eg-body
-  data=attrs.data columns=columns height=bodyHeight width=bodyWidth
+  data=attrs.data columns=_columns height=bodyHeight width=bodyWidth
   contentWidth=contentWidth rowHeight=rowHeight scrollY=scrollY }}
 
 {{#if showFooter}}
-	{{eg-render/eg-footer columns=columns width=bodyWidth}}
+	{{eg-render/eg-footer columns=_columns width=bodyWidth}}
 {{/if}}

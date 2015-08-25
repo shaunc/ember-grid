@@ -4,40 +4,42 @@ import Ember from 'ember';
 import layout from './template';
 import Column from '../eg-column/model';
 import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
+import potentialDimensions from 'ember-grid/utils/potential-dimensions';
 
 export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   classNames: ['ember-grid'],
-  styleBindings: ['width[px]'],
+  styleBindings: ['width[px]', 'height[px]'],
 
   showHeader: true,
   showFooter: false,
 
-  columns: null,
+  _columns: null,
+  width: null,
+  height: null,
+  bodyWidth: null,
+  bodyHeight: null,
 
-  bodyWidth: Ember.computed.alias('width'),
-  contentWidth: Ember.computed( 'columns.[]', 'columns.{width}', {
-    get() {
-      var columns = this.get('columns');
-      if (columns == null || columns.length === 0) { return 0; }
-      var w = columns.reduce(((r,col)=> r + col.get('width')), 0);
-      return w;
-    },
-    set(k, v) {
-      return v;
-    }
+  needDimensions: Ember.computed(
+      'height', 'width', 'columnsWithoutWidth', function(){
+    var {height, width, columnsWithoutWidth} = 
+      this.getProperties('height', 'width', 'columnsWithoutWidth');
+    return height == null || (width == null && columnsWithoutWidth > 0);
   }),
+
   columnsWithoutWidth: Ember.computed('columns', function(){
-    return this.get('columns').reduce(((r, col)=>r + (col.width == null)), 0);
+    var columns = this.get('_columns');
+    if (columns == null ) { return 0; }
+    return columns.reduce(((r, col)=>r + (col.width == null)), 0);
   }),
+
   init: function() {
     this._super();
     // XXX didReceiveAttrs can be called before init!
-    if (this.get('columns') == null) {
-      this.set('columns', new Ember.A([]));
+    if (this.get('_columns') == null) {
+      this.set('_columns', new Ember.A([]));
     }
   },
-
   didReceiveAttrs() {
     this._super();
     var columns = this.getAttr('columns');
@@ -49,14 +51,14 @@ export default Ember.Component.extend(CspStyleMixin, {
     } else {
       columns = columns.map( 
         col => col instanceof Column ? col : Column.create(col) );
-      this.set('columns', columns);
+      this.set('_columns', columns);
     }
     var [
       height, width, rowHeight, headerHeight, footerHeight, 
       scrollX, scrollY, showHeader, showFooter, data
     ] = [
       'height', 'width', 'rowHeight', 'headerHeight', 'footerHeight',
-      'scrollX', 'scrollY', 'showHeader', 'showFooter', 'data'
+      'scroll-x', 'scroll-y', 'showHeader', 'showFooter', 'data'
     ].map( (attr)=>this.getAttr(attr));
 
     rowHeight = rowHeight || 25;
@@ -69,33 +71,8 @@ export default Ember.Component.extend(CspStyleMixin, {
       height, width, rowHeight, headerHeight, footerHeight, 
       scrollX, scrollY, showHeader, showFooter, data      
     });
-    this._setupLayout();
-    var self = this;
-    this.columns.forEach( column => { self._refreshColumn(column); });
+    columns.forEach( column => { this._refreshColumn(column); });
   },
-  _setupLayout() {
-    var { height, width, headerHeight, footerHeight, scrollX, scrollY } =
-      this.getProperties(
-        'height', 'width', 'headerHeight', 'footerHeight',
-        'scrollX', 'scrollY');
-    if (height == null) {
-      if (scrollY == null) {
-        this.set('scrollY', false);
-      }
-      var {data, rowHeight} = this.getProperties('data','rowHeight');
-      var bodyHeight = rowHeight * data.length;
-      this.set('bodyHeight', bodyHeight);
-      this.set('height', bodyHeight + headerHeight + footerHeight);
-    } else {
-      this.set('bodyHeight', height - headerHeight - footerHeight);
-    }
-    if (width == null) {
-      if (scrollX == null) {
-        this.set('scrollX', false);
-      }
-    }
-  },
-
   _refreshColumn(column) {
     var body;
     if (column._zones == null) {
@@ -118,56 +95,115 @@ export default Ember.Component.extend(CspStyleMixin, {
       limit: limit
     });
   },
-
   _addColumn: function(column) {
-   	this.columns.pushObject(column);
+    this.get('_columns').pushObject(column);
     this._refreshColumn(column);
   },
+
   didRender() {
-    var {width, columnsWithoutWidth} = this.getProperties('width', 'columnsWithoutWidth');
-    if(width == null || columnsWithoutWidth > 0) {
-      Ember.run.next(this, 'adjustWidth');
-    }
+    Ember.run.next(()=>{
+      this.adjustDimensions();
+    });
   },
-  adjustWidth() {
-    var {width, columnsWithoutWidth} = this.getProperties('width', 'columnsWithoutWidth');
-    if (columnsWithoutWidth > 0) {
-      this.calcContentWidth(width, columnsWithoutWidth);
+
+  /** 
+   *
+   * Adjust dimensions according to settings & available space
+   *
+   * 1) If height is missing:
+   *   * If scroll-y is false, calculate size of body, then add
+   *     header height and footer height for height.
+   *   * If scroll-y is true or auto, use css height if set; otherwise
+   *     measure potential height and use that.
+   *
+   * 2) If width is missing:
+   *   * If column widths are all present, and scroll-y is not true,
+   *     then width is sum of column widths.
+   *      
+   *   * If column widths are missing or scroll-y is true, potential
+   *     width is measured and taken as width. Any columns without
+   *     width are given width equal to display space, minimum 20.
+   */
+  adjustDimensions() {
+    if (!this.get('needDimensions')) { return; }
+    var {width, height} = this.getProperties('height', 'width');
+    var dimensions = potentialDimensions(this.element);
+    if (height == null) {
+      this.calculateHeight(dimensions);
     }
-    if (this.get('width') == null) {
-      this.set('width', this.get('contentWidth'));
+    if (width == null) {
+      this.calculateWidth(dimensions);
+    }
+    this.get('_columns').forEach( column => { this._refreshColumn(column); });
+  },
+
+  calculateHeight(dimensions) {
+    var element = this.element;
+    var scrollY = this.get('scrollY');
+    if (scrollY === false) {
+      // no scroll - body big enough to fit all content.
+      let {data, rowHeight} = this.getProperties('rowHeight', 'data');
+      if (data == null) { return; }
+      let innerBodyHeight = data.length * rowHeight;
+      let bodyElement = element.getElementsByClassName('body')[0];
+      let bodyDimensions = potentialDimensions(bodyElement);
+      let bodyBorderHeight = bodyDimensions.outer.height - bodyDimensions.inner.height;
+      let bodyHeight = innerBodyHeight + bodyBorderHeight;
+      this.set('bodyHeight', bodyHeight);
+      let ownBorderHeight = dimensions.outer.height - dimensions.inner.height;
+      this.set('height', bodyHeight + ownBorderHeight);
+    }
+    else {
+      // if our height is bigger than header and footer height,
+      // use actual height; otherwise use potential height.
+      let height, endHeight = 0;
+      if (this.get('showHeader')) {
+        let header = element.getElementsByClassName('header')[0];
+        endHeight += header.offsetHeight;
+      }
+      let body = element.getElementsByClassName('body')[0];
+      endHeight += body.offsetHeight;
+      if (this.get('showFooter')) {
+        let footer = element.getElementsByClassName('footer')[0];
+        endHeight += footer.offsetHeight;
+      }
+      // XXX heuristic: if current internal height matches height of
+      // internal contents (before display of data), we assume element
+      // is "flexible" and use max height that will fit into parent.
+      //
+      // Otherwise, height may be given by css, so we leave it alone.
+      if (element.clientHeight > endHeight) {
+        height = element.clientHeight;
+      } else {
+        height = dimensions.outer.height;
+      }
+      this.set('height', height);
+      this.set('bodyHeight', height - endHeight);
     }
   },
 
-  calcContentWidth(width, columnsWithoutWidth) {
-    if (width == null) {
-      width = this.readElementWidth();
-    }
-    if (width == null) { return; }
-    var colWidth = width / columnsWithoutWidth;
-    var columns = this.get('columns');
-    var contentWidth = 0;
-    columns.forEach((col)=>{
-      if(col.width == null) {
-        col.set('width', colWidth);
-      }
-      contentWidth += col.width;
-    });
-    this.set('contentWidth', contentWidth);
-  },
-  
-  readElementWidth() {
+  calculateWidth(dimensions) {
     var element = this.element;
-    if (element == null) { return; }
-    var width = this.element.width;
-    if (!width) {
-      this.element.style.width = '100%';
-      this.element.style.boxSizing = 'border-box';
-      width = this.element.offsetWidth;
-      this.element.style.width = null;
-      this.element.style.boxSizing = null;
+    var {scrollY, columnsWithoutWidth} = this.getProperties(
+      'scrollY', 'columnsWithoutWidth');
+    let borderWidth = dimensions.outer.width - dimensions.inner.width;
+    if (scrollY !== true && columnsWithoutWidth === 0) {
+      // body width is sum of column widths
+      let columns = this.get('_columns');
+      let bodyWidth = columns.reduce(((r,col)=> r + col.get('width')), 0);
+      this.set('bodyWidth', bodyWidth);
+      this.set('width', bodyWidth + borderWidth);
+    } else {
+      // body width derived from own width
+      let bodyWidth = element.clientWidth;
+      if (bodyWidth > 0) {
+        this.set('bodyWidth', bodyWidth);
+        this.set('width', bodyWidth + borderWidth);
+      } else {
+        this.set('bodyWidth', dimensions.inner.width);
+        this.set('width', dimensions.offsetWidth);
+      }
     }
-    return width;
   }
 
 });
