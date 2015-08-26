@@ -4,6 +4,14 @@ var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 module.exports = function(defaults) {
   var app = new EmberAddon(defaults, {
     // Add options here
+    /*
+     * The following needed by phantomjs & safari. However, phantomjs
+     * hits another problem (see below), and is turned off in testem.
+     */
+    babel: {
+      //optional: ['es6.spec.symbols'],
+      includePolyfill: true
+    }
   });
 
   /*
@@ -15,6 +23,20 @@ module.exports = function(defaults) {
   app.import( app.bowerDirectory + '/chai/chai.js', {test: true});
   app.import( app.bowerDirectory + '/chance/chance.js', {test: true});
   app.import( app.bowerDirectory + '/lodash/lodash.js', {test: true});
+  /**
+   * TODO: phantomJS needs a polyfill of requestAnimationFrame, which
+   * is used in ember-collection.
+   * 
+   * This one: https://github.com/cagosta/requestAnimationFrame
+   * however, doesn't seem to work.
+   * 
+   * For the moment, we have phantomjs turned off in testem.
+   *
+
+  app.import( 
+    app.bowerDirectory + '/requestAnimationFrame/app/requestAnimationFrame.js', 
+    {test: true});
+   */
 
   return app.toTree();
 };
