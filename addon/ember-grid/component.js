@@ -138,6 +138,7 @@ export default Ember.Component.extend(CspStyleMixin, {
     var {bodyHeight, bodyWidth} = this.getProperties('bodyHeight', 'bodyWidth');
     if (bodyHeight == null) {
       bodyHeight = this.element.clientHeight;
+      bodyHeight -= (this._actualBodyHeight() || 0); // should be just border
       bodyHeight -= headerHeight + footerHeight;
       this.set('bodyHeight', bodyHeight);
     }
@@ -201,6 +202,12 @@ export default Ember.Component.extend(CspStyleMixin, {
       return header ? header.offsetHeight : null;
     }
     return 0;
+  },
+  _actualBodyHeight() {
+    if (this.element == null) { return; }
+    let body = this.element.getElementsByClassName('body')[0];
+    return body ? body.offsetHeight : null;
+
   },
   _actualFooterHeight() {
     if (this.element == null) { return; }

@@ -27,11 +27,14 @@ export function readDimensions(element, ...dimensions) {
   var raw = window.getComputedStyle(element);
   for (let key in dimensions) {
     let dim = dimensions[key];
-    measured[dim] = parseInt(raw[dim], 10);
+    measured[dim] = parseFloat(raw[dim]);
   }
   return measured;
 }
 export function readElementDimensions(context, name, ...dimensions) {
   var element = getElement(context, name);
+  if (element == null) {
+    return {};
+  }
   return readDimensions(element, ...dimensions);
 }

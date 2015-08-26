@@ -28,7 +28,12 @@ function patchAssertMethod(cassert, qassert, key, method) {
 
 export function test(name, callback) {
   qtest(name, function(assert) {
+    var context = this;
+    if (context == null) {
+      context = {};
+    }
     var cassert = getChaiAssert(assert);
-    return callback.call(this, cassert);
+    context.assert = cassert;
+    return callback.call(context, cassert);
   });
 }
