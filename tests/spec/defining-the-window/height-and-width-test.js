@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { skip } from 'qunit';
 import { test } from '../../helpers/chai-assert';
 import moduleForIntegration from '../../helpers/test-component';
 import { personTable500 } from '../../helpers/example-data';
@@ -46,7 +45,7 @@ function readOuterHeight(context, name) {
 // --------------------------------------------------------------------------
 moduleForIntegration(
   'spec/defining-the-window/height', 
-  'use explicit ember-grid.height to control layout');
+  'use explicit ember-grid.height to control vertical layout');
 
 test('explicit height controls element height', function(assert) {
   var height = 400, data = personTable500;
@@ -56,7 +55,6 @@ test('explicit height controls element height', function(assert) {
     checkHeights(this, 400);
   });
 });
-
 test('explicit height w/o header controls element height', function(assert) {
   var height = 400, data = personTable500, showHeader = false;
   assert.expect(2);
@@ -65,7 +63,6 @@ test('explicit height w/o header controls element height', function(assert) {
     checkHeights(this, 400);
   });
 });
-
 test('explicit height w/ header & footer controls element height', function(assert) {
   var height = 400, data = personTable500, showFooter = true;
   assert.expect(2);
@@ -74,11 +71,24 @@ test('explicit height w/ header & footer controls element height', function(asse
     checkHeights(this, 400);
   });
 });
+test('explicit height w/ no header & footer controls element height', function(assert) {
+  var height = 400, data = personTable500, showHeader = false, showFooter = true;
+  assert.expect(2);
+  renderTemplate(this, {height, data, columns, showHeader, showFooter});
+  andThen(()=>{
+    checkHeights(this, 400);
+  });
+});
 
 
+// --------------------------------------------------------------------------
+// implicit height: fill parent
+// --------------------------------------------------------------------------
+moduleForIntegration(
+  'spec/defining-the-window/height', 
+  'use parent context to control vertical layout');
 
-
-test('undefined height, scroll, css fills to potential in parent', function(assert){
+test('height to potential in parent when no height, scroll or css', function(assert){
   var data = personTable500;
   assert.expect(2);
   addStyles({'> *': 'height: 400px;'});
@@ -86,10 +96,39 @@ test('undefined height, scroll, css fills to potential in parent', function(asse
   andThen(()=>{
     checkHeights(this, 400);
   });
-
+});
+test('height  to potential in parent when no height, scroll or css; no header', function(assert){
+  var data = personTable500, showHeader = false;
+  assert.expect(2);
+  addStyles({'> *': 'height: 400px;'});
+  renderTemplate(this, {data, columns, showHeader});
+  andThen(()=>{
+    checkHeights(this, 400);
+  });
+});
+test('height to potential in parent when no height, scroll or css; footer', function(assert){
+  var data = personTable500, showFooter = true;
+  assert.expect(2);
+  addStyles({'> *': 'height: 400px;'});
+  renderTemplate(this, {data, columns, showFooter});
+  andThen(()=>{
+    checkHeights(this, 400);
+  });
+});
+test('height to potential in parent when no height, scroll or css; no header & footer', function(assert){
+  var data = personTable500, showHeader = false, showFooter = true;
+  assert.expect(2);
+  addStyles({'> *': 'height: 400px;'});
+  renderTemplate(this, {data, columns, showHeader, showFooter});
+  andThen(()=>{
+    checkHeights(this, 400);
+  });
 });
 
-test('undefined height, scroll, explict css respected', function(assert){
+// --------------------------------------------------------------------------
+// implicit height: from css
+// --------------------------------------------------------------------------
+test('css height respect when no explicit height or scroll', function(assert){
   var data = personTable500;
   assert.expect(2);
   addStyles({'.ember-grid': 'height: 300px;'});
@@ -98,34 +137,32 @@ test('undefined height, scroll, explict css respected', function(assert){
     checkHeights(this, 300);
   });
 });
-
-skip('undefined height, scroll false: layout displays all rows', function(assert) {
-  var data = personTable500;
+test('css height respect when no explicit height or scroll; no header', function(assert){
+  var data = personTable500, showHeader = false;
   assert.expect(2);
+  addStyles({'.ember-grid': 'height: 300px;'});
+  renderTemplate(this, {data, columns, showHeader});
+  andThen(()=>{
+    checkHeights(this, 300);
+  });
 });
-
-skip('', function(assert) {
-  var data = personTable500;
+test('css height respect when no explicit height or scroll; footer', function(assert){
+  var data = personTable500, showFooter = true;
   assert.expect(2);
-
+  addStyles({'.ember-grid': 'height: 300px;'});
+  renderTemplate(this, {data, columns, showFooter});
+  andThen(()=>{
+    checkHeights(this, 300);
+  });
 });
-
-skip('', function(assert) {
-  var data = personTable500;
+test('css height respect when no explicit height or scroll; no header, footer', function(assert){
+  var data = personTable500, showHeader = false, showFooter = true;
   assert.expect(2);
-
-});
-
-skip('', function(assert) {
-  var data = personTable500;
-  assert.expect(2);
-
-});
-
-skip('', function(assert) {
-  var data = personTable500;
-  assert.expect(2);
-
+  addStyles({'.ember-grid': 'height: 300px;'});
+  renderTemplate(this, {data, columns, showHeader, showFooter});
+  andThen(()=>{
+    checkHeights(this, 300);
+  });
 });
 
 
