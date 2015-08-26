@@ -29,8 +29,8 @@ export default Ember.Component.extend({
       Ember.run.debounce(function() { 
         bodies.map( function(body){
           if (body != null) {
-            Ember.set(body, 'offset', Math.max(offset - 60, 0));
-            Ember.set(body, 'limit', limit + 60);
+            Ember.set(body, 'offset', Math.max(offset - 30, 0));
+            Ember.set(body, 'limit', limit + 30);
           }
         });
       }, 100);
