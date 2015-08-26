@@ -13,12 +13,19 @@ export default Ember.Component.extend({
     for (let opt in options) {
       this.set(opt, options[opt]);
     }
-    var templateString = this.getAttr('layoutString');
+    var templateString = this.getAttr('layoutString').trim();
     if (templateString.string != null) {
       templateString = templateString.string;
     }
     this.set('layoutString', templateString);
+  },
+  didRender() {
+    var pelement = this.element.parentNode;
+    var {top} = pelement.getBoundingClientRect();
+    pelement.style.height = ($(window).height() - top - 20) + 'px';
+
   }
+
 });
 
 

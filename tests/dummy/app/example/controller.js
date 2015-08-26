@@ -88,7 +88,7 @@ export default Ember.Controller.extend({
             min-width=150 max-width=300 align="center"}}
           
           {{#eg-body as |field rowIndex column|}}
-            {{rowIndex}}: <strong>{{field}}</strong>
+            {{rowIndex}} <strong>{{field}}</strong>
           {{/eg-body}}
 
         {{/eg-column}}
@@ -106,7 +106,9 @@ export default Ember.Controller.extend({
         {{eg-column key="email" width=150}}
       {{/ember-grid}}`,
 
-    minimal: `{{ember-grid data=data columns="name,age,salary,email"}}`
+    minimal: `
+      {{! without scroll-y=false, takes available space in parent element }}
+      {{ember-grid data=data columns="name,age,salary,email"}}`
 
    }
 });
