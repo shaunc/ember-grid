@@ -1,3 +1,4 @@
+/* globals _ */
 // eg-column
 
 import Ember from 'ember';
@@ -10,30 +11,40 @@ export default Ember.Component.extend({
 
 	_column: null,
 
-	init: function() {
+	init() {
 		this._super.apply(this, arguments);
-		this._column = ColumnModel.create({});
-		this._column.key = this.elementId;
+    // receive attrs before init!
+    if (this._column == null) {
+  		this._column = ColumnModel.create({});
+	   	this._column.key = this.elementId;
+    }
 	},
 
-	didReceiveAttrs: function() {
+	didReceiveAttrs() {
 		this._super();
-		Ember.run.scheduleOnce('afterRender', this, function() {
-			var column = this.get('_column');
-			for(let key in this.attrs) {
-				column.set(key, this.getAttr(key));
-			}
-		});
-	},
-
-  didInsertElement: function() {
-    this._super.apply(this, arguments);
-  	Ember.run.next(this, function() {
-	    var parentView = this.get('parentView');
-	    if (parentView instanceof EmberGrid) {
-	    	parentView._addColumn(this.get('_column'));
-	    }
-	  });
+    var column = this._column;
+    if (column == null) {
+      column = this._column = ColumnModel.create({});
+    }
+    for (let key in this.attrs) {
+      column[key] = this.getAttr(key);
+    }
+  },
+  willRender() {
+    var parentView = this.get('parentView');
+    if (parentView instanceof EmberGrid) {
+      var column = this._column;
+      var parentColumn = _.find(parentView._columns, {key: this._column.key});
+      if (parentColumn == null) {
+        parentView._columns.push(column);
+      } else {
+        for (let key in column) {
+          if (key === '_zones' || parentColumn[key] == null) {
+            parentColumn[key] = column[key];
+          }
+        }
+      }
+    }
 	}
 
 });

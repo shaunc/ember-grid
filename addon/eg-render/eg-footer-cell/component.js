@@ -16,11 +16,9 @@ export default Ember.Component.extend(CspStyleMixin, {
   align: Ember.computed.alias('_column.align'),
   width: Ember.computed.alias('_column.width'),
 
-  didInsertElement: function() {
+  didRender: function() {
     this._super();
-  	Ember.run.scheduleOnce('afterRender', this, function() {
-  		this.renderFooter();
-  	});
+ 		this.renderFooter();
   },
 
   didReceiveAttrs: function() {
@@ -34,7 +32,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   	{
 	    var sourceElement = footer.element;
 	    var destinationElement = this.get('element');
-      moveChildren(sourceElement, destinationElement);
+      moveChildren(sourceElement, destinationElement, true);
 	  }
   },
 

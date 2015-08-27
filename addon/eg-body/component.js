@@ -55,11 +55,12 @@ export default Ember.Component.extend({
   didReceiveAttrs: function() {
     this._super();
     var body = this._body;
-    if (body == null ) {
-      body = Ember.Object.create({});
-      this.set('_body', body);
+    if (body == null) {
+      body = this._body = Ember.Object.create({source: this});
     }
-    Ember.merge(body, this.attrs);
+    for (let key in this.attrs) {
+      body[key] = this.getAttr(key);
+    }
     if (body._offset == null) {
       Ember.set(body, 'offset', 0);
     }
@@ -67,27 +68,17 @@ export default Ember.Component.extend({
       Ember.set(body, 'limit', Math.ciel(body.height / body.rowHeight) + 10);
     }
   },
-  didInsertElement: function() {
+  willRender() {
     this._super.apply(this, arguments);
-
-  	Ember.run.next(this, function() {
-	    var parentView = this.get('parentView');
-	    if (parentView instanceof EmberGridColumn) {
-        var columnBody = parentView.get('_column._zones.body');
-        if( columnBody == null) {
-          parentView.set('_column._zones.body', this._body);
-          columnBody = this._body;
-        }
-        else {
-          columnBody.setProperties(this._body);
-          this.set('_body', columnBody);
-        }
-	    	Ember.set(columnBody, 'element', this.get('element'));
-        Ember.set(columnBody, 'source', this);
-	    }
-	    this.get('element').style.display = 'none';
-	  });
-	}
-
-
+    var parentView = this.get('parentView');
+    if (parentView instanceof EmberGridColumn) {
+      var body = this._body;
+      if (parentView._column._zones.body !== body) {
+        parentView._column._zones.body = body;
+      }
+    }
+	},
+  didRender() {
+    this._body.element = this.element;
+  }
 });

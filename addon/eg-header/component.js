@@ -7,16 +7,30 @@ import layout from './template';
 export default Ember.Component.extend({
   layout: layout,
 
+  _header: null,
   _column: Ember.computed.alias('parentView._column'),
 
-  willInsertElement: function() {
-    this._super.apply(this, arguments);
-
+  didReceiveAttrs() {
+    this._super();
+    var header = this._header;
+    if (header == null) {
+      header = this._header = Ember.Object.create({});
+    }
+    for (let key in this.attrs) {
+      header[key] = this.getAttr(key);
+    }
+  },
+  willRender() {
     var parentView = this.get('parentView');
     if (parentView instanceof EmberGridColumn) {
-    	parentView.set('_column._zones.header', this.attrs);
-    	parentView.set('_column._zones.header.element', this.get('element'));
+      var header = this._header;
+      if (parentView._column._zones.header !== header) {
+        parentView._column._zones.header = header;
+      }
     }
-	}
+	},
+  didRender() {
+    this._header.element = this.element;
+  }
 
 });

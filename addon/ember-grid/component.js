@@ -2,7 +2,7 @@
 
 import Ember from 'ember';
 import layout from './template';
-import Column from '../eg-column/model';
+import ColumnModel from '../eg-column/model';
 import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
 import potentialDimensions from 'ember-grid/utils/potential-dimensions';
 
@@ -20,7 +20,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   bodyWidth: null,
   bodyHeight: null,
 
-  columnsWithoutWidth: Ember.computed('columns', function(){
+  columnsWithoutWidth: Ember.computed('_columns.[]', function(){
     var columns = this.get('_columns');
     if (columns == null ) { return 0; }
     return columns.reduce(((r, col)=>r + (col.width == null)), 0);
@@ -43,7 +43,7 @@ export default Ember.Component.extend(CspStyleMixin, {
       columns = new Ember.A();
     } else {
       columns = columns.map( 
-        col => col instanceof Column ? col : Column.create(col) );
+        col => col instanceof ColumnModel ? col : ColumnModel.create(col) );
     }
     this.set('_columns', columns);
     var [
@@ -66,9 +66,6 @@ export default Ember.Component.extend(CspStyleMixin, {
   },
   _refreshColumn(column) {
     var body;
-    if (column._zones == null) {
-      Ember.set(column, '_zones', Ember.Object.create({}));
-    }
     if (column._zones.body == null) {
       body = Ember.Object.create({});
       Ember.set(column._zones, 'body', body);
@@ -88,11 +85,12 @@ export default Ember.Component.extend(CspStyleMixin, {
   },
   _addColumn: function(column) {
     this.get('_columns').pushObject(column);
+    console.log('added column');
     this._refreshColumn(column);
   },
 
   didRender() {
-    Ember.run.next(()=>{
+    Ember.run.scheduleOnce('afterRender', ()=>{
       this.adjustDimensions();
     });
   },
@@ -117,35 +115,54 @@ export default Ember.Component.extend(CspStyleMixin, {
    */
   adjustDimensions() {
     var {width, height} = this.getProperties('height', 'width');
-    if (width == null || height == null) {
+    var columnsWithoutWidth = this.get('columnsWithoutWidth');
+    if (width == null || height == null || columnsWithoutWidth > 0) {
       let dimensions = potentialDimensions(this.element);
+      // XXX TODO: if calculated, height and width should change
+      // if input changes; but not if set explicitly
       if (height == null) {
         this.calculateHeight(dimensions);
       }
-      if (width == null) {
-        this.calculateWidth(dimensions);
+      if (width == null || columnsWithoutWidth > 0) {
+        this.calculateWidth(dimensions, width);
       }
     }
-    var {headerHeight, footerHeight} = this.getProperties('headerHeight', 'footerHeight');
-    if (headerHeight == null) {
-      headerHeight = this._actualHeaderHeight();
-      this.set('headerHeight', headerHeight);
-    }
-    if (footerHeight == null) {
-      footerHeight = this._actualFooterHeight();
-      this.set('footerHeight', footerHeight);
-    }
-    var {bodyHeight, bodyWidth} = this.getProperties('bodyHeight', 'bodyWidth');
-    if (bodyHeight == null) {
-      bodyHeight = this.element.clientHeight;
-      bodyHeight -= (this._actualBodyHeight() || 0); // should be just border
-      bodyHeight -= headerHeight + footerHeight;
-      this.set('bodyHeight', bodyHeight);
-    }
-    if (bodyWidth ==null) {
-      this.set('bodyWidth', this.element.clientWidth);
-    }
+    this.adjustContentDimensions();
+  },
+  adjustContentDimensions() {
+    if(this.element == null) { return; }
+
+    /*
+     * The goal is to calculate how much room we have for body
+     * content. The trick part is the height. From the inner height
+     * of the element, we need to remove the height of the footer
+     * header and body border. However, we need to keep in mind
+     * that the body border may overlap with the borders of header
+     * and footer.
+     *
+     * TODO: take margin into account. Take scrollbar into account.
+     */
+    var newBodyHeight = this.element.clientHeight;
+    newBodyHeight -= this._bodyShellHeight();
+
+    this.set('bodyHeight', newBodyHeight);
+    this.set('bodyWidth', this.element.clientWidth);
     this.get('_columns').forEach( column => { this._refreshColumn(column); });
+  },
+  _bodyShellHeight() {
+    // calclulate the height of content except contents of body
+    var headerStyle = this._actualHeaderStyle();
+    var bodyStyle = this._actualBodyStyle();
+    var footerStyle = this._actualFooterStyle();
+    var _N = val=> val == null ? 0 : parseFloat(val);
+    var shellHeight = 0;
+    shellHeight += _N(headerStyle.offsetHeight) - _N(headerStyle.bottomBorderWidth);
+    shellHeight += Math.max(
+      _N(headerStyle.bottomBorderWidth), _N(bodyStyle.topBorderWidth));
+    shellHeight += Math.max(
+      _N(footerStyle.topBorderWidth), _N(bodyStyle.borderBottomWidth));
+    shellHeight += _N(footerStyle.offsetHeight) - _N(footerStyle.topBorderWidth);
+    return shellHeight;    
   },
 
   calculateHeight(dimensions) {
@@ -160,7 +177,6 @@ export default Ember.Component.extend(CspStyleMixin, {
       let bodyDimensions = potentialDimensions(bodyElement);
       let bodyBorderHeight = bodyDimensions.outer.height - bodyDimensions.inner.height;
       let bodyHeight = innerBodyHeight + bodyBorderHeight;
-      this.set('bodyHeight', bodyHeight);
       // XXX reconsider if we support box-sizing: border-box
       //let ownBorderHeight = dimensions.outer.height - dimensions.inner.height;
       this.set('height', bodyHeight); // + ownBorderHeight);
@@ -168,63 +184,29 @@ export default Ember.Component.extend(CspStyleMixin, {
     else {
       // if our height is bigger than header and footer height,
       // use actual height; otherwise use potential height.
-      let height, endHeight = 0;
-      let headerHeight = this._actualHeaderHeight();
-      if (this.get('headerHeight') == null) {
-        this.set('headerHeight', headerHeight);
-      }
-      endHeight += headerHeight | 0;
-      let body = element.getElementsByClassName('body')[0];
-      endHeight += body.offsetHeight;
-      let footerHeight = this._actualFooterHeight();
-      if (this.get('footerHeight') == null) {
-        this.set('footerHeight', footerHeight);
-      }
-      endHeight += footerHeight | 0;
+
+      let height, shellHeight = this._bodyShellHeight();
       // XXX heuristic: if current internal height matches height of
       // internal contents (before display of data), we assume element
       // is "flexible" and use max height that will fit into parent.
       //
       // Otherwise, height may be given by css, so we leave it alone.
-      if (element.clientHeight > endHeight) {
+      if (element.clientHeight > Math.floor(shellHeight + 0.5)) {
         height = element.clientHeight;
       } else {
         height = dimensions.outer.height;
       }
       this.set('height', height);
-      this.set('bodyHeight', height - endHeight + body.offsetHeight);
     }
   },
-  _actualHeaderHeight() {
-    if (this.element == null) { return; }
-    if (this.get('showHeader')) {
-      let header = this.element.getElementsByClassName('header')[0];
-      return header ? header.offsetHeight : null;
-    }
-    return 0;
-  },
-  _actualBodyHeight() {
-    if (this.element == null) { return; }
-    let body = this.element.getElementsByClassName('body')[0];
-    return body ? body.offsetHeight : null;
-
-  },
-  _actualFooterHeight() {
-    if (this.element == null) { return; }
-    if (this.get('showFooter')) {
-      let footer = this.element.getElementsByClassName('footer')[0];
-      return footer ? footer.offsetHeight : null;
-    }
-    return 0;
-  },
-
-  calculateWidth(dimensions) {
+  calculateWidth(dimensions, width) {
     var element = this.element;
     var {scrollY, columnsWithoutWidth} = this.getProperties(
       'scrollY', 'columnsWithoutWidth');
     let columns = this.get('_columns');
-    let contentWidth = columns.reduce(((r,col)=> r + col.get('width')), 0);
-    if (scrollY !== true && columnsWithoutWidth === 0) {
+    let contentWidth = columns.reduce((
+      (r,col)=> r + (col.get('width') || 0)), 0);
+    if (width == null && scrollY !== true && columnsWithoutWidth === 0) {
       // body width is sum of column widths
       this.set('bodyWidth', contentWidth);
       this.set('width', contentWidth);
@@ -235,7 +217,9 @@ export default Ember.Component.extend(CspStyleMixin, {
         bodyWidth = dimensions.inner.width;
       }
       this.set('bodyWidth', bodyWidth);
-      this.set('width', bodyWidth);
+      if (width == null) {
+        this.set('width', bodyWidth);
+      }
       if (columnsWithoutWidth > 0) {
         var unusedWidth = Math.max(bodyWidth - contentWidth, 0);
         var colWidth = Math.max(10, unusedWidth / columnsWithoutWidth);
@@ -245,6 +229,30 @@ export default Ember.Component.extend(CspStyleMixin, {
           Ember.set(col, 'width', colWidth);
         }
       });
+    }
+  },  
+  _actualHeaderStyle() {
+    return this._readElementStyle('header');
+  },
+  _actualBodyStyle() {
+    return this._readElementStyle('body');
+  },
+  _actualFooterStyle() {
+    return this._readElementStyle('footer');
+  },
+  _readElementStyle(name) {
+    if (this.element == null) { return; }
+    let sub = this.element.getElementsByClassName(name)[0];
+    if (sub != null) {
+      var style = window.getComputedStyle(sub);
+      style.clientHeight = sub.clientHeight;
+      style.offsetHeight = sub.offsetHeight;
+      style.clientWidth = sub.clientWidth;
+      style.offsetWidth = sub.offsetWidth;
+      return style;
+    }
+    else {
+      return {};
     }
   }
 

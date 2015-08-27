@@ -1,25 +1,13 @@
-import Ember from 'ember';
+// tests/spec/defining-the-window/height-test.js
+
 import { test } from '../../helpers/chai-assert';
 import moduleForIntegration from '../../helpers/test-component';
 import { personTable500 } from '../../helpers/example-data';
 import { getElement, readElementDimensions } from '../../helpers/element';
 import { addStyles } from '../../helpers/styles';
-
+import { renderTemplate } from '../../helpers/render';
 
 var columns = 'name,age,salary,email';
-function renderTemplate(context, params) {
-  var paramStr = [];
-  for(let key in params) {
-    paramStr.push(`${key}=${key}`);
-  }
-  paramStr = paramStr.join(' ');
-  var template = `{{ember-grid ${paramStr} }}`;
-  Ember.run(()=>{
-    context.setProperties(params);
-    context.render(Ember.Handlebars.compile(template));
-  });
-}
-
 
 function checkHeights(context, expectedHeight) {
     var {height: elementHeight} = readElementDimensions(context, 'grid', 'height');

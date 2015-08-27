@@ -33,11 +33,11 @@ export default Ember.Component.extend(CspStyleMixin, {
     return this === this.get('parentView.draggingHeaderCell');
   }),
 
-  didInsertElement: function() {
+  didRender: function() {
     this._super();
+    this.renderHeader();
   	Ember.run.scheduleOnce('afterRender', this, function() {
       this.set('width', this.constrainDragWidth(this.get('width')));
-  		this.renderHeader();
   	});
   },
 
@@ -52,7 +52,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   	{
 	    var sourceElement = header.element;
 	    var destinationElement = this.get('element');
-      moveChildren(sourceElement, destinationElement);
+      moveChildren(sourceElement, destinationElement, true);
 	  }
   },
 
