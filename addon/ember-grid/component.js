@@ -20,7 +20,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   _columns: null,
   width: null,          // total width of element
   bodyWidth: null,      // inside width of element
-  contentWidth: null,   // width of all columns
+  /*contentWidth*/      // width of all columns
                         // column scrolling if more than body width
 
   height: null,         // total height of element
@@ -174,7 +174,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   adjustDisplayWidth() {
     if (this.element == null) { return; }
     var contentWidth = this.get('contentWidth');
-    var display = this.element.getElementsByClassName('display')[0]
+    var display = this.element.getElementsByClassName('display')[0];
     display.style.width = (contentWidth - 2) + 'px';
   },
 

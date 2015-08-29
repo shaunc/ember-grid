@@ -52,7 +52,10 @@ export function checkHorizontalScroll(context, enabled, present) {
   }
   var display = grid.getElementsByClassName('display')[0];
   // allow one pixel play
-  context.assert.equal(
-    display.scrollHeight > display.clientHeight, present);
-  debugger
+  if (display.scrollWidth == null) {
+    context.assert.isFalse(present);
+  } else {
+    context.assert.equal(
+      display.scrollWidth - 2 > grid.clientWidth, present);
+  }
 }
