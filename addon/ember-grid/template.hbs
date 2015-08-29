@@ -2,17 +2,19 @@
 
 <div class='declarative'>
   {{! yield injects the declarative components}}
-  {{yield}}
+  {{yield _columns}}
 </div>
 
-{{#if showHeader}}
-	{{eg-render/eg-header columns=_columns width=bodyWidth}}
-{{/if}}
+<div class="display">
+  {{#if showHeader}}
+  	{{eg-render/eg-header columns=_columns width=contentWidth}}
+  {{/if}}
 
-{{eg-render/eg-body
-  data=attrs.data columns=_columns height=bodyHeight width=bodyWidth
-  contentWidth=bodyWidth rowHeight=rowHeight scrollY=scrollY }}
+  {{eg-render/eg-body
+    data=attrs.data columns=_columns height=bodyHeight width=contentWidth
+    rowHeight=rowHeight scrollY=scrollY }}
 
-{{#if showFooter}}
-	{{eg-render/eg-footer columns=_columns width=bodyWidth}}
-{{/if}}
+  {{#if showFooter}}
+  	{{eg-render/eg-footer columns=_columns width=contentWidth}}
+  {{/if}}
+</div>

@@ -8,4 +8,14 @@ var personTable500 = generateData(500, {
     }, 4359);
 var personTable10 = personTable500.slice(0, 10);
 
-export { personTable10, personTable500 };
+var columns = 'name,age,salary,email';
+var width = 0;
+var columnsWithWidths = columns.split(',').map(key=>{
+  width += 50;
+  return { key, width};
+});
+
+export { 
+  personTable10, personTable500, 
+  columns, columnsWithWidths
+  };

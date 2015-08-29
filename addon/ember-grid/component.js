@@ -10,20 +10,36 @@ export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   classNames: ['ember-grid'],
   styleBindings: ['width[px]', 'height[px]'],
+  classNameBindings: [
+    'showHeader:with-header:without-header',
+    'showFooter:with-footer:without-footer'],
 
   showHeader: true,
   showFooter: false,
 
   _columns: null,
-  width: null,
-  height: null,
-  bodyWidth: null,
-  bodyHeight: null,
+  width: null,          // total width of element
+  bodyWidth: null,      // inside width of element
+  contentWidth: null,   // width of all columns
+                        // column scrolling if more than body width
+
+  height: null,         // total height of element
+  bodyHeight: null,     // height to display body (inside height
+                        // minus header and footer total height).
 
   columnsWithoutWidth: Ember.computed('_columns.[]', function(){
     var columns = this.get('_columns');
     if (columns == null ) { return 0; }
-    return columns.reduce(((r, col)=>r + (col.width == null)), 0);
+    return columns.reduce(((r, col)=>r + (col.get('width') == null)), 0);
+  }),
+
+  contentWidth: Ember.computed('_columns.@each.width', function(){
+    var columns = this.get('_columns');
+    if (columns == null ) { return 0; }
+    return columns.reduce(((r, col)=>r + (col.get('width') || 0)), 0);
+  }),
+  contentWidthDidChange: Ember.observer('contentWidth', function(){
+    this.adjustDisplayWidth();    
   }),
 
   init: function() {
@@ -33,6 +49,7 @@ export default Ember.Component.extend(CspStyleMixin, {
       this.set('_columns', new Ember.A([]));
     }
   },
+
   didReceiveAttrs() {
     this._super();
     var columns = this.getAttr('columns');
@@ -42,8 +59,8 @@ export default Ember.Component.extend(CspStyleMixin, {
     if (columns == null) {
       columns = new Ember.A();
     } else {
-      columns = columns.map( 
-        col => col instanceof ColumnModel ? col : ColumnModel.create(col) );
+      columns = Ember.A(columns.map( 
+        col => col instanceof ColumnModel ? col : ColumnModel.create(col) ));
     }
     this.set('_columns', columns);
     var [
@@ -64,6 +81,7 @@ export default Ember.Component.extend(CspStyleMixin, {
     });
     columns.forEach( column => { this._refreshColumn(column); });
   },
+
   _refreshColumn(column) {
     var body;
     if (column._zones.body == null) {
@@ -102,6 +120,7 @@ export default Ember.Component.extend(CspStyleMixin, {
    * 1) If height is missing:
    *   * If scroll-y is false, calculate size of body, then add
    *     header height and footer height for height.
+   *
    *   * If scroll-y is true or auto, use css height if set; otherwise
    *     measure potential height and use that.
    *
@@ -129,12 +148,13 @@ export default Ember.Component.extend(CspStyleMixin, {
     }
     this.adjustContentDimensions();
   },
+
   adjustContentDimensions() {
     if(this.element == null) { return; }
 
     /*
      * The goal is to calculate how much room we have for body
-     * content. The trick part is the height. From the inner height
+     * content. The tricky part is the height. From the inner height
      * of the element, we need to remove the height of the footer
      * header and body border. However, we need to keep in mind
      * that the body border may overlap with the borders of header
@@ -146,9 +166,18 @@ export default Ember.Component.extend(CspStyleMixin, {
     newBodyHeight -= this._bodyShellHeight();
 
     this.set('bodyHeight', newBodyHeight);
-    this.set('bodyWidth', this.element.clientWidth);
+    var bodyWidth = this.element.clientWidth;
+    this.set('bodyWidth', bodyWidth);
     this.get('_columns').forEach( column => { this._refreshColumn(column); });
+    this.adjustDisplayWidth();
   },
+  adjustDisplayWidth() {
+    if (this.element == null) { return; }
+    var contentWidth = this.get('contentWidth');
+    var display = this.element.getElementsByClassName('display')[0]
+    display.style.width = (contentWidth - 2) + 'px';
+  },
+
   _bodyShellHeight() {
     // calclulate the height of content except contents of body
     var headerStyle = this._actualHeaderStyle();
@@ -168,6 +197,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   calculateHeight(dimensions) {
     var element = this.element;
     var scrollY = this.get('scrollY');
+    this._setScroll('overflow-y', scrollY);
     if (scrollY === false) {
       // no scroll - make body big enough to fit all content.
       let {data, rowHeight} = this.getProperties('rowHeight', 'data');
@@ -201,12 +231,15 @@ export default Ember.Component.extend(CspStyleMixin, {
   },
   calculateWidth(dimensions, width) {
     var element = this.element;
-    var {scrollY, columnsWithoutWidth} = this.getProperties(
-      'scrollY', 'columnsWithoutWidth');
+    var {scrollX, columnsWithoutWidth} = this.getProperties(
+      'scrollX', 'columnsWithoutWidth');
+    if(scrollX != null) {
+      this.element.style.scrollX = scrollX;
+    }
     let columns = this.get('_columns');
     let contentWidth = columns.reduce((
       (r,col)=> r + (col.get('width') || 0)), 0);
-    if (width == null && scrollY !== true && columnsWithoutWidth === 0) {
+    if (width == null && scrollX !== true && columnsWithoutWidth === 0) {
       // body width is sum of column widths
       this.set('bodyWidth', contentWidth);
       this.set('width', contentWidth);
@@ -223,14 +256,32 @@ export default Ember.Component.extend(CspStyleMixin, {
       if (columnsWithoutWidth > 0) {
         var unusedWidth = Math.max(bodyWidth - contentWidth, 0);
         var colWidth = Math.max(10, unusedWidth / columnsWithoutWidth);
+        columns.forEach((col)=>{
+          if (col.width == null) {
+            Ember.set(col, 'width', colWidth);
+          }
+        });
       }
-      columns.forEach((col)=>{
-        if (col.width == null) {
-          Ember.set(col, 'width', colWidth);
-        }
-      });
     }
   },  
+  _setScroll(cssProp, scroll) {
+    if(scroll != null) {
+      var scrollStyle;
+      switch (scroll) {
+        case true:
+        case 'true':
+          scrollStyle = 'scroll';
+          break;
+        case false:
+        case 'false':
+          scrollStyle = 'hidden';
+          break;
+      }
+      if(scrollStyle != null) {
+        this.element.style[cssProp] = scrollStyle;
+      }
+    }
+  },
   _actualHeaderStyle() {
     return this._readElementStyle('header');
   },

@@ -18,7 +18,6 @@ export default Ember.Component.extend({
       if (this.getAttr('columns') == null) { return false; }
       if (this.getAttr('height') == null) { return false; }
       if (this.getAttr('width') == null) { return false; }
-      if (this.getAttr('contentWidth') == null) { return false; }
       if (this.getAttr('rowHeight') == null) { return false; }
       return true;
     }),

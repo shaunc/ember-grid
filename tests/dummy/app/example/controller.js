@@ -108,8 +108,15 @@ export default Ember.Controller.extend({
 
     minimal: `
       {{! without scroll-y=false, takes available space in parent element }}
-      {{ember-grid data=data columns="name,age,salary,email"}}`
+      {{ember-grid data=data columns="name,age,salary,email"}}`,
 
+    'scroll-columns': `
+      {{! if columns are wider than width, horizontal scrolling is enabled by default}}
+      {{#ember-grid data=data width=400 height=400 columns="name,age,salary,email" as |columns|}}
+        {{#each columns as |column|}}
+          {{eg-column key=column.key width=250}}
+        {{/each}}
+      {{/ember-grid}}`
    }
 });
 

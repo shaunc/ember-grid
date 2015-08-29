@@ -6,7 +6,8 @@ export default Ember.Controller.extend({
   
   gallery: [
     { section: 'General', examples: ['overview']},
-    { section: 'Layout & scrolling', examples: ['minimal'] },
+    { section: 'Layout & scrolling', examples: [
+      'minimal', 'scroll columns'] },
     { section: 'Text columns', examples: [] },
     { section: 'Header & footer', examples: [] },
     { section: 'Column attributes', examples: [] },
@@ -17,10 +18,9 @@ export default Ember.Controller.extend({
     var example = row.examples[key];
     if (example == null) { return null; }
     if (typeof example === 'string') {
-      example = { name: example };
-    }
-    if (example.title == null) {
-      example.title = example.name[0].toUpperCase() + example.name.slice(1);
+      example = { 
+        name: example.replace(/ /g, '-'), 
+        title: example[0].toUpperCase() + example.slice(1) };
     }
     return example;
   }

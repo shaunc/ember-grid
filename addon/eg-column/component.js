@@ -31,19 +31,38 @@ export default Ember.Component.extend({
     }
   },
   willRender() {
-    var parentView = this.get('parentView');
-    if (parentView instanceof EmberGrid) {
+    var parentView = this;
+    while(parentView = parentView.get('parentView')) {
+      if (!(parentView instanceof EmberGrid)) {
+        continue;
+      }
       var column = this._column;
       var parentColumn = _.find(parentView._columns, {key: this._column.key});
       if (parentColumn == null) {
         parentView._columns.push(column);
       } else {
+        var async = [];
         for (let key in column) {
-          if (key === '_zones' || parentColumn[key] == null) {
-            parentColumn[key] = column[key];
+          if (key !== '_zones' || parentColumn[key] == null) {
+            if (parentColumn.get(key) == null) {
+              parentColumn[key] = column[key]; 
+            }
+            else {
+              // if any are already set, we need another render cycle
+              // to change the value.
+              async.push(key);
+            }
+          }
+          if (async.length > 0) {
+            Ember.run.scheduleOnce('afterRender', ()=>{
+              for (let key in async) {
+                parentColumn.set(key, column[key]);
+              }
+            });
           }
         }
       }
+      break;
     }
 	}
 

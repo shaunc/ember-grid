@@ -1,14 +1,21 @@
 @ember-grid-color: #5B83AD;
+@ember-grid-odd-row-color: #F1F0F0;
 
 .ember-grid {
 	
 	border: 2px solid @ember-grid-color;
-  overflow: hidden;
+  overflow-y: hidden;
+  overflow-x: auto;
+  position: relative;
 
 	.declarative {
 		// always hide declarative components
 		display:none;
 	}
+  .display {
+    box-sizing: border-box;
+    overflow: hidden;
+  }
 
 	.header, .body {
 	  border-bottom: 1px solid @ember-grid-color;
@@ -95,7 +102,7 @@
 			  .cell {
           background-color: white;
 			  	&.odd {
-			  		background-color: #F1F0F0;
+			  		background-color: @ember-grid-odd-row-color;
 			  	}
 			  }
 			}

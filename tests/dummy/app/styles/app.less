@@ -1,5 +1,6 @@
 @example-ember-grid-color: #5B83AD;
 @hover-color: #DBDCD1;
+@ember-grid-background: rgba(249,248,248,.8);
 
 body * {
   font-family: 'calibri';
@@ -49,6 +50,8 @@ body * {
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
 
+    background-color: @ember-grid-background;
+
     .cell {
       > * {
         padding: 0 2px;
@@ -76,7 +79,7 @@ body * {
     .body .cell {
       transition: opacity 0.1s;
     }
-    .body .row.first {
+    &.without-header .body .row.first {
       .cell:first-child {
         border-top-left-radius: 6px;
       }
@@ -84,7 +87,7 @@ body * {
         border-top-right-radius: 6px;
       }
     }
-    .body .row.last {
+    &.without-footer .body .row.last {
       .cell:first-child {
         border-bottom-left-radius: 6px;
       }
@@ -95,7 +98,7 @@ body * {
 
   }
 
-  .display {
+  > .display {
     height: 100%;
     padding: 10px;
     .ember-grid {
@@ -129,6 +132,7 @@ body * {
         font-size: 12px;
         line-height: 1em;
         padding: 0 5px;
+        margin: 2px 5px 10px 10px;
       }
     }
 
