@@ -37,7 +37,8 @@ export default Ember.Component.extend(CspStyleMixin, {
     this._super();
     this.renderHeader();
   	Ember.run.scheduleOnce('afterRender', this, function() {
-      this.set('width', this.constrainDragWidth(this.get('width')));
+      var constrainedWidth = this.constrainDragWidth(this.get('width'));
+      this.set('_column.width', constrainedWidth);
   	});
   },
 
@@ -65,10 +66,6 @@ export default Ember.Component.extend(CspStyleMixin, {
     var key = this.get('_column.key');
     return key.charAt(0).toUpperCase() + key.slice(1).toLowerCase();
   }),
-
-  startDragging: function() {
-    this.set('parentView.draggingHeaderCell', this);
-  },
 
   minSize: Ember.computed('_column.min-width', function() {
     var element = this.$();

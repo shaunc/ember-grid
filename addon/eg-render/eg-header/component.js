@@ -17,25 +17,4 @@ export default Ember.Component.extend(CspStyleMixin, {
 
   draggingHeaderCell: null,
 
-  mouseUp: function() {
-    this.set('draggingHeaderCell', null);
-  },
-
-  mouseLeave: function() {
-    this.set('draggingHeaderCell', null);
-  },
-
-  mouseMove: function(event) {
-    if(!this.get('isDragging')) {
-      return;
-    }
-
-    var cell = this.get('draggingHeaderCell');
-    var offset = cell.$().offset();
-    var newWidth = event.pageX - offset.left;
-    if (newWidth < 5) { newWidth = 5; }
-
-    cell.set('width', newWidth);
-  }
-
 });
