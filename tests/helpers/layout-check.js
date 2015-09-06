@@ -5,7 +5,10 @@ import { getElement, readElementDimensions } from './element';
 
 export function checkWidths(context, expectedWidth, expectedColumnWidths) {
   var {width: elementWidth} = readElementDimensions(context, 'grid', 'width');
-  context.assert.equal(elementWidth, expectedWidth);
+  if (expectedWidth)
+  {
+    context.assert.equal(elementWidth, expectedWidth);
+  }
 
   // make sure columns rendered with correct widths
   var columns = context.get('columns');
@@ -16,7 +19,7 @@ export function checkWidths(context, expectedWidth, expectedColumnWidths) {
   var body = getElement(context, 'body');
   var footer = getElement(context, 'footer');
   columns.forEach((col, i)=>{
-    var expColWidth = expectedColumnWidths[i];
+    var expColWidth = expectedColumnWidths ? expectedColumnWidths[i] : null;
     expColWidth = checkCellWidth(context, header, i, expColWidth);
     var rows = body.getElementsByClassName('row') || [];
     rows = _.filter(rows, row => row.style.display !== 'none');
