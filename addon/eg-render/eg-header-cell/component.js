@@ -107,6 +107,17 @@ export default Ember.Component.extend(CspStyleMixin, {
   constrainDragWidth: function(newWidth) {
     var minSize = this.get('minSize');
     var maxSize = this.get('maxSize');
+    if (!newWidth)
+    {
+      if (minSize)
+      {
+        newWidth = minSize;
+      }
+      else if (maxSize)
+      {
+        newWidth = maxSize;
+      }
+    }
     if (minSize && newWidth < minSize) {
       newWidth = minSize;
     }
