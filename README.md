@@ -299,6 +299,10 @@ If the data items will never change, a plain JavaScript array is fine. Note that
 
 When items will be added to and removed from the data array, the array must be an Ember Array (`Ember.A([...])`). Items must be added using `addObject`/`addObjects`/`pushObject`/`pushObjects` and removed with `removeObject`/`removeObjects`/`popObject`.
 
+### Promises
+
+Data can be supplied as a promise. Once the promise has resolved, the data will be rendered into the grid as normal.
+
 ## Override Styling
 
 Use the following selectors in your css to affect each part of the layout.

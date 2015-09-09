@@ -199,8 +199,8 @@ test('items pushed to data are added to grid when data is Ember array', function
 });
 
 
-// --- Promise resolving plain array ---
-test('one item rendered after resolution when data is promise array resolving plain array of one object', function() {
+// --- Promise -> plain array ---
+test('one item rendered after resolution when data is promise resolving to plain array of one object', function() {
 	var width = 400;
 	var height = 800;
 	var columns = columnsWithWidths;
@@ -208,14 +208,20 @@ test('one item rendered after resolution when data is promise array resolving pl
 		getDummyItem()
 	];
 
-	var data = DS.PromiseArray.create({
-		promise: new Ember.RSVP.Promise(function (resolve) {
-
-		})
+	var resolvePromise;
+	var dataPromise = new Ember.Test.Promise(function (resolve) {
+		resolvePromise = resolve;
 	});
 
-	renderTemplate(this, {width, height, data, columns});
+	renderTemplate(this, {width, height, data: dataPromise, columns});
 	andThen(() => {
-		expectElement(".row", 1);
+		expectElement(".row", 0);
+
+		Ember.run(() => {
+			resolvePromise(internalData);
+		});
+		andThen(() => {
+			expectElement(".row", 1);
+		});
 	});
 });
