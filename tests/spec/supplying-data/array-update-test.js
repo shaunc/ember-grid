@@ -16,7 +16,7 @@ function getDummyItem() {
 	};
 }
 
-function getDummyData(count) {
+function getDummyItems(count) {
 	var data = [];
 
 	for (var i = 0; i < count; i++)
@@ -52,7 +52,7 @@ test('item removed from data is removed from grid when data is Ember array', fun
 	var width = 400;
 	var height = 800;
 	var columns = columnsWithWidths;
-	var data = Ember.A(getDummyData(2));
+	var data = Ember.A(getDummyItems(2));
 
 	renderTemplate(this, {width, height, data, columns});
 	andThen(() => {
@@ -60,6 +60,46 @@ test('item removed from data is removed from grid when data is Ember array', fun
 
 		Ember.run(() => {
 			data.removeObject(data[0]);
+		});
+		andThen(() => {
+			expectElement(".row", 1);
+		});
+	});
+});
+
+test('items added to data are added to grid when data is Ember array', function() {
+	var width = 400;
+	var height = 800;
+	var columns = columnsWithWidths;
+	var data = Ember.A([
+		getDummyItem()
+	]);
+
+	renderTemplate(this, {width, height, data, columns});
+	andThen(() => {
+		expectElement(".row", 1);
+
+		Ember.run(() => {
+			data.addObjects(getDummyItems(2));
+		});
+		andThen(() => {
+			expectElement(".row", 3);
+		});
+	});
+});
+
+test('items removed from data are removed from grid when data is Ember array', function() {
+	var width = 400;
+	var height = 800;
+	var columns = columnsWithWidths;
+	var data = Ember.A(getDummyItems(3));
+
+	renderTemplate(this, {width, height, data, columns});
+	andThen(() => {
+		expectElement(".row", 3);
+
+		Ember.run(() => {
+			data.removeObjects([data[0], data[1]]);
 		});
 		andThen(() => {
 			expectElement(".row", 1);
@@ -92,7 +132,7 @@ test('item popped from data is removed from grid when data is Ember array', func
 	var width = 400;
 	var height = 800;
 	var columns = columnsWithWidths;
-	var data = Ember.A(getDummyData(2));
+	var data = Ember.A(getDummyItems(2));
 
 	renderTemplate(this, {width, height, data, columns});
 	andThen(() => {
@@ -103,6 +143,27 @@ test('item popped from data is removed from grid when data is Ember array', func
 		});
 		andThen(() => {
 			expectElement(".row", 1);
+		});
+	});
+});
+
+test('items pushed to data are added to grid when data is Ember array', function() {
+	var width = 400;
+	var height = 800;
+	var columns = columnsWithWidths;
+	var data = Ember.A([
+		getDummyItem()
+	]);
+
+	renderTemplate(this, {width, height, data, columns});
+	andThen(() => {
+		expectElement(".row", 1);
+
+		Ember.run(() => {
+			data.pushObjects(getDummyItems(2));
+		});
+		andThen(() => {
+			expectElement(".row", 3);
 		});
 	});
 });

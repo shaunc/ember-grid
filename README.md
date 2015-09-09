@@ -297,7 +297,7 @@ If the data items will never change, a plain JavaScript array is fine. Note that
 
 ### Variable-length Data Array
 
-When items will be added to and removed from the data array, the array must be an Ember Array (`Ember.A([...])`). Items must be added using `addObject`/`addObjects`/`pushObject`/`pushObjects` and removed with `removeObject`/`removeObjects`/`popObject`/`popObjects`.
+When items will be added to and removed from the data array, the array must be an Ember Array (`Ember.A([...])`). Items must be added using `addObject`/`addObjects`/`pushObject`/`pushObjects` and removed with `removeObject`/`removeObjects`/`popObject`.
 
 ## Override Styling
 
