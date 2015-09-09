@@ -27,6 +27,8 @@ function getDummyItems(count) {
 	return data;
 }
 
+
+// --- Plain array ---
 test('one item rendered when data is plain array of one object', function() {
 	var width = 400;
 	var height = 800;
@@ -53,6 +55,8 @@ test('three items rendered when data is plain array of three objects', function(
 	});
 });
 
+
+// --- Ember array ---
 test('item added to data is added to grid when data is Ember array', function() {
 	var width = 400;
 	var height = 800;
@@ -191,5 +195,27 @@ test('items pushed to data are added to grid when data is Ember array', function
 		andThen(() => {
 			expectElement(".row", 3);
 		});
+	});
+});
+
+
+// --- Promise resolving plain array ---
+test('one item rendered after resolution when data is promise array resolving plain array of one object', function() {
+	var width = 400;
+	var height = 800;
+	var columns = columnsWithWidths;
+	var internalData = [
+		getDummyItem()
+	];
+
+	var data = DS.PromiseArray.create({
+		promise: new Ember.RSVP.Promise(function (resolve) {
+
+		})
+	});
+
+	renderTemplate(this, {width, height, data, columns});
+	andThen(() => {
+		expectElement(".row", 1);
 	});
 });
