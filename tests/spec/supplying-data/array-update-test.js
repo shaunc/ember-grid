@@ -27,6 +27,32 @@ function getDummyItems(count) {
 	return data;
 }
 
+test('one item rendered when data is plain array of one object', function() {
+	var width = 400;
+	var height = 800;
+	var columns = columnsWithWidths;
+	var data = [
+		getDummyItem()
+	];
+
+	renderTemplate(this, {width, height, data, columns});
+	andThen(() => {
+		expectElement(".row", 1);
+	});
+});
+
+test('three items rendered when data is plain array of three objects', function() {
+	var width = 400;
+	var height = 800;
+	var columns = columnsWithWidths;
+	var data = getDummyItems(3);
+
+	renderTemplate(this, {width, height, data, columns});
+	andThen(() => {
+		expectElement(".row", 3);
+	});
+});
+
 test('item added to data is added to grid when data is Ember array', function() {
 	var width = 400;
 	var height = 800;
