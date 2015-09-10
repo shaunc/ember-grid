@@ -209,7 +209,7 @@ test('one item rendered after resolution when data is promise resolving to plain
 	];
 
 	var resolvePromise;
-	var dataPromise = new Ember.Test.Promise(function (resolve) {
+	var dataPromise = new Ember.RSVP.Promise(function (resolve) {
 		resolvePromise = resolve;
 	});
 
