@@ -75,6 +75,18 @@ export default Ember.Component.extend(CspStyleMixin, {
     showHeader = showHeader || this.get('showHeader');
     showFooter = showFooter || this.get('showFooter');
     data = data || [];
+
+    // Handle data being a promise.
+    if (data.then)
+    {
+      var dataPromise = data;
+      data = [];
+      var self = this;
+      dataPromise.then(realData => {
+        self.set("data", realData);
+      });
+    }
+
     this.setProperties({
       height, width, rowHeight, 
       scrollX, scrollY, showHeader, showFooter, data      
