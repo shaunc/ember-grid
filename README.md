@@ -291,17 +291,17 @@ in enclosing parent.
 
 Data is supplied as an array. The type of array required depends on the use case.
 
-### Fixed-length Data Array
+### Immutable Data Array
 
-If the data items will never change, a plain JavaScript array is fine. Note that adding and removing items will not be reflected in the grid.
+If the `data` items will never change, supply a plain JavaScript array. Note that modifications to the array will not be reflected in the grid.
 
-### Variable-length Data Array
+### Mutable Data Array
 
-When items will be added to and removed from the data array, the array must be an Ember Array (`Ember.A([...])`). Items must be added using `addObject`/`addObjects`/`pushObject`/`pushObjects` and removed with `removeObject`/`removeObjects`/`popObject`.
+When items will be added to and removed from the data array, the supllied `data` array must be an Ember Array (`Ember.A([...])`). Items must be added using `addObject`/`addObjects`/`pushObject`/`pushObjects` and removed with `removeObject`/`removeObjects`/`popObject`.
 
 ### Promises
 
-Data can be supplied as a promise. Once the promise has resolved, the data will be rendered into the grid as normal.
+`data` can be supplied as a promise which resolves to an array. Once the promise has resolved, the data will be rendered into the grid as normal.
 
 ## Override Styling
 
