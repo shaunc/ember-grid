@@ -21,7 +21,7 @@ export default Ember.Component.extend({
       if (template.string != null) {
         template = template.string;
       }
-      template = template.replace(/</g, '&gt;');
+      template = template.replace(/</g, '&lt;');
     }
     this.set('templateString', Ember.String.htmlSafe(template));
   },
