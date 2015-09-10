@@ -287,6 +287,22 @@ will be displayed. Finally, if `scroll-y` is not false, and `height` is not
 specified, then css height is used, or if not specified, available height
 in enclosing parent.
 
+## Supplying Data
+
+Data is supplied as an array. The type of array required depends on the use case.
+
+### Immutable Data Array
+
+If the `data` items will never change, supply a plain JavaScript array. Note that modifications to the array will not be reflected in the grid.
+
+### Mutable Data Array
+
+When items will be added to and removed from the data array, the supllied `data` array must be an Ember Array (`Ember.A([...])`). Items must be added using `addObject`/`addObjects`/`pushObject`/`pushObjects` and removed with `removeObject`/`removeObjects`/`popObject`.
+
+### Promises
+
+`data` can be supplied as a promise which resolves to an array. Once the promise has resolved, the data will be rendered into the grid as normal.
+
 ## Override Styling
 
 Use the following selectors in your css to affect each part of the layout.
