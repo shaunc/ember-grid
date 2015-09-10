@@ -82,8 +82,8 @@ export default Ember.Component.extend(CspStyleMixin, {
       var dataPromise = data;
       data = [];
       var self = this;
-      dataPromise.then(realData => {
-        self.set("data", realData);
+      dataPromise.then(resolvedData => {
+        self.set("data", resolvedData);
       });
     }
 
