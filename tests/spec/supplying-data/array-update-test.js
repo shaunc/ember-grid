@@ -225,3 +225,31 @@ test('one item rendered after resolution when data is promise resolving to plain
 		});
 	});
 });
+
+
+// --- Promise -> Ember array ---
+test('one item rendered after resolution when data is promise resolving to Ember array of one object', function() {
+	var width = 400;
+	var height = 800;
+	var columns = columnsWithWidths;
+	var internalData = Ember.A([
+		getDummyItem()
+	]);
+
+	var resolvePromise;
+	var dataPromise = new Ember.RSVP.Promise(function (resolve) {
+		resolvePromise = resolve;
+	});
+
+	renderTemplate(this, {width, height, data: dataPromise, columns});
+	andThen(() => {
+		expectElement(".row", 0);
+
+		Ember.run(() => {
+			resolvePromise(internalData);
+		});
+		andThen(() => {
+			expectElement(".row", 1);
+		});
+	});
+});
