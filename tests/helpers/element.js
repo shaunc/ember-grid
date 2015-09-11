@@ -24,7 +24,7 @@ export function getElement(context, name) {
 }
 export function readDimensions(element, ...dimensions) {
   var measured = {};
-  var raw = window.getComputedStyle(element);
+  var raw = element.style; // window.getComputedStyle(element);
   for (let key in dimensions) {
     let dim = dimensions[key];
     measured[dim] = parseFloat(raw[dim]);
