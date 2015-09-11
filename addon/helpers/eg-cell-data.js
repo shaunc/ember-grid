@@ -11,14 +11,22 @@ export function egCellData(params/*, hash*/) {
   var [data, rowIndex, column] = params;
   var {key, field} = column;
   var row = data[rowIndex];
-  if (typeof field === 'function') {
-    return field(row, rowIndex, column);
-  } else if (field === '@row') {
-    return row;
-  } else if (field === '@rowIndex') {
-    return rowIndex;
-  } else if (field != null) {
-    return row[field];
+  if (field != null) {
+    if (typeof field === 'function') {
+      return field(row, rowIndex, column);
+    } else if (field === '@row') {
+      return row;
+    } else if (field === '@rowIndex') {
+      return rowIndex;
+    } else {
+      if (row.get) {
+        return row.get(field);
+      } else {
+        return row[field];
+      }
+    } 
+  } else if (row.get) {
+    return row.get(key);
   } else {
     return row[key];
   }

@@ -5,7 +5,7 @@ import { renderTemplate } from '../../helpers/render';
 import Ember from 'ember';
 
 moduleForIntegration("spec/supplying-data/array-update-test",
-					 "supply data using different kinds of array");
+					 "Data Source | supply data using different kinds of array");
 
 function getDummyItem() {
 	return {
