@@ -2,7 +2,7 @@
 
 A Declarative Data Grid for ember that is scalable to millions of rows. Each cell can be defined simply and quickly or fully customised.
 
-[![Build Status](https://travis-ci.org/shaunc/ember-grid.svg?branch=master)](https://travis-ci.org/shaunc/ember-grid)
+[//]: # [![Build Status](https://travis-ci.org/shaunc/ember-grid.svg?branch=master)](https://travis-ci.org/shaunc/ember-grid)
 
 ## Demo
 
@@ -36,7 +36,7 @@ All the below examples use the following model for the data rows
 
 ### Defining the window
 
-Ember grid only displays data that fits into a fixed size window. Cells will only be rendered as (or just before) they scroll into view. This makes `ember-grid` is suitable for displaying very large datasets.
+Ember grid only displays data that fits into a fixed size window. Cells will only be rendered as (or just before) they scroll into view. This makes `ember-grid` suitable for displaying very large datasets.
 
 To specify the window, use the `height` and `width` attributes. The `rowHeight` attribute specifies the (outer) height of rows in the body of the grid.
 
