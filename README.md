@@ -305,6 +305,21 @@ When items will be added to and removed from the data array, the supllied `data`
 
 `data` can be supplied as a promise which resolves to an array. Once the promise has resolved, the data will be rendered into the grid as normal.
 
+## Show content if there are no data rows
+
+Place an `eg-if-empty` component inside the `ember-grid` component to show custom content when there are no rows in the `data`. 
+
+    {{#ember-grid ...}}
+        ...
+        {{eg-column ...}}
+        ...
+
+        {{#eg-if-empty}}
+            {{!-- Display this when data array is empty. --}}
+            Nothing to see here!
+        {{/eg-if-empty}}
+    {{/ember-grid}}
+
 ## Override Styling
 
 Use the following selectors in your css to affect each part of the layout.

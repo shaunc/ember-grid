@@ -57,7 +57,7 @@ export default Ember.Controller.extend({
     var salaries = this.get('data').map(function(row) {return row.salary;});
     if (salaries)
     {
-      var sum = salaries.reduce(function(a, b){return a+b;});
+      var sum = salaries.reduce(function(a, b){return a+b;}, 0);
       return 'AVG $' + (sum / salaries.length).toFixed(2);
     }
     else

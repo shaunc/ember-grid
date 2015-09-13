@@ -53,6 +53,7 @@ export default Ember.Component.extend({
       if (this.getAttr('height') == null) { return false; }
       if (this.getAttr('width') == null) { return false; }
       if (this.getAttr('rowHeight') == null) { return false; }
+      if (!this.getAttr('data').length) { return false; }
       return true;
     }),
 

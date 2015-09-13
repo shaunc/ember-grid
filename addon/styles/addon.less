@@ -1,5 +1,6 @@
 @ember-grid-color: #5B83AD;
 @ember-grid-odd-row-color: #F1F0F0;
+@ember-grid-background: rgba(240,240,240,.5);
 
 .ember-grid {
 	
@@ -116,15 +117,29 @@
 
 	.body {
 
-		background-color: rgba(240,240,240,.5);
+		background-color: @ember-grid-background;
 	  overflow-y: hidden;
 	  overflow-x: hidden;
 
-	  .cell {
-      background-color: white;
-	  	&.odd {
-	  		background-color: @ember-grid-odd-row-color;
-	  	}
+	  .row {
+		  .cell {
+	      background-color: white;
+		  	&.odd {
+		  		background-color: @ember-grid-odd-row-color;
+		  	}
+		  }
+
+		  &.empty {
+
+		  	padding:20px;
+
+		  	.cell {
+		  		background-color: @ember-grid-background;
+			    width: 100%;
+			    border: none;
+			    text-align: center;
+		  	}
+		  }
 	  }
 
 	  .scrollable {
