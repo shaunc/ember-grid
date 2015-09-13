@@ -12,7 +12,7 @@ export default Ember.Component.extend({
 
   rowHeight: 25,
 
-  rowCount: Ember.computed('data', function() {
+  rowCount: Ember.computed('data.[]', function() {
     return this.get('data').length;
   }),
 

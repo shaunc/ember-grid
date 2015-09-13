@@ -52,8 +52,8 @@ export default Ember.Component.extend({
     if (rowIndex < offset || rowIndex >= offset + limit) { return null; }
     return element.getElementsByClassName('eg-body-cell')[rowIndex - offset];
   },
-  didReceiveAttrs: function() {
-    this._super();
+
+  attrsChanged: Ember.on('didReceiveAttrs', function() {
     var body = this._body;
     if (body == null) {
       body = this._body = Ember.Object.create({source: this});
@@ -67,7 +67,8 @@ export default Ember.Component.extend({
     if (body.limit == null && body.rowHeight != null && body.height != null) {
       Ember.set(body, 'limit', Math.ciel(body.height / body.rowHeight) + 10);
     }
-  },
+  }),
+  
   willRender() {
     this._super.apply(this, arguments);
     var parentView = this.get('parentView');

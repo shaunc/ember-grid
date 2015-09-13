@@ -53,8 +53,7 @@ export default Ember.Component.extend(CspStyleMixin, {
     this.set('_columnScrollerModel', ColumnScrollerModel.create({}));
   },
 
-  didReceiveAttrs() {
-    this._super();
+  attrsChanged: Ember.on('didReceiveAttrs', function() {
     var columns = this.getAttr('columns');
     if (typeof columns === 'string') {
       columns = columns.split(',').map( name => {return {key: name};}  );
@@ -95,7 +94,7 @@ export default Ember.Component.extend(CspStyleMixin, {
       scrollX, scrollY, showHeader, showFooter, data      
     });
     columns.forEach( column => { this._refreshColumn(column); });
-  },
+  }),
 
   _refreshColumn(column) {
     var body;
@@ -112,7 +111,7 @@ export default Ember.Component.extend(CspStyleMixin, {
       height: height,
       width: column.width,
       rowHeight: this.rowHeight,
-      data: this.data,
+      data: this.get('data'),
       limit: limit
     });
   },
