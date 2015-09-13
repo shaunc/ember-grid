@@ -1,1 +1,1 @@
-export { default } from 'ember-grid/eg-render/eg-header-resize-handle/component';
+export { default } from 'ember-grid/components/eg-render/eg-header-resize-handle/component';

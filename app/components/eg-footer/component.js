@@ -1,1 +1,1 @@
-export { default } from 'ember-grid/eg-footer/component';
+export { default } from 'ember-grid/components/eg-footer/component';
