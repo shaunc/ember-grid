@@ -7,9 +7,14 @@ export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   styleBindings: ['scrollX:margin-left[px]'],
 
-  findModel: Ember.on('didInsertElement', function() {
-  	var grid = this.nearestOfType(EmberGrid);
-	  this.set('_model', grid.get('_columnScrollerModel'));
+  findModel: Ember.on('didUpdate', function() {
+  	Ember.run.later(function() {
+	  	var grid = this.nearestOfType(EmberGrid);
+	  	if (grid)
+	  	{
+			  this.set('_model', grid.get('_columnScrollerModel'));
+			}
+  	}.bind(this));
   }),
 
   scrollX: Ember.computed('_model', '_model.xPos', function() {

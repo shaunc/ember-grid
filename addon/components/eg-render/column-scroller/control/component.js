@@ -9,9 +9,14 @@ export default Ember.Component.extend(CspStyleMixin, {
   classNames: ['column-scroll-control'],
   styleBindings: ['_scrollbarHeight:height[px]'],
 
-  findModel: Ember.on('didInsertElement', function() {
-  	var grid = this.nearestOfType(EmberGrid);
-	  this.set('_model', grid.get('_columnScrollerModel'));
+  findModel: Ember.on('didUpdate', function() {
+    Ember.run.later(function() {
+      var grid = this.nearestOfType(EmberGrid);
+      if (grid)
+      {
+        this.set('_model', grid.get('_columnScrollerModel'));
+      }
+    }.bind(this));
   }),
 
   getScrollbarHeight: Ember.on('didInsertElement', function() {
