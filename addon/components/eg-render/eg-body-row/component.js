@@ -70,10 +70,10 @@ export default Ember.Component.extend({
       return true;
     });
     if (!allPresent()) {
-      this.element.style.opacity = '0';
+ //     this.element.style.opacity = '0';
       Ember.run.next(this, function() {
         if (!this.get('isDestroying')) {
-          this.element.style.opacity = null;
+//          this.element.style.opacity = null;
           this.rerender();
         }
       });
