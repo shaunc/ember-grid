@@ -2,9 +2,7 @@
 
 A Declarative Data Grid for ember that is scalable to millions of rows. Each cell can be defined simply and quickly or fully customised.
 
-<!---
  [![Build Status](https://travis-ci.org/shaunc/ember-grid.svg?branch=master)](https://travis-ci.org/shaunc/ember-grid)
--->
 
 ## Demo
 
