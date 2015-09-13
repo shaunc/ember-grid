@@ -11,10 +11,14 @@
   {{/if}}
 
   {{eg-render/eg-body
-    data=attrs.data columns=_columns height=bodyHeight width=contentWidth
+    data=data columns=_columns height=bodyHeight width=contentWidth
     rowHeight=rowHeight scrollY=scrollY }}
 
   {{#if showFooter}}
   	{{eg-render/eg-footer columns=_columns width=contentWidth}}
+  {{/if}}
+
+  {{#if tooWide}}
+    {{eg-render/column-scroller/control width=bodyWidth contentWidth=contentWidth}}
   {{/if}}
 </div>

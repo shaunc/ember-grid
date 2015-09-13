@@ -1,0 +1,20 @@
+{{! eg-render/eg-body ~}}
+{{#if requiredPresent}}
+	<div class="scroll-container">
+		<div class="scrollable">
+		  {{eg-render/sized-filler height=topFillHeight}}
+
+		  {{#eg-render/column-scroller}}
+			  {{#each visibleRows as |rowIndex|}}
+				    {{eg-render/eg-body-row 
+				      rowIndex=rowIndex columns=columns rowHeight=attrs.rowHeight offset=offset limit=limit}}
+			  {{else}}
+			  	Nothing to show
+			  {{/each}}
+		  {{/eg-render/column-scroller}}
+		  
+		  {{eg-render/sized-filler height=bottomFillHeight}}
+		</div>
+	</div>
+
+{{/if}}

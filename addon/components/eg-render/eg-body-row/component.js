@@ -7,19 +7,6 @@ import { copyChildren } from 'ember-grid/utils/dom-util';
 export default Ember.Component.extend({
   layout: layout,
   classNames: ['row'],
-  classNameBindings: [ 'isFirstInWindow:first', 'isLastInWindow:last' ],
-
-  windowIndex: Ember.computed('offset', 'rowIndex', function() { 
-    var rowIndex = this.getAttr('rowIndex');
-    return rowIndex - this.offset;
-  }),
-
-  isFirstInWindow: Ember.computed.equal('windowIndex', 0),
-
-  isLastInWindow: Ember.computed('offset', 'limit', 'rowIndex', function(){
-    var rowIndex = this.get('rowIndex');
-    return this.offset + this.limit === rowIndex + 1;
-  }),
 
   didInitAttrs() {
     this._super();
@@ -83,10 +70,10 @@ export default Ember.Component.extend({
       return true;
     });
     if (!allPresent()) {
-      this.element.style.opacity = '0';
+ //     this.element.style.opacity = '0';
       Ember.run.next(this, function() {
         if (!this.get('isDestroying')) {
-          this.element.style.opacity = null;
+//          this.element.style.opacity = null;
           this.rerender();
         }
       });

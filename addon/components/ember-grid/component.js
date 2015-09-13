@@ -5,6 +5,7 @@ import layout from './template';
 import ColumnModel from '../eg-column/model';
 import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
 import potentialDimensions from 'ember-grid/utils/potential-dimensions';
+import ColumnScrollerModel from '../eg-render/column-scroller/model'
 
 export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
@@ -17,6 +18,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   showHeader: true,
   showFooter: false,
 
+  _columnScrollerModel: null,
   _columns: null,
   width: null,          // total width of element
   bodyWidth: null,      // inside width of element
@@ -48,6 +50,7 @@ export default Ember.Component.extend(CspStyleMixin, {
     if (this.get('_columns') == null) {
       this.set('_columns', new Ember.A([]));
     }
+    this.set('_columnScrollerModel', ColumnScrollerModel.create({}));
   },
 
   didReceiveAttrs() {
@@ -184,10 +187,10 @@ export default Ember.Component.extend(CspStyleMixin, {
     this.adjustDisplayWidth();
   },
   adjustDisplayWidth() {
-    if (this.element == null) { return; }
-    var contentWidth = this.get('contentWidth');
-    var display = this.element.getElementsByClassName('display')[0];
-    display.style.width = (contentWidth - 2) + 'px';
+    // if (this.element == null) { return; }
+    // var contentWidth = this.get('contentWidth');
+    // var display = this.element.getElementsByClassName('display')[0];
+    // display.style.width = (contentWidth - 2) + 'px';
   },
 
   _bodyShellHeight() {
@@ -209,7 +212,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   calculateHeight(dimensions) {
     var element = this.element;
     var scrollY = this.get('scrollY');
-    this._setScroll('overflow-y', scrollY);
+//    this._setScroll('overflow-y', scrollY);
     if (scrollY === false) {
       // no scroll - make body big enough to fit all content.
       let {data, rowHeight} = this.getProperties('rowHeight', 'data');
@@ -317,6 +320,10 @@ export default Ember.Component.extend(CspStyleMixin, {
     else {
       return {};
     }
-  }
+  },
+
+  tooWide: Ember.computed('width', 'contentWidth', function() {
+    return this.get('contentWidth') > this.get('width');
+  })
 
 });
