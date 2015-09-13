@@ -66,5 +66,22 @@ export default Ember.Component.extend({
       }, 100);
 
     }
+  },
+
+  bindScroll: Ember.on('didUpdate', function() {
+      this.$('.scrollable').on('scroll', this.didScroll.bind(this));
+  }),
+
+  unbindScroll: Ember.on('willDeleteElement', function() {
+    this.$('.scrollable').off('scroll', this.didScroll.bind(this));
+  }),
+
+  didScroll(event) {
+    Ember.run.debounce(this, this.scrollTo, 10);
+  },
+
+  scrollTo() {
+    this.set('topVisibleIndex', Math.trunc(this.$('.scrollable')[0].scrollTop / this.get('rowHeight')));
   }
+
 });

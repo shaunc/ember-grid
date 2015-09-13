@@ -37,7 +37,7 @@ export default Ember.Component.extend(CspStyleMixin, {
     this.set('_scrollbarHeight', heightNoScroll - heightWithScroll);
 	}),
 
-	bindScroll: Ember.on('didInsertElement', function() {
+	bindScroll: Ember.on('didUpdate', function() {
 		this.$('.scrollable').on('scroll', this.didScroll.bind(this));
 	}),
 

@@ -9,11 +9,6 @@ export default Ember.Component.extend(CspStyleMixin, {
   classNames: 'filler',
   styleBindings: ['height[px]', 'width[px]'],
 
-  didUpdateAttrs(options) {
-  	this._super();
-    console.log('didUpdateAttrs ', options);
-  },
-
   didReceiveAttrs() {
   	this._super();
   	var height = this.attrs.height;
