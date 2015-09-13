@@ -1,0 +1,1 @@
+export { default } from 'ember-grid/eg-render/column-scroller/model';

@@ -17,4 +17,8 @@
   {{#if showFooter}}
   	{{eg-render/eg-footer columns=_columns width=contentWidth}}
   {{/if}}
+
+  {{#if tooWide}}
+    {{eg-render/column-scroller/control width=bodyWidth contentWidth=contentWidth}}
+  {{/if}}
 </div>

@@ -12,9 +12,14 @@
 		// always hide declarative components
 		display:none;
 	}
+
   .display {
     box-sizing: border-box;
     overflow: hidden;
+    display: table;
+    table-layout: fixed;
+    height: 100%;
+    width: 100%;
   }
 
 	.header, .body {
@@ -29,8 +34,9 @@
 
 	.header, .footer, .body {
 
+		display: table-row;
 	  font-size: 0px;
-      white-space: nowrap;
+    white-space: nowrap;
 
 	  .cell {
     	border-right: 1px solid @ember-grid-color;
@@ -78,7 +84,8 @@
   }
 
 	.header, .footer {
-		position: relative;
+		height: 0px;
+		width: 100%;
 
 		.cell {
 			position: relative;
@@ -86,28 +93,43 @@
 
 	}
 
+  .scroll-container {
+  	display:table-cell;
+
+	  .scrollable {
+	    width: 100%;
+	    height: 100%;
+	    margin: 0;
+	    padding: 0;
+	    overflow: auto;
+	  }
+  }
+
+	  .filler {
+	  	width: 1px;
+	  	height: 1px;
+	  }
+
 	.body {
 
-    .body-collection {
-      background-color: rgba(240,240,240,.5);
-		  overflow-y: auto;
-		  overflow-x: hidden;
-		  position: relative;
-		  width: 100%;
+		background-color: rgba(240,240,240,.5);
+	  overflow-y: hidden;
+	  overflow-x: hidden;
 
-			> div {
-			  position: absolute;
-			  overflow: hidden;
+	  .cell {
+      background-color: white;
+	  	&.odd {
+	  		background-color: @ember-grid-odd-row-color;
+	  	}
+	  }
 
-			  .cell {
-          background-color: white;
-			  	&.odd {
-			  		background-color: @ember-grid-odd-row-color;
-			  	}
-			  }
-			}
-		}
+	}
 
+	.column-scroll-control {
+    height: 1px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: table-row;
 	}
 }
 

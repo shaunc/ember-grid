@@ -1,1 +1,1 @@
-export { default } from 'ember-grid/eg-header/component';
+export { default } from 'ember-grid/components/eg-header/component';
