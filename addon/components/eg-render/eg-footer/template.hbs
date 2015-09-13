@@ -1,5 +1,6 @@
 {{! eg-render/eg-footer ~}}
-COLUMNS {{columns}}
-{{#each columns key="key" as |column|}}
-  {{eg-render/eg-footer-cell column=column}}
-{{/each}}
+{{#eg-render/column-scroller}}
+	{{#each columns key="key" as |column|}}
+	  {{eg-render/eg-footer-cell column=column}}
+	{{/each}}
+{{/eg-render/column-scroller}}
