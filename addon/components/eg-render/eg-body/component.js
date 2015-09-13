@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   classNames: ['body'],
 
   topVisibleIndex: 0,
-  bufferRowCount: 10,
+  bufferRowCount: 0,
 
   rowHeight: 25,
 
@@ -38,7 +38,7 @@ export default Ember.Component.extend({
   }),
 
   bottomFillHeight: Ember.computed('rowHeight', 'rowCount', 'bottomBufferRowIndex', function() {
-    return (this.get('rowCount') - this.get('bottomBufferRowIndex') - 1) * this.get('rowHeight');
+    return (this.get('rowCount') - 1 - this.get('bottomBufferRowIndex')) * this.get('rowHeight');
   }),
 
   requiredPresent: Ember.computed(
@@ -67,6 +67,16 @@ export default Ember.Component.extend({
 
     }
   },
+
+  visibleRows: Ember.computed('topBufferRowIndex', 'bottomBufferRowIndex', function() {
+    var startIndex = this.get('topBufferRowIndex');
+    var endIndex = this.get('bottomBufferRowIndex');
+    var result = [];
+    while(startIndex <= endIndex){
+       result.push(startIndex++);
+    }
+    return result;
+  }),
 
   bindScroll: Ember.on('didUpdate', function() {
       this.$('.scrollable').on('scroll', this.didScroll.bind(this));
