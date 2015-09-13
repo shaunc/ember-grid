@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   classNames: ['body'],
 
   topVisibleIndex: 0,
-  bufferRowCount: 20,
+  bufferRowCount: 10,
 
   rowHeight: 25,
 
@@ -59,7 +59,7 @@ export default Ember.Component.extend({
   visibleRows: Ember.computed('topBufferRowIndex', 'bottomBufferRowIndex', function() {
     var startIndex = this.get('topBufferRowIndex');
     var endIndex = this.get('bottomBufferRowIndex');
-    console.log(startIndex + ' ' + endIndex);
+
     var result = [];
     while(startIndex <= endIndex){
        result.push(startIndex++);
