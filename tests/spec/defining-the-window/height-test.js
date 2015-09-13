@@ -3,7 +3,7 @@
 import { test } from '../../helpers/chai-assert';
 import moduleForIntegration from '../../helpers/test-component';
 import { personTable500 } from '../../helpers/example-data';
-import { getElement, readElementDimensions } from '../../helpers/element';
+import { readElementDimensions } from '../../helpers/element';
 import { addStyles } from '../../helpers/styles';
 import { renderTemplate } from '../../helpers/render';
 
@@ -21,11 +21,12 @@ function checkHeights(context, expectedHeight) {
     // var nparts = (headerHeight > 0) + (bodyHeight > 0) + (footerHeight > 0);
     // context.assert.closeTo(elementHeight, contentHeight, nparts);
 }
-function readOuterHeight(context, name) {
-  var element = getElement(context, name);
-  if (element == null) { return 0; }
-  return element.offsetHeight;
-}
+
+// function readOuterHeight(context, name) {
+//   var element = getElement(context, name);
+//   if (element == null) { return 0; }
+//   return element.offsetHeight;
+// }
 
 
 // --------------------------------------------------------------------------

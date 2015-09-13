@@ -5,7 +5,7 @@ import layout from './template';
 import ColumnModel from '../eg-column/model';
 import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
 import potentialDimensions from 'ember-grid/utils/potential-dimensions';
-import ColumnScrollerModel from '../eg-render/column-scroller/model'
+import ColumnScrollerModel from '../eg-render/column-scroller/model';
 
 export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,

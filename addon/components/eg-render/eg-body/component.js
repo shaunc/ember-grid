@@ -83,7 +83,7 @@ export default Ember.Component.extend({
     this.scrollBound = false;
   }),
 
-  didScroll(event) {
+  didScroll(/*event*/) {
     Ember.run.debounce(this, this.scrollTo, 10);
   },
 
