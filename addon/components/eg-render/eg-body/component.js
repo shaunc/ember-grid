@@ -7,10 +7,44 @@ export default Ember.Component.extend({
   layout: layout,
   classNames: ['body'],
 
+  topVisibleIndex: 0,
+  bufferRowCount: 20,
+
+  rowHeight: 25,
+
+  rowCount: Ember.computed('data', function() {
+    return this.get('data').length;
+  }),
+
+  visibleRowCount: Ember.computed('height', 'rowHeight', function() {
+    return Math.ceil(this.get('height') / this.get('rowHeight'));
+  }),
+
+  bottomVisibleIndex: Ember.computed('rowCount', 'topVisibleIndex', 'visibleRowCount', function() {
+    return Math.min(this.get('rowCount')-1, this.get('topVisibleIndex') + this.get('visibleRowCount'));
+  }),
+
+  topBufferRowIndex: Ember.computed('topVisibleIndex', 'bufferRowCount', function() {
+    return Math.max(0, this.get('topVisibleIndex') - this.get('bufferRowCount'));
+  }),
+
+  bottomBufferRowIndex: Ember.computed('rowCount', 'bottomVisibleIndex', 'bufferRowCount', function() {
+    return Math.min(this.get('rowCount')-1, this.get('bottomVisibleIndex') + this.get('bufferRowCount'));
+  }),
+
   sourceBodies: Ember.computed('columns.@each._zones.body', function(){
     return this.get('columns').map(
       function (col) { return Ember.get(col, '_zones.body'); });
   }),
+
+  topFillHeight: Ember.computed('rowHeight', 'topBufferRowIndex', function() {
+    return this.get('topBufferRowIndex') * this.get('rowHeight');
+  }),
+
+  bottomFillHeight: Ember.computed('rowHeight', 'rowCount', 'bottomBufferRowIndex', function() {
+    return (this.get('rowCount') - 1 - this.get('bottomBufferRowIndex')) * this.get('rowHeight');
+  }),
+
   requiredPresent: Ember.computed(
     'attrs.data', 'attrs.columns', 'attrs.height', 'attrs.width', 
     'attrs.contentWidth', 'attrs.rowHeight', function() {
@@ -21,19 +55,40 @@ export default Ember.Component.extend({
       if (this.getAttr('rowHeight') == null) { return false; }
       return true;
     }),
-  actions: {
-    scrollSource: function (offset, limit) {
-      var bodies = this.get('sourceBodies') || [];
-      this.setProperties({offset, limit});
-      Ember.run.debounce(function() { 
-        bodies.map( function(body){
-          if (body != null) {
-            Ember.set(body, 'offset', Math.max(offset - 30, 0));
-            Ember.set(body, 'limit', limit + 30);
-          }
-        });
-      }, 100);
 
+  visibleRows: Ember.computed('topBufferRowIndex', 'bottomBufferRowIndex', function() {
+    var startIndex = this.get('topBufferRowIndex');
+    var endIndex = this.get('bottomBufferRowIndex');
+    console.log(startIndex + ' ' + endIndex);
+    var result = [];
+    while(startIndex <= endIndex){
+       result.push(startIndex++);
     }
+    return result;
+  }),
+
+  bindScroll: Ember.on('didUpdate', function() {
+    Ember.run.later(function() {
+      if (this.scrollBound) { return; }
+      var scrollable = this.$('.scrollable');
+      if (scrollable[0]) {
+        scrollable.on('scroll', this.didScroll.bind(this));
+        this.scrollBound = true;
+      }
+    }.bind(this));
+  }),
+
+  unbindScroll: Ember.on('willDeleteElement', function() {
+    this.$('.scrollable').off('scroll', this.didScroll.bind(this));
+    this.scrollBound = false;
+  }),
+
+  didScroll(event) {
+    Ember.run.debounce(this, this.scrollTo, 10);
+  },
+
+  scrollTo() {
+    this.set('topVisibleIndex', Math.trunc(this.$('.scrollable')[0].scrollTop / this.get('rowHeight')));
   }
+
 });
