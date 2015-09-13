@@ -38,14 +38,22 @@ export default Ember.Component.extend(CspStyleMixin, {
 	}),
 
 	bindScroll: Ember.on('didUpdate', function() {
-		this.$('.scrollable').on('scroll', this.didScroll.bind(this));
+    Ember.run.later(function() {
+      if (this.scrollBound) { return; }
+      var scrollable = this.$('.scrollable');
+      if (scrollable[0]) {
+        scrollable.on('scroll', this.didScroll.bind(this));
+        this.scrollBound = true;
+      }
+    }.bind(this));
 	}),
 
 	unbindScroll: Ember.on('willDeleteElement', function() {
 		this.$('.scrollable').off('scroll', this.didScroll.bind(this));
+    this.scrollBound = false;
 	}),
 
-	didScroll(event) {
+	didScroll() {
 		Ember.run.debounce(this, this.scrollTo, 10);
 	},
 

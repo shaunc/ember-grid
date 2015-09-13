@@ -8,7 +8,7 @@ export default Ember.Component.extend({
   classNames: ['body'],
 
   topVisibleIndex: 0,
-  bufferRowCount: 0,
+  bufferRowCount: 20,
 
   rowHeight: 25,
 
@@ -16,8 +16,12 @@ export default Ember.Component.extend({
     return this.get('data').length;
   }),
 
-  bottomVisibleIndex: Ember.computed('rowCount', 'topVisibleIndex', function() {
-    return Math.min(this.get('rowCount'), this.get('topVisibleIndex') + 2);
+  visibleRowCount: Ember.computed('height', 'rowHeight', function() {
+    return Math.ceil(this.get('height') / this.get('rowHeight'));
+  }),
+
+  bottomVisibleIndex: Ember.computed('rowCount', 'topVisibleIndex', 'visibleRowCount', function() {
+    return Math.min(this.get('rowCount')-1, this.get('topVisibleIndex') + this.get('visibleRowCount'));
   }),
 
   topBufferRowIndex: Ember.computed('topVisibleIndex', 'bufferRowCount', function() {
@@ -25,7 +29,7 @@ export default Ember.Component.extend({
   }),
 
   bottomBufferRowIndex: Ember.computed('rowCount', 'bottomVisibleIndex', 'bufferRowCount', function() {
-    return Math.min(this.get('rowCount'), this.get('bottomVisibleIndex') + this.get('bufferRowCount'));
+    return Math.min(this.get('rowCount')-1, this.get('bottomVisibleIndex') + this.get('bufferRowCount'));
   }),
 
   sourceBodies: Ember.computed('columns.@each._zones.body', function(){
@@ -52,25 +56,10 @@ export default Ember.Component.extend({
       return true;
     }),
 
-  actions: {
-    scrollSource: function (offset, limit) {
-      var bodies = this.get('sourceBodies') || [];
-      this.setProperties({offset, limit});
-      Ember.run.debounce(function() { 
-        bodies.map( function(body){
-          if (body != null) {
-            Ember.set(body, 'offset', Math.max(offset - 30, 0));
-            Ember.set(body, 'limit', limit + 30);
-          }
-        });
-      }, 100);
-
-    }
-  },
-
   visibleRows: Ember.computed('topBufferRowIndex', 'bottomBufferRowIndex', function() {
     var startIndex = this.get('topBufferRowIndex');
     var endIndex = this.get('bottomBufferRowIndex');
+    console.log(startIndex + ' ' + endIndex);
     var result = [];
     while(startIndex <= endIndex){
        result.push(startIndex++);
@@ -79,11 +68,19 @@ export default Ember.Component.extend({
   }),
 
   bindScroll: Ember.on('didUpdate', function() {
-      this.$('.scrollable').on('scroll', this.didScroll.bind(this));
+    Ember.run.later(function() {
+      if (this.scrollBound) { return; }
+      var scrollable = this.$('.scrollable');
+      if (scrollable[0]) {
+        scrollable.on('scroll', this.didScroll.bind(this));
+        this.scrollBound = true;
+      }
+    }.bind(this));
   }),
 
   unbindScroll: Ember.on('willDeleteElement', function() {
     this.$('.scrollable').off('scroll', this.didScroll.bind(this));
+    this.scrollBound = false;
   }),
 
   didScroll(event) {
