@@ -4,10 +4,10 @@
   "disable_watching": true,
   "ignore_missing_launchers": true,
   "launch_in_ci": [
-    "Chrome",
-    "Firefox"
+    "PhantomJS"
   ],
   "launch_in_dev": [
+    "PhantomJS",
     "Chrome",
     "Firefox",
     "Safari"
