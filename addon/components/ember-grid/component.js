@@ -178,7 +178,7 @@ export default Ember.Component.extend(CspStyleMixin, {
      * TODO: take margin into account. Take scrollbar into account.
      */
     var newBodyHeight = this.element.clientHeight;
-//    newBodyHeight -= this._bodyShellHeight();
+    newBodyHeight -= this._bodyShellHeight();
 
     this.set('bodyHeight', newBodyHeight);
     var bodyWidth = this.element.clientWidth;
@@ -212,7 +212,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   calculateHeight(dimensions) {
     var element = this.element;
     var scrollY = this.get('scrollY');
-    this._setScroll('overflow-y', scrollY);
+//    this._setScroll('overflow-y', scrollY);
     if (scrollY === false) {
       // no scroll - make body big enough to fit all content.
       let {data, rowHeight} = this.getProperties('rowHeight', 'data');
