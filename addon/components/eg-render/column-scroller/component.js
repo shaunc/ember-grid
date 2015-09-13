@@ -7,7 +7,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   styleBindings: ['scrollX:margin-left[px]'],
 
-  findModel: Ember.on('didUpdate', function() {
+  findModel: Ember.on('didInsertElement', function() {
   	Ember.run.later(function() {
 	  	var grid = this.nearestOfType(EmberGrid);
 	  	if (grid)
