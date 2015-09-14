@@ -8,13 +8,13 @@ export default Ember.Component.extend(CspStyleMixin, {
   styleBindings: ['scrollX:margin-left[px]'],
 
   findModel: Ember.on('didInsertElement', function() {
-  	Ember.run.later(function() {
+  	Ember.run.later(()=> {
 	  	var grid = this.nearestOfType(EmberGrid);
 	  	if (grid)
 	  	{
 			  this.set('_model', grid.get('_columnScrollerModel'));
 			}
-  	}.bind(this));
+  	});
   }),
 
   scrollX: Ember.computed('_model', '_model.xPos', function() {

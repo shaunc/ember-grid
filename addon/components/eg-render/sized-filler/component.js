@@ -11,17 +11,9 @@ export default Ember.Component.extend(CspStyleMixin, {
 
   didReceiveAttrs() {
   	this._super();
-  	var height = this.attrs.height;
-  	// deal with mutable
-  	if (height && height.value !== undefined) {
-	    height = height.value;
-	  }
+  	var height = this.getAttr('height');
     this.set('height', height);
-    var width = this.attrs.width;
-    // deal with mutable
-    if (width && width.value !== undefined) {
-      width = width.value;
-    }
+    var width = this.getAttr('width');
     this.set('width', width);
   }
 });
