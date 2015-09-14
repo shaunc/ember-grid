@@ -9,7 +9,6 @@ export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   classNames: ['header'],
 	classNameBindings: ['isDragging:dragging'],
-  //styleBindings: ['width[px]'],
 	
   isDragging: Ember.computed('draggingHeaderCell', function() {
   	return this.get('draggingHeaderCell') !== null;

@@ -22,6 +22,10 @@
     height: 100%;
     width: 100%;
   }
+  &.native-scroll .display {
+    overflow-x: auto;
+    table-layout: auto;
+  }
 
 	.header, .body {
 	  border-bottom: 1px solid @ember-grid-color;
@@ -75,6 +79,12 @@
 	    width: 5px;
 	    cursor: ew-resize;
 	  }
+    .cell:not(:last-of-type) .resize-handle {
+      right: -5px;
+    }
+    .cell:last-of-type .resize-handle {
+      right: 0px;
+    }
 	}
 
   .header {

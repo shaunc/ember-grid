@@ -9,6 +9,7 @@ export default Ember.Component.extend(CspStyleMixin, {
 
   findModel: Ember.on('didInsertElement', function() {
   	Ember.run.later(()=> {
+      if (this.isDestroying) { return; }
 	  	var grid = this.nearestOfType(EmberGrid);
 	  	if (grid)
 	  	{

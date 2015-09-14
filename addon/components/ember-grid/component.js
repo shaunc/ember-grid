@@ -13,7 +13,8 @@ export default Ember.Component.extend(CspStyleMixin, {
   styleBindings: ['width[px]', 'height[px]'],
   classNameBindings: [
     'showHeader:with-header:without-header',
-    'showFooter:with-footer:without-footer'],
+    'showFooter:with-footer:without-footer',
+    'nativeScroll:native-scroll'],
 
   showHeader: true,
   showFooter: false,
@@ -28,6 +29,9 @@ export default Ember.Component.extend(CspStyleMixin, {
   height: null,         // total height of element
   bodyHeight: null,     // height to display body (inside height
                         // minus header and footer total height).
+
+
+  nativeScroll: Ember.computed.alias('_columnScrollerModel.nativeScroll'),
 
   columnsWithoutWidth: Ember.computed('_columns.[]', function(){
     var columns = this.get('_columns');

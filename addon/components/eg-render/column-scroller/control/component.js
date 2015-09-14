@@ -11,10 +11,13 @@ export default Ember.Component.extend(CspStyleMixin, {
 
   findModel: Ember.on('didInsertElement', function() {
     Ember.run.later(()=> {
+      if (this.isDestroying) { return; }
       var grid = this.nearestOfType(EmberGrid);
       if (grid)
       {
-        this.set('_model', grid.get('_columnScrollerModel'));
+        var model = grid.get('_columnScrollerModel');
+        this.set('_model', model);
+        model.set('nativeScroll', this.get('_scrollbarHeight') === 0);
       }
     });
   }),

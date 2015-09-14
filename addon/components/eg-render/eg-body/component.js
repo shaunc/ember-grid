@@ -69,14 +69,14 @@ export default Ember.Component.extend({
   }),
 
   bindScroll: Ember.on('didUpdate', function() {
-    Ember.run.later(function() {
+    Ember.run.later(()=> {
       if (this.scrollBound) { return; }
       var scrollable = this.$('.scrollable');
       if (scrollable[0]) {
         scrollable.on('scroll', this.didScroll.bind(this));
         this.scrollBound = true;
       }
-    }.bind(this));
+    });
   }),
 
   unbindScroll: Ember.on('willDeleteElement', function() {

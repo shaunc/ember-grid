@@ -8,5 +8,4 @@ import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
 export default Ember.Component.extend(CspStyleMixin, {
   layout: layout,
   classNames: ['footer'],
-  styleBindings: ['width[px]']
 });
