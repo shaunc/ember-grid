@@ -89,6 +89,12 @@ export default Ember.Component.extend({
   },
 
   scrollTo() {
+    (this.getAttr('columns') || []).forEach((column)=>{
+      var body = column.get('_zones.body');
+      if (body == null) { return; }
+      body.set('offset', Math.max(this.get('topVisibleIndex') - 10, 0));
+      body.set('limit', this.get('visibleRowCount') + 20);
+    });
     this.set('topVisibleIndex', Math.trunc(this.$('.scrollable')[0].scrollTop / this.get('rowHeight')));
   }
 
