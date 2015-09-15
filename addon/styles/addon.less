@@ -5,7 +5,7 @@
 .ember-grid {
 	
   overflow-y: hidden;
-  overflow-x: auto;
+  overflow-x: hidden;
   position: relative;
 
 	.declarative {
@@ -66,6 +66,7 @@
 
   .scroll-container {
   	position:relative;
+  	height: 100%;
 
 	  .scrollable {
 	    margin: 0;
@@ -89,8 +90,6 @@
 
 	.column-scroll-control {
     height: 1px;
-    overflow-x: scroll;
-    overflow-y: hidden;
 	}
 
   &.native-scroll .display {
