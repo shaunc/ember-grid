@@ -4,7 +4,6 @@
 
 .ember-grid {
 	
-	border: 2px solid @ember-grid-color;
   overflow-y: hidden;
   overflow-x: auto;
   position: relative;
@@ -14,22 +13,113 @@
 		display:none;
 	}
 
+	// -------------- main layout
+
   .display {
     box-sizing: border-box;
-    overflow: hidden;
-    display: table;
-    table-layout: fixed;
-    height: 100%;
     width: 100%;
+    height: 100%;
+	  display:flex;
+	  flex-direction:column;
+	  overflow:hidden;
+
+	  .body {
+		  flex-grow:1;
+		  position:relative;
+
+		  .scroll-container {
+		  	position: absolute;
+		    left: 0px;
+		    right: 0px;
+		    top: 0px;
+		    bottom: 0px;
+		  }
+
+	  }
   }
-  &.native-scroll .display {
-    overflow-x: auto;
-    table-layout: auto;
-  }
+
+  // -------------- borders
+
+	border: 2px solid @ember-grid-color;
 
 	.header, .body {
 	  border-bottom: 1px solid @ember-grid-color;
 	}
+
+  .cell {
+  	border-right: 1px solid @ember-grid-color;
+
+  	&:last-child {
+  		border-right-color: @ember-grid-color;
+  	}
+  }
+
+  .row {
+  	&.empty {
+  	  .cell {
+		    border: none;
+	    }
+  	}
+  }
+
+  // -------------- scrolling
+
+  .scroll-container {
+  	position:relative;
+
+	  .scrollable {
+	    margin: 0;
+	    padding: 0;
+	    overflow: auto;
+	    position: absolute;
+	    left: 0px;
+	    top: 0px;
+	    right: 0px;
+	    bottom: 0px;
+	  }
+  }
+
+  .body {
+	
+	  .scrollable {
+	  	overflow-x: hidden;
+	  }
+
+	}
+
+	.column-scroll-control {
+    height: 1px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+	}
+
+  &.native-scroll .display {
+    overflow-x: auto;
+  }
+
+  // -------------- colours
+
+  .body {
+
+		background-color: @ember-grid-background;
+
+	  .row {
+		  .cell {
+	      background-color: white;
+		  	&.odd {
+		  		background-color: @ember-grid-odd-row-color;
+		  	}
+		  }
+
+		  &.empty {
+		  	.cell {
+		  		background-color: @ember-grid-background;
+		  	}
+		  }
+		}
+	}
+
+  // -------------- the rest
 
 	.footer, .body {
 		.cell {
@@ -39,24 +129,18 @@
 
 	.header, .footer, .body {
 
-		display: table-row;
 	  font-size: 0px;
     white-space: nowrap;
 
 	  .cell {
-    	border-right: 1px solid @ember-grid-color;
     	padding-left: 2px;
     	padding-right: 2px;
     	padding-top: 1px;
     	padding-bottom: 2px;
     	font-size: 14px;
-        box-sizing: border-box;
-        margin: 0;
+      box-sizing: border-box;
+      margin: 0;
     	display: inline-block;
-
-    	&:last-child {
-    		border-right-color: @ember-grid-color;
-    	}
 
     	.default {
     		&.left {
@@ -95,8 +179,6 @@
   }
 
 	.header, .footer {
-		height: 0px;
-		width: 100%;
 
 		.cell {
 			position: relative;
@@ -104,65 +186,29 @@
 
 	}
 
-  .scroll-container {
-  	display:table-cell;
-  	position:relative;
-
-	  .scrollable {
-	    margin: 0;
-	    padding: 0;
-	    overflow: auto;
-	    position: absolute;
-	    left: 0px;
-	    top: 0px;
-	    right: 0px;
-	    bottom: 0px;
-	  }
-  }
-
-	  .filler {
-	  	width: 1px;
-	  	height: 1px;
-	  }
-
 	.body {
 
-		background-color: @ember-grid-background;
 	  overflow-y: hidden;
 	  overflow-x: hidden;
 
 	  .row {
-		  .cell {
-	      background-color: white;
-		  	&.odd {
-		  		background-color: @ember-grid-odd-row-color;
-		  	}
-		  }
 
 		  &.empty {
 
 		  	padding:20px;
 
 		  	.cell {
-		  		background-color: @ember-grid-background;
 			    width: 100%;
-			    border: none;
 			    text-align: center;
 		  	}
 		  }
 	  }
-
-	  .scrollable {
-	  	overflow-x: hidden;
-	  }
-
 	}
 
-	.column-scroll-control {
-    height: 1px;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    display: table-row;
-	}
+  .filler {
+  	width: 1px;
+  	height: 1px;
+  }
+
 }
 
