@@ -66,8 +66,6 @@
 		    border: none;
 	    }
   	}
-    display: -webkit-flex;
-    display: flex;
   }
 
   // -------------- scrolling
@@ -232,3 +230,17 @@
 
 }
 
+// Use flex to render rows, rather than relying on inline block stacking
+// in block mode.
+//
+// This is only needed in safari; seems to be harmless but unnecessary
+// in mac chrome/firefox, but breaks some windows browsers -- so
+// for now safari specific
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  /* Safari-Opera specific declarations here */
+  .ember-grid .body .row {
+    display: -webkit-flex;
+    display: flex;
+  }
+}
