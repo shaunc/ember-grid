@@ -76,6 +76,10 @@ export default Ember.Component.extend({
         scrollable.on('scroll', this.didScroll.bind(this));
         this.scrollBound = true;
       }
+      // for the moment native scroll support works on body rather
+      // than "scrollable" because of sizing problems. 
+
+      this.$().on('scroll', this.didScroll.bind(this));
     });
   }),
 
@@ -89,13 +93,15 @@ export default Ember.Component.extend({
   },
 
   scrollTo() {
+    var scrollTop = Math.max(
+      this.$('.scrollable')[0].scrollTop, this.element.scrollTop );
     (this.getAttr('columns') || []).forEach((column)=>{
       var body = column.get('_zones.body');
       if (body == null) { return; }
       body.set('offset', Math.max(this.get('topVisibleIndex') - 10, 0));
       body.set('limit', this.get('visibleRowCount') + 20);
     });
-    this.set('topVisibleIndex', Math.trunc(this.$('.scrollable')[0].scrollTop / this.get('rowHeight')));
+    this.set('topVisibleIndex', Math.trunc(scrollTop / this.get('rowHeight')));
   }
 
 });

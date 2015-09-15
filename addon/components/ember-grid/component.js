@@ -325,8 +325,10 @@ export default Ember.Component.extend(CspStyleMixin, {
     }
   },
 
-  tooWide: Ember.computed('width', 'contentWidth', function() {
-    return this.get('contentWidth') > this.get('width');
+  scrollNeeded: Ember.computed('width', 'contentWidth', function() {
+    let data = this.get('data')
+    return this.get('contentWidth') > this.get('width') || 
+      this.get('rowHeight') * (data.length || 0) > this.get('height');
   })
 
 });

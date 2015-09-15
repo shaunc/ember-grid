@@ -66,6 +66,8 @@
 		    border: none;
 	    }
   	}
+    display: -webkit-flex;
+    display: flex;
   }
 
   // -------------- scrolling
@@ -91,10 +93,11 @@
       position: relative;
     }
     .body, .header, .footer {
-      display: table;
-      > div {
-        display: table-row;
-      }
+      width: -webkit-fit-content;
+      width: fit-content;
+    }
+    .body {
+      overflow-y: auto;
     }
   }
 
