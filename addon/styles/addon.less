@@ -92,6 +92,7 @@
     }
     .body, .header, .footer {
       width: -webkit-fit-content;
+      width: -moz-fit-content;
       width: fit-content;
     }
     .body {
@@ -236,7 +237,6 @@
 // This is only needed in safari; seems to be harmless but unnecessary
 // in mac chrome/firefox, but breaks some windows browsers -- so
 // for now safari specific
-
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   /* Safari-Opera specific declarations here */
   .ember-grid .body .row {
