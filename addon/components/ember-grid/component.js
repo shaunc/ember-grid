@@ -14,7 +14,8 @@ export default Ember.Component.extend(CspStyleMixin, {
   classNameBindings: [
     'showHeader:with-header:without-header',
     'showFooter:with-footer:without-footer',
-    'nativeScroll:native-scroll'],
+    'nativeScroll:native-scroll',
+    'tooWide:horizontal-scroll'],
 
   showHeader: true,
   showFooter: false,
@@ -30,6 +31,9 @@ export default Ember.Component.extend(CspStyleMixin, {
   bodyHeight: null,     // height to display body (inside height
                         // minus header and footer total height).
 
+  tooWide: Ember.computed('contentWidth', 'width', function(){
+    return this.get('contentWidth') > this.get('width');
+  }),
 
   nativeScroll: Ember.computed.alias('_columnScrollerModel.nativeScroll'),
 
@@ -45,7 +49,7 @@ export default Ember.Component.extend(CspStyleMixin, {
     return columns.reduce(((r, col)=>r + (col.get('width') || 0)), 0);
   }),
   contentWidthDidChange: Ember.observer('contentWidth', function(){
-    this.adjustDisplayWidth();    
+    this.adjustDisplayWidth();
   }),
 
   init: function() {

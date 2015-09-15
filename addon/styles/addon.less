@@ -111,6 +111,9 @@
 	.column-scroll-control {
     height: 1px;
 	}
+  &:not(.horizontal-scroll) .column-scroll-control {
+    display: none;
+  }
 
   &.native-scroll .display {
     overflow-x: auto;
