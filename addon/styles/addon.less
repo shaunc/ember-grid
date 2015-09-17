@@ -78,12 +78,15 @@
 	    margin: 0;
 	    padding: 0;
 	    overflow: auto;
+      position: absolute;
 	    left: 0px;
 	    top: 0px;
 	    right: 0px;
 	    bottom: 0px;
 	  }
   }
+
+
   // In native scroll mode, make sizes of main sections inside
   // display take content width.
   &.native-scroll {
@@ -240,10 +243,16 @@
 // This is only needed in safari; seems to be harmless but unnecessary
 // in mac chrome/firefox, but breaks some windows browsers -- so
 // for now safari specific
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  /* Safari-Opera specific declarations here */
-  .ember-grid .body .row {
-    display: -webkit-flex;
-    display: flex;
+
+@media screen and (min-color-index:0) and (-webkit-min-device-pixel-ratio:0){ 
+  .ember-grid .body {
+    .row {
+      display: -webkit-flex;
+      display: flex;
+    }
+    .cell {
+      -webkit-flex: none;
+      flex: none;
+    }
   }
 }
