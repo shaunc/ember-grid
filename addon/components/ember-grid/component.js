@@ -3,6 +3,7 @@
 import Ember from 'ember';
 import layout from './template';
 import ColumnModel from '../eg-column/model';
+import EGColumn from '../eg-column/component';
 import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
 import ColumnScrollerModel from '../eg-render/column-scroller/model';
 import DeclarationContainer from 'ember-declarative/ed-container/mixin';
@@ -22,9 +23,6 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
   showHeader: true,
   showFooter: false,
 
-  _columnScrollerModel: null,
-
-  _columns: Ember.computed(function(){ return Ember.A(); }),
   width: null,          // total width of element
   bodyWidth: null,      // inside width of element
   /*contentWidth*/      // width of all columns
@@ -41,10 +39,11 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
 
   nativeScroll: Ember.computed.alias('_columnScrollerModel.nativeScroll'),
 
-  columnsWithoutWidth: Ember.computed('_columns.[]', function(){
+  columnWidthAuto: Ember.computed('_columns.[]', function(){
     var columns = this.get('_columns');
     if (columns == null ) { return 0; }
-    return columns.reduce(((r, col)=>r + (col.get('width') == null)), 0);
+    return columns.reduce(((r, col)=>
+      r + (col.get('width') == null || col.get('autoWidth'))), 0);
   }),
 
   contentWidth: Ember.computed('_columns.@each.width', function(){
@@ -53,16 +52,22 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
     return columns.reduce(((r, col)=>r + (col.get('width') || 0)), 0);
   }),
   scrollNeeded: Ember.computed(
-      'width', 'contentWidth', 'rowHeight', 'height', function() {
-    const data = this.get('data') || [];
-    let height = this.get('height');
-    if (height == null && this.element != null) {
-      height = this.$().height(); 
+      'bodyWidth', 'contentWidth', 'rowHeight', 'bodyHeight', function() {
+    const data = this.get('_data') || [];
+    const height = this.get('bodyHeight');
+    const width = this.get('bodyWidth');
+    if (height == null || width == null) {
+      return null;
     }
-    const needed = this.get('contentWidth') > this.get('width') || 
+    const needed = this.get('contentWidth') > width || 
       this.get('rowHeight') * data.length > height;
     return needed;
   }),
+
+  _columnScrollerModel: null,
+  _columns: null,
+  _data: null,                    // data or resolved data if data is promise
+  _declarationsProcessed: false,
 
   init: function() {
     this._super();
@@ -70,22 +75,39 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
   },
 
   attrsChanged: Ember.on('didReceiveAttrs', function() {
-    this.setupColumns();
-    let data = this.setupData();
-    this._refreshColumns(data);
+    if(!this.get('_declarationsProcessed')) { return; }
+
+    this.updateColumns();
+    this.setupData();
+    this._refreshColumns();
   }),
-  setupColumns() {
-    let acolumns = this.getAttr('columns');
-    if (typeof acolumns === 'string') {
-      acolumns = acolumns.split(',').map( name => {return {key: name};}  );
-    }
+  updateColumns() {
+    this.set('bodyWidth', null);
+    this.set('bodyHeight', null);
+    // XXX TODO: new data will override data from explicit column
+    // declaration, but no way to tell data source currently
+    // as only merged object is saved.
+    const acolumns = this._unpackColumnAttribute();
     if (acolumns != null ) {
-      const columns = this.get('columns');
+      const columns = this.get('_columns');
       acolumns.forEach((col)=>{
-        if(!(col instanceof columnModel)) {
+        if(!(col instanceof ColumnModel)) {
           col = ColumnModel.create(col);
         }
-        columns.pushObject(col);
+        let oldColumn = null;
+        columns.some(function(currentColumn){ 
+          if(currentColumn.get('key') === column.key) {
+            oldColumn = currentColumn;
+            return true;
+          }
+          return false;
+        });
+        if(oldColumn != null) {
+          oldColumn.merge(acolumn);
+        }
+        else {
+          columns.pushObject(col);
+        }
       });
     }
   },
@@ -96,23 +118,60 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
     {
       var dataPromise = data;
       data = [];
-      this.set('data', data);
       var self = this;
       dataPromise.then(resolvedData => {
         if (this.get('data') === dataPromise) {
-          self.set("data", resolvedData);
+          self.set("_data", resolvedData);
         }
       });
     }
-    return data;
+    this.set('_data', data);
   },
-  _refreshColumns(data) {
+  processDeclarations: Ember.on('allDeclarationsRegistered', function(){
+    const columns = this.get('declarations')
+      .filter(decl => decl instanceof EGColumn)
+      .map(decl => decl.get('_column'));
+    const columnMap = columns.reduce((map, col, icol)=>{
+      map[col.key] = icol;
+      return map;
+    }, {});
+    const acolumns = this._unpackColumnAttribute();
+    acolumns.forEach(acol=>{
+      const icol = columnMap[Ember.get(acol, 'key')];
+      if(icol != null) {
+        // explicitly specified overrides, and should also be
+        // final object so we don't have to change EGColumn instance.
+        const col = columnMap[icol];
+        acol.merge(col);
+        col.merge(acol);
+      } else {
+        columns.push(acol);
+      }
+    });
+    Ember.run.scheduleOnce('afterRender', ()=>{
+      this.set('_columns', columns);
+      this.setupData();
+      this._refreshColumns();
+      this.set('_declarationsProcessed', true);
+    });
+  }),
+  _refreshColumns() {
+    let needsDistribute = false
+    const columns = this.get('_columns');
+    const data = this.get('_data');
     this.get('_columns').forEach( column => { 
-      this.refreshColumn(column, data); });
+      this.refreshColumn(column, data); 
+      if(column.get('autoWidth')) {
+        needsDistribute = true;
+      }
+    });
+    if(needsDistribute) {
+      Ember.run.scheduleOnce('afterRender', this, 'distributeWidthToColumns');
+    }
   },
   refreshColumn(column, data) {
     if(data == null) {
-      data = this.get('data') || [];
+      data = this.get('_data') || [];
     }
     var body;
     if (column._zones.body == null) {
@@ -125,44 +184,80 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
     const rowHeight = this.get('rowHeight');
     body.set('data',  data);
     body.set('rowHeight', rowHeight);
+    if (column.get('width') == null) {
+      column.set('autoWidth', true);
+    }
 
-    const setLimit = ()=>{
+    const setDimensionRelated = ()=>{
       let height = this.$().height(),
         limit = Math.ceil(height / rowHeight) + 10;
       body.set('limit', limit);
     }
     if(this.element != null) { 
-      setLimit(); 
+      setDimensionRelated(); 
     }
     else {
-      Ember.run.scheduleOnce('afterRender', setLimit);
+      Ember.run.scheduleOnce('afterRender', setDimensionRelated);
     }
   },
   /**
-   *  Add a column, either appending if new key, or merging if key
-   *  present. Returns promise for the column that ends up in the collection.
+   *  Distribute actual width to columns whose width wasn't explicitly
+   *  specified. Explicitly specified minimum and maximum are
+   *  also taken into account. This may result in total column width
+   *  not matching current width.
    *
-   *  Unfortunately, will get deprecation ember-views.render-double-modify
-   *  if we modify _columns during prerender, so delay action till afterRender.
    */
-  addColumn(column) {
-    return new Promise((res)=>{
-      Ember.run.scheduleOnce('afterRender',()=>{
-        const key = column.get('key');
-        const columns = this.get('_columns');
-        const rcolumn = columns.reduce(function(found, col){
-          return found || (col.get('key') === key ? col : null);
-        }, null);
-        if(rcolumn == null) {
-          columns.pushObject(column);
-        } else {
-          rcolumn.merge(column)
-          column = rcolumn
-        }
-        this.refreshColumn(column);
-        res(column)
-      });
-    })
-
+  distributeWidthToColumns() {
+    const width = this.$().width();
+    const columns = this.get('_columns');
+    const autoMin = [];
+    const autoMax = [];
+    const [nfixed, fixed] = columns.reduce(([nfixed, fixed], col)=>{
+      if (!col.get('autoWidth')) {
+        nfixed += 1;
+        fixed += col.get('width');
+      }
+      else {
+        autoMin.push(col.get('min-width') || 10);
+        autoMax.push(col.get('max-width') || 100000);
+      }
+      return [nfixed, fixed];
+    }, [0, 0]);
+    const nauto = columns.length - nfixed;
+    if (nauto == 0) { return; }
+    let awidth = width / nauto;
+    let excess = 0;
+    autoMin.forEach( cmin=>{ excess -= Math.max(cmin - awidth, 0); });
+    autoMax.forEach( cmax=>{ excess += Math.max(awidth - cmax, 0); });
+    awidth = (width + excess) / nauto;
+    columns.forEach(column => {
+      if(column.get('autoWidth')) {
+        const cmin = column.get('min-width') || 10;
+        const cmax = column.get('max-width') || 100000;
+        column.set('width', 
+          Math.min(cmax, Math.max(cmin, awidth)));
+      }
+    });
   },
+  didRender() {
+    if(!this.get('_declarationsProcessed')) { return; }
+    if(this.get('bodyWidth') == null || this.get('bodyHeight') == null) {
+      Ember.run.scheduleOnce('afterRender', ()=>{
+        this.set('bodyWidth', Math.floor(this.$().innerWidth()));
+        this.set('bodyHeight', 
+          Math.floor(this.$().innerHeight())
+            - Math.ceil(this.$('.header').height())
+            - Math.ceil(this.$('.footer').height()))
+        console.log('component rendered', this.get('bodyWidth'), this.get('bodyHeight'))
+      });
+    }
+  },
+  _unpackColumnAttribute() {
+    let acolumns = this.getAttr('columns');
+    if (typeof acolumns === 'string') {
+      acolumns = acolumns.split(',').map( 
+        name => ColumnModel.create({key: name}) );
+    }
+    return acolumns || [];
+  }
 });

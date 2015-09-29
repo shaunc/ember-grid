@@ -14,20 +14,20 @@ export default Ember.Component.extend(PortalDeclaration, ColumnZone, {
   _data : Ember.computed.alias('_body.data'),
 
   _items: Ember.computed('_body.{data,offset,limit}', function() {
-    var body = this.get('_body');
-    var {data, offset, limit} = body;
-    var {oldOffset, oldLimit, oldItems} = this;
-    var end = offset + limit;
-    var oldEnd = oldOffset + oldLimit;
-    var jump = Math.max(
+    const body = this.get('_body');
+    const {data, offset, limit} = body;
+    const {oldOffset, oldLimit, oldItems} = this;
+    const end = offset + limit;
+    const oldEnd = oldOffset + oldLimit;
+    const jump = Math.max(
       Math.abs(offset - oldOffset), Math.abs(end - oldEnd));
     if (oldItems != null && jump * 4 < oldItems.length) {
       return oldItems;
     }
-    oldItems = this.oldItems = data.slice(offset, offset + limit);
+    const items = this.oldItems = data.slice(offset, offset + limit);
     this.oldOffset = offset;
     this.oldLimit = limit;
-    return oldItems;
+    return items;
 
   }),
   _requiredPresent: Ember.computed(

@@ -20,15 +20,17 @@ export default Ember.Mixin.create({
    * After registration with column, set column data zone with zone
    * data.
    */
-  registered: Ember.on('didRegisterDeclaration', function(){
+  addZoneInfo: Ember.on('didRegisterDeclaration', function() {
     const zoneName = this.get('zoneName');
     const column = this.get('_column');
     column.set('_zones.' + zoneName, this.get('_' + zoneName));
+    this._super();
   }),
   /**
    * Copy any passed attributes into zone data.
    */
-  receivedAttrs: Ember.on('didReceiveAttrs', function(){
+
+  zoneAttr: Ember.on('didReceiveAttrs', function(){
     const zone = this.get('_' + this.get('zoneName'));
     for (let key in this.attrs) {
       zone.set(key, this.getAttr(key));

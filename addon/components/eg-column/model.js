@@ -20,7 +20,6 @@ export default Ember.Object.extend({
  	merge(rhs) {
  		Object.keys(rhs).forEach((key)=>{
  			const val = rhs.get(key);
- 			console.log("key", key, val);
  			if(val === undefined) { return; }
  			if (key == '_zones') {
  				Object.keys(val).forEach((zkey)=>{
@@ -28,9 +27,9 @@ export default Ember.Object.extend({
  					const rzone = this.get('_zones.' + zkey);
  					if (rzone == null) {
  						this.set('_zones.' + zkey, lzone);
- 					} else if(zval != null) {
- 						Object.keys(zval).forEach((zikey)=>
- 							rzone.set(zikey, zval.get('zikey')));
+ 					} else if(lzone != null) {
+ 						Object.keys(lzone).forEach((zikey)=>
+ 							rzone.set(zikey, lzone.get('zikey')));
  					}
  				});
  			}

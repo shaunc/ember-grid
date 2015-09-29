@@ -1,5 +1,5 @@
 {{! eg-render/eg-body-cell ~}}
-{{#if _body ~}}
+{{#if _body.portal ~}}
   {{impl/ed-render rowIndex portal=_body.portal ~}}
 {{else ~}}
   <div class="default {{column.align}}">

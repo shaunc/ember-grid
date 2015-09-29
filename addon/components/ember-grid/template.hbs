@@ -1,9 +1,9 @@
 {{!ember-grid}}
 
-<div class='declarative'>
+{{#decl/ed-block}}
   {{! yield injects the declarative components}}
-  {{yield _columns}}
-</div>
+  {{yield}}
+{{/decl/ed-block}}
 
 <div class="display">
   {{#if showHeader}}
@@ -11,7 +11,7 @@
   {{/if}}
 
   {{eg-render/eg-body
-    data=data columns=_columns height=bodyHeight width=contentWidth
+    data=_data columns=_columns height=bodyHeight width=contentWidth
     rowHeight=rowHeight scrollX=scrollX scrollY=scrollY }}
 
   {{#if showFooter}}

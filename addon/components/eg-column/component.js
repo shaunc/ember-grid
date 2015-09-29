@@ -11,16 +11,11 @@ export default Ember.Component.extend(DeclarationContainer, DeclarationBase, {
 
   grid: Ember.computed.alias('declarationContainer'),
   _column: Ember.computed(function(){ return Column.create(); }),
-
-  setupAttrs: Ember.on('didInitAttrs', function(){
+  setupAttrs: Ember.on('didReceiveAttrs', function(){
     const column = this.get('_column');
     Object.keys(this.attrs).forEach((attr)=>{
       column[attr] = this.getAttr(attr);
     });
   }),
-  registered: Ember.on('didRegisterDeclaration', function() {
-    this.get('grid').addColumn(this.get('_column')).then((column)=>{
-      this.set('_column', column);
-    })
-  })
+
 });
