@@ -18,7 +18,6 @@ export default Ember.Component.extend(DeclarationContainer, DeclarationBase, {
       column[attr] = this.getAttr(attr);
     });
   }),
-
   registered: Ember.on('didRegisterDeclaration', function() {
     this.get('grid').addColumn(this.get('_column')).then((column)=>{
       this.set('_column', column);

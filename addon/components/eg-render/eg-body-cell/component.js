@@ -12,7 +12,7 @@ export default Ember.Component.extend(CspStyleMixin, {
   attributeBindings: ['rowIndex:data-row-index'],
   styleBindings: ['width[px]', 'rowHeight:height[px]'],
 
-  _source: Ember.computed.alias('column._zones.body.source'),
+  _body: Ember.computed.alias('column._zones.body'),
   _data: Ember.computed.alias('column._zones.body.data'),
 
   width: Ember.computed.alias('column.width'),

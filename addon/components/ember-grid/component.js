@@ -52,6 +52,17 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
     if (columns == null ) { return 0; }
     return columns.reduce(((r, col)=>r + (col.get('width') || 0)), 0);
   }),
+  scrollNeeded: Ember.computed(
+      'width', 'contentWidth', 'rowHeight', 'height', function() {
+    const data = this.get('data') || [];
+    let height = this.get('height');
+    if (height == null && this.element != null) {
+      height = this.$().height(); 
+    }
+    const needed = this.get('contentWidth') > this.get('width') || 
+      this.get('rowHeight') * data.length > height;
+    return needed;
+  }),
 
   init: function() {
     this._super();
@@ -134,7 +145,7 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
    *  Unfortunately, will get deprecation ember-views.render-double-modify
    *  if we modify _columns during prerender, so delay action till afterRender.
    */
-  addColumn: function(column) {
+  addColumn(column) {
     return new Promise((res)=>{
       Ember.run.scheduleOnce('afterRender',()=>{
         const key = column.get('key');
@@ -154,16 +165,4 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
     })
 
   },
-  scrollNeeded: Ember.computed(
-      'width', 'contentWidth', 'rowHeight', 'height', function() {
-    const data = this.get('data') || [];
-    let height = this.get('height');
-    if (height == null && this.element != null) {
-      height = this.$().height(); 
-    }
-    const needed = this.get('contentWidth') > this.get('width') || 
-      this.get('rowHeight') * data.length > height;
-    return needed;
-  })
-
 });

@@ -1,6 +1,7 @@
 {{! eg-render/eg-header-cell ~}}
-{{#if _header}}{{impl/ed-render portal=_header}}
-{{else}}
+{{#if _header ~}}
+ {{impl/ed-render portal=_header.portal ~}}
+{{else ~}}
 	<div class="default {{align}}">
 	  {{text}}
 	</div>

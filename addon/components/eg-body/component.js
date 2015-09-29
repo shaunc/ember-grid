@@ -11,6 +11,8 @@ export default Ember.Component.extend(PortalDeclaration, ColumnZone, {
 	classNames: ['body-def'],
   zoneName: 'body',
 
+  _data : Ember.computed.alias('_body.data'),
+
   _items: Ember.computed('_body.{data,offset,limit}', function() {
     var body = this.get('_body');
     var {data, offset, limit} = body;
@@ -47,12 +49,12 @@ export default Ember.Component.extend(PortalDeclaration, ColumnZone, {
    *  Adjust porting element to reflect current offset.
    */
   portElement(receiver, idx) {
-    idx -= this.get('offset');
+    idx -= this.get('_body.offset');
     return this._super(receiver, idx);
   },
   // XXX STUDY IF WORKING....
   putBackElement(receiver, idx) {
-    idx -= this.get('offset');
+    idx -= this.get('_.body.offset');
     return this._super(receiver, idx);
   }
 });

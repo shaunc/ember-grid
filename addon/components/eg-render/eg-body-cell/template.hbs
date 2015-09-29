@@ -1,6 +1,8 @@
 {{! eg-render/eg-body-cell ~}}
-{{#unless _source}}
+{{#if _body ~}}
+  {{impl/ed-render rowIndex portal=_body.portal ~}}
+{{else ~}}
   <div class="default {{column.align}}">
     {{eg-cell-data _data rowIndex column}}
   </div>
-{{/unless}}
+{{/if}}

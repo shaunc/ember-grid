@@ -1,6 +1,8 @@
 {{! eg-render/eg-footer-cell ~}}
-{{#unless _footer}}
+{{#if _footer ~}}
+  {{impl/ed-render portal=_footer.portal ~}}
+{{else ~}}
 	<div class="default {{align}}">
 	  {{text}}
 	</div>
-{{/unless}}
+{{/if}}

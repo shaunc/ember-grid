@@ -17,9 +17,10 @@ export default Ember.Object.extend({
 	 * 
 	 *
 	 */
- 	merge(lhs) {
- 		Object.keys(lhs).forEach((key)=>{
- 			const val = lhs.get(key);
+ 	merge(rhs) {
+ 		Object.keys(rhs).forEach((key)=>{
+ 			const val = rhs.get(key);
+ 			console.log("key", key, val);
  			if(val === undefined) { return; }
  			if (key == '_zones') {
  				Object.keys(val).forEach((zkey)=>{
