@@ -1,0 +1,1275 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"vis",
+				"visibleRowCount"
+			],
+			[
+				"v",
+				"topVisibleIndex"
+			],
+			[
+				"_co",
+				"_columnScrollerModel"
+			],
+			[
+				"_",
+				"_scrollbarHeight"
+			],
+			[
+				"mat",
+				"matchingRecords"
+			],
+			[
+				"convert",
+				"convertToEmber"
+			],
+			[
+				"ma",
+				"matchingRecords"
+			],
+			[
+				"request",
+				"requestNodeRewriter"
+			],
+			[
+				"err",
+				"err"
+			],
+			[
+				"fro",
+				"fromXQOperation"
+			],
+			[
+				"updateS",
+				"updateSchemaNode"
+			],
+			[
+				"createS",
+				"createSchemaNode"
+			],
+			[
+				"findS",
+				"findSchemaNode"
+			],
+			[
+				"pro",
+				"processID"
+			],
+			[
+				"rej",
+				"rejected"
+			],
+			[
+				"I",
+				"IQUOTEIN"
+			],
+			[
+				"sheet1",
+				"sheet1Rows"
+			],
+			[
+				"disp",
+				"displayColumns"
+			],
+			[
+				"getSlice",
+				"getSliceStream"
+			],
+			[
+				"viwe",
+				"viewSchema"
+			],
+			[
+				"to",
+				"toSQL"
+			],
+			[
+				"_get",
+				"_getSliceSortOps"
+			],
+			[
+				"res",
+				"resolveArgs"
+			],
+			[
+				"db",
+				"dbDataset"
+			],
+			[
+				"com",
+				"columnMap"
+			],
+			[
+				"T",
+				"TYPE_IDS"
+			],
+			[
+				"exp",
+				"explicit"
+			],
+			[
+				"_d",
+				"_datasetDirty"
+			],
+			[
+				"is",
+				"isMeasure"
+			],
+			[
+				"display",
+				"displayOrder"
+			],
+			[
+				"cache",
+				"cacheID"
+			],
+			[
+				"clear",
+				"clearCache"
+			],
+			[
+				"cacheS",
+				"cacheSheets"
+			],
+			[
+				"getA",
+				"getAllSchema"
+			],
+			[
+				"cach",
+				"cacheDataset"
+			],
+			[
+				"der",
+				"derivedFromID"
+			],
+			[
+				"save",
+				"_saveDataset"
+			],
+			[
+				"S",
+				"SHEET_TYPE_ID"
+			],
+			[
+				"SchemaNo",
+				"SchemaNodeType"
+			],
+			[
+				"Schema",
+				"SchemaNode"
+			],
+			[
+				"metadata",
+				"metadataConfig"
+			],
+			[
+				"i",
+				"i"
+			],
+			[
+				"un",
+				"unsafe-inline"
+			],
+			[
+				"_var",
+				"_variableMap"
+			],
+			[
+				"_re",
+				"_resolveError"
+			],
+			[
+				"set",
+				"setCurrentUser"
+			],
+			[
+				"OAuth2",
+				"OAuth2Authenticator"
+			],
+			[
+				"list",
+				"list-style-type"
+			],
+			[
+				"F",
+				"FlagCell"
+			],
+			[
+				"text",
+				"text-align-center"
+			],
+			[
+				"he",
+				"header-cell"
+			],
+			[
+				"headerCe",
+				"headerCellViewClass"
+			],
+			[
+				"_table",
+				"_tableScrollTop"
+			],
+			[
+				"CD",
+				"CDAdminOrganizationsView"
+			],
+			[
+				"in",
+				"innerTextField"
+			],
+			[
+				"org",
+				"organization"
+			],
+			[
+				"pr",
+				"productCounts"
+			],
+			[
+				"So",
+				"SortHeaderCell"
+			],
+			[
+				"Mo",
+				"ModalView"
+			],
+			[
+				"Admin",
+				"AdminTableRow"
+			],
+			[
+				"resi",
+				"resizeAntiscroll"
+			],
+			[
+				"E",
+				"EditableTable"
+			],
+			[
+				"start",
+				"startEdit"
+			],
+			[
+				"editing",
+				"editingCell"
+			],
+			[
+				"Ed",
+				"EditableField"
+			],
+			[
+				"table",
+				"tableCellViewClass"
+			],
+			[
+				"Editable",
+				"EditableTableCell"
+			],
+			[
+				"back",
+				"background-color"
+			],
+			[
+				"cl",
+				"closeOnChildClick"
+			],
+			[
+				"dr",
+				"dropdown-menu"
+			],
+			[
+				"rl-",
+				"rl-dropdown-toggle"
+			],
+			[
+				"CDU",
+				"CDUsersRoute"
+			],
+			[
+				"_to",
+				"_toggleColumnSelected"
+			],
+			[
+				"_toggle",
+				"_toggleGroupOpen"
+			],
+			[
+				"colum",
+				"columnGroups"
+			],
+			[
+				"currentR",
+				"currentRows"
+			],
+			[
+				"default",
+				"defaultSelections"
+			],
+			[
+				"co",
+				"columnize"
+			],
+			[
+				"currentRo",
+				"currentRowsLast"
+			],
+			[
+				"curre",
+				"currentOpenRows"
+			],
+			[
+				"current",
+				"currentRowsFirst"
+			],
+			[
+				"time",
+				"timeseriesRows"
+			],
+			[
+				"colu",
+				"column"
+			],
+			[
+				"datapoint",
+				"datapointSet"
+			],
+			[
+				"create",
+				"create-cd"
+			],
+			[
+				"Folder",
+				"FolderCreateCDExtractView"
+			],
+			[
+				"Fo",
+				"FolderCreateCDRoute"
+			],
+			[
+				"Validated",
+				"ValidatedModelMixin"
+			],
+			[
+				"parentView",
+				"parentViewDidChange"
+			],
+			[
+				"Sheet",
+				"SheetDetailController"
+			],
+			[
+				"re",
+				"rejectUnauthorized"
+			],
+			[
+				"rela",
+				"relations"
+			],
+			[
+				"Document",
+				"DocumentEventMixin"
+			],
+			[
+				"all",
+				"allAggregates"
+			],
+			[
+				"Aggre",
+				"AggregateFct"
+			],
+			[
+				"Promise",
+				"PromisePresence"
+			],
+			[
+				"Agg",
+				"aggregateFct"
+			],
+			[
+				"sort-",
+				"sort-height"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"initial",
+				"InitializedProperty"
+			],
+			[
+				"App",
+				"ApplicationView"
+			],
+			[
+				"formu",
+				"formulaDisplayHeight"
+			],
+			[
+				"mes",
+				"messageIndex"
+			],
+			[
+				"Message",
+				"MessageController"
+			],
+			[
+				"gro",
+				"groupLevelLow"
+			],
+			[
+				"group",
+				"grouping-instructions"
+			],
+			[
+				"source",
+				"sourceObj"
+			],
+			[
+				"target",
+				"targetLevel"
+			],
+			[
+				"taret",
+				"targetColumn"
+			],
+			[
+				"Table",
+				"TableCell"
+			],
+			[
+				"le",
+				"levelHeaders"
+			],
+			[
+				"calculated",
+				"calculatedBefore"
+			],
+			[
+				"calcul",
+				"calculatedAfter"
+			],
+			[
+				"ca",
+				"calculatedAfter"
+			],
+			[
+				"_v",
+				"_beforeVariable"
+			],
+			[
+				"column",
+				"columnOfPivot"
+			],
+			[
+				"gr",
+				"groupLevel"
+			],
+			[
+				"cal",
+				"calculatedAfter"
+			],
+			[
+				"calcula",
+				"calculatedBefore"
+			],
+			[
+				"groupLevel",
+				"groupLevelHigh"
+			],
+			[
+				"par",
+				"partAfter"
+			],
+			[
+				"formula",
+				"formulaLevel"
+			],
+			[
+				"for",
+				"formulaLevel"
+			],
+			[
+				"fo",
+				"formulas"
+			],
+			[
+				"opera",
+				"operationList"
+			],
+			[
+				"ember",
+				"ember-drag-drop"
+			],
+			[
+				"pane",
+				"panel1NameDefault"
+			],
+			[
+				"nav-",
+				"nav-header-width"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "template.hbs",
+			"settings":
+			{
+				"buffer_size": 591,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/styles/addon.less",
+			"settings":
+			{
+				"buffer_size": 4039,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/eg-body/component.js",
+			"settings":
+			{
+				"buffer_size": 3673,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/tests/dummy/config/environment.js",
+			"settings":
+			{
+				"buffer_size": 1658,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "component.js",
+			"settings":
+			{
+				"buffer_size": 11466,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/eg-body-row/component.js",
+			"settings":
+			{
+				"buffer_size": 2622,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-body/component.js",
+			"settings":
+			{
+				"buffer_size": 2569,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 485.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-cli/xquery-cli.sublime-project",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/eg-header/component.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/sized-filler/component.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/eg-footer/component.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/column-scroller/component.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/column-scroller/control/component.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/testem.json",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/styles/addon.less-new",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/eg-body/component.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/column-scroller/model.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/app/components/ember-grid/component.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/node_modules/waterline/lib/waterline/adapter/dql.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/node_modules/waterline/lib/waterline/query/finders/basic.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/lib/router/bind.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/unit/controllers/test-operation-controller.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/package.json",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/test/test-sheet.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-generate-ember-blueprints/templates/basic/api/blueprints/_util/actionUtil.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-generate-ember-blueprints/templates/basic/api/blueprints/find.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/config/routes.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/models/Node.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/controllers/SheetController.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/adapters/xquery/lib/adapter.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/unit/models/test-operations.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/unit/models/test-sheets.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/controllers/DatabaseController.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/unit/models/test-folders.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/helpers/check-entity.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/unit/controllers/test-sheet-controller.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/lib/hooks/responses/defaults/created.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/base.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-test-helper-as-promised/lib/bootstrap.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-test-helper-as-promised/node_modules/sails/lib/app/lower.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sails-test-helper-as-promised/node_modules/sails/node_modules/async/lib/async.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sails-test-helper-as-promised/node_modules/node-test-helper/lib/global.js",
+		"/usr/local/lib/node_modules/mocha/lib/runnable.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/async/lib/async.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/grunt-contrib-less/node_modules/async/lib/async.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/grunt-contrib-less/node_modules/less/node_modules/request/node_modules/form-data/node_modules/async/lib/async.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/async/lib/async.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-disk/node_modules/async/lib/async.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-disk/node_modules/waterline-cursor/node_modules/async/lib/async.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-postgresql/node_modules/waterline-cursor/node_modules/async/lib/async.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/services/logger.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/blueprints/update.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-test-helper-as-promised/node_modules/sails/lib/hooks/blueprints/actions/findOne.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/models/Dataset.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/responses/badRequest.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src/sheet.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery/src/operation.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/unit/controllers/test-folder-controller.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/config/connections.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/responses/notFound.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/responses/methodNotAllowed.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/responses/unprocessableEntity.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-test-helper-as-promised/node_modules/sails/lib/hooks/blueprints/actions/destroy.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-test-helper-as-promised/node_modules/sails/lib/hooks/blueprints/actionUtil.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/responses/ok.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-test-helper-as-promised/package.json",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/lib/hooks/blueprints/actions/create.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/controllers/FolderController.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails-test-helper-as-promised/node_modules/sails/lib/hooks/blueprints/actions/create.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/lib/hooks/blueprints/actions/update.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/lib/hooks/blueprints/actions/find.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/config/blueprints.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/config/models.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/base.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/models/Folder.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/test/unit/models/test-folders.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/node_modules/waterline/lib/waterline/query/integrator/_join.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/adapters/xquery/xqueryAdapter.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/adapters/xquery/lib/adapter.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api/adapters/xquery/xqueryAdapter.coffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/sql/schema/schema_node.sql",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src/index.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/sheetweaver-textlogo.txt",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xwrap/src/xwrap.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/schematist/src/model.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/node_modules/pg/lib/query.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/schematist-postgres/src/postgres.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src/util.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/test/config.json",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/node_modules/pg-copy-streams/index.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/test-pg-copy-stream/node_modules/pg/node_modules/packet-reader/index.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/test-pg-copy-stream/node_modules/pg/lib/connection.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/test-pg-copy-stream/test.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/node_modules/pg-copy-streams/copy-to.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src/column.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/node_modules/pg/lib/client.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/schematist/src/hooks.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/docs/about.md",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/schematist/src/schema.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/schematist/src/relations.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/schematist/src/sql.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-sql/datatypes.json",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/test/base.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src/constants.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/package.json",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-sql/xquery-sql.sublime-project",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/node_modules/xquery-join/src/dataset.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src/schemaNode.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src/folder.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/schematist-postgres/test/init.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/schematist/index.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/schematist-postgres/test/config.json",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/utils/reduce-computed-promise.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/router.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/utils/parse-uri.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/pods/cd-admin/users/controller.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/models/cd-user.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/utils/authenticator.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/node_modules/ember-cli-ember-table/addon/components/ember-table.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/styles/modules/_colors.scss",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/styles/modules/_boxes.scss",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/pods/cd-admin/organizations/controller.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/pods/application/route.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/routes/index.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/models/user.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/routes/catchall.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/pods/folder/route.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/pods/folder/create-cd-extract/route.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/bower_components/ember-data/ember-data.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/config/environment.js",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/initializers/coordinator-view.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/pods/cd-admin/search-header-cell/view.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/crane/cranedata/db/funds/models.py",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/pods/folder/model.litcoffee",
+		"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/pods/application/adapter.litcoffee"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/tests",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/config",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/node_modules/waterline/lib",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/lib",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails/lib",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/node_modules/sails",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest/api",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-rest",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/test",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/test",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/test",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db/src",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/xquery-db",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/node_modules/ember-cli-ember-table",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/node_modules/ember-cli-ember-table/addon",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/node_modules/ember-table-ember-cli/addons",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/node_modules/ember-cli-ember-table",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/bower_components/ic-autocomplete/lib",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/pods/cd-admin/users",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app",
+			"<open folders>",
+			"/Volumes/Macintosh_HD/Users/shauncutts/src/sheetweaver/app/styles/partials",
+			"<open folders>,*.litcoffee",
+			"<open folders>,*.json",
+			"<open folders>",
+			"<open folders>,*.litcoffee",
+			"<open folders>",
+			"app",
+			"/app",
+			"<open folders>",
+			"<open folders>,*.litcoffee",
+			"<open folders>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"ember-collection",
+			"bodyHeight",
+			"overflow-y",
+			"flex",
+			"</p>",
+			"<p>",
+			"_body",
+			"_columnS",
+			"firefox",
+			"createS",
+			"convert",
+			"debu",
+			"findOne",
+			"debugger",
+			"datasetID",
+			"ROUTING",
+			"Ember.",
+			"console.log(2",
+			"console.log",
+			"con",
+			"AfterAll",
+			"Callback was already called",
+			"UPDATING",
+			".error",
+			"FIND",
+			"yaml.safeLoad",
+			"debugger",
+			"done",
+			"esheet",
+			"asheet",
+			"folder",
+			"afterAll",
+			"debugg",
+			"dele",
+			"del",
+			"updateSchemaNode",
+			"fn",
+			"return",
+			"fO",
+			"checkfOlder",
+			"_checkFolder",
+			"efolder",
+			"afolder",
+			"updateFolder",
+			".info",
+			"console",
+			"conso",
+			"it",
+			"skip",
+			"conso",
+			"SAVE FOLDER",
+			"deb",
+			"xqFind",
+			"debugg",
+			"conso",
+			"fromXQ",
+			"conso",
+			"createO",
+			"findSchemaNode",
+			"findSchema",
+			"pop",
+			"folder",
+			"xqC",
+			"_convertFolderCriteria",
+			"xq.getFolderSync",
+			"xq",
+			"_convertFolder",
+			"folder",
+			"Folder",
+			"conso",
+			"cons`",
+			"findFolder",
+			"cons",
+			"\"destroyF",
+			"delete",
+			"critera",
+			"xquery",
+			"Folder",
+			"_purchase_redemption_dea",
+			"conso",
+			"columns",
+			"column",
+			"get all rows",
+			"console.log(",
+			"console",
+			"consol",
+			"DONE",
+			"console",
+			"created",
+			"FLUSH",
+			"CONNECTED",
+			"unshi",
+			"cons",
+			"readyFor",
+			"Message",
+			"'message'",
+			"parseM",
+			"parseP",
+			"Message",
+			"parseZ",
+			"emit",
+			"quer",
+			"processID",
+			"consol",
+			"query(",
+			"debugg",
+			"debug",
+			"resolve",
+			"console",
+			"sheet1",
+			"resolveaR",
+			"_resolveArgs",
+			"table",
+			"conn",
+			"databaseID",
+			"findOr",
+			"defineForeignKey",
+			"defineFor",
+			"belongsTo",
+			"canBeNull",
+			"propertySettings",
+			"not null",
+			"nulla",
+			"load sh",
+			"load sheet",
+			"load folder",
+			"CREATE",
+			"create"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": false,
+		"replace_history":
+		[
+			"</div>",
+			"<div class=\"row\"><div class=\"cell\">cell</div>",
+			"cson.parse",
+			"expected",
+			"actual",
+			"operation",
+			"sheet",
+			"Fo",
+			"checkFolder",
+			"esheet",
+			"asheet",
+			".debug",
+			"it.skip",
+			"node",
+			"_convertSchemaCriteria",
+			"xqFind",
+			"_convertSchemaNode",
+			"sheet",
+			"Sheet",
+			"destroy",
+			"Dataset",
+			"Operation",
+			"Sheet",
+			"resolveAr",
+			"resolveArgs",
+			"view",
+			"marshal",
+			"Product",
+			"timeseries",
+			"Compare",
+			"daily",
+			"Pivot",
+			"pivot",
+			"range",
+			".btn-primary\\n                 ",
+			".btn-primary\\n                ",
+			".btn-primary\\n",
+			".btn.btn-primary",
+			".btn",
+			"range",
+			"pivot",
+			"group"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "template.hbs",
+					"settings":
+					{
+						"buffer_size": 591,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								55,
+								55
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/styles/addon.less",
+					"settings":
+					{
+						"buffer_size": 4039,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4039,
+								4039
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2496.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/eg-body/component.js",
+					"settings":
+					{
+						"buffer_size": 3673,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3307,
+								3307
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 354.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/tests/dummy/config/environment.js",
+					"settings":
+					{
+						"buffer_size": 1658,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								540,
+								540
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		},
+		{
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "component.js",
+					"settings":
+					{
+						"buffer_size": 11466,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5553,
+								5553
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1846.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-render/eg-body-row/component.js",
+					"settings":
+					{
+						"buffer_size": 2622,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2399,
+								2399
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 32.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/Volumes/Macintosh_HD/Users/shauncutts/src/ember-grid/addon/components/eg-body/component.js",
+					"settings":
+					{
+						"buffer_size": 2569,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								396,
+								396
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 60.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			],
+			[
+				2,
+				0,
+				3,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.33,
+			0.66,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}

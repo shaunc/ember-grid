@@ -33,16 +33,83 @@ body * {
   a {
     text-decoration: none;
   }
+  height: auto;
+  width: auto;
 }
+
+// display example template ---------------------
 
 .example {
   position: relative;
+  overflow: hidden;
   h4 {
     background: @example-ember-grid-color;
     margin: 0;
     padding: 5px 30px;
     color: white;
     border-radius: 6px;
+  }
+
+  .display-template {
+    h4 {
+      position: absolute;
+      padding: 0px;
+      margin: 5px;
+      left: 700px;
+      top: 0px;
+      color:white;
+      &:hover {
+        color: @hover-color;
+      }
+    }
+    .body {
+      margin-top: 4px;
+      max-height: 0px;
+      transition: max-height .4s;
+      overflow: hidden;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background-color: #F7F7ED;
+      pre {
+        font-size: 12px;
+        line-height: 1em;
+        padding: 0 5px;
+        margin: 2px 5px 10px 10px;
+      }
+    }
+
+    &.open .body {
+      height: inherit;
+      max-height: 300px;
+      overflow: auto;
+    }
+    .arrow {
+      font-size: .7em;
+      display: inline-block;
+      opacity: 1;
+      transition: opacity .2s;
+    }
+    &.open .arrow {
+      opacity: 0;
+    }
+  }  
+
+}
+// example itself -------------------------------
+
+.example {
+
+  > .display {
+    height: ~"calc(100% - 20px)";
+    width: ~"calc(100% - 20px)";
+    overflow: hidden;
+    margin: 10px;
+    .ember-grid {
+      margin: auto;
+    }
+    > * {
+      height: 100%;
+    }
   }
 
   .ember-grid {
@@ -98,58 +165,6 @@ body * {
 
   }
 
-  > .display {
-    height: 100%;
-    padding: 10px;
-    .ember-grid {
-      margin: auto;
-    }
-    > * {
-      height: 100%;
-    }
-  }
-  .display-template {
-    h4 {
-      position: absolute;
-      padding: 0px;
-      margin: 5px;
-      left: 700px;
-      top: 0px;
-      color:white;
-      &:hover {
-        color: @hover-color;
-      }
-    }
-    .body {
-      margin-top: 4px;
-      max-height: 0px;
-      transition: max-height .4s;
-      overflow: hidden;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      background-color: #F7F7ED;
-      pre {
-        font-size: 12px;
-        line-height: 1em;
-        padding: 0 5px;
-        margin: 2px 5px 10px 10px;
-      }
-    }
 
-    &.open .body {
-      height: inherit;
-      max-height: 300px;
-      overflow: auto;
-    }
-    .arrow {
-      font-size: .7em;
-      display: inline-block;
-      opacity: 1;
-      transition: opacity .2s;
-    }
-    &.open .arrow {
-      opacity: 0;
-    }
-  }
 
 }

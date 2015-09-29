@@ -15,6 +15,11 @@
 
 	// -------------- main layout
 
+  // default style is to fill space in parent. Override to change.
+  height: 100%;
+  width: 100%;
+  display: table;
+
   .display {
     box-sizing: border-box;
     width: 100%;
@@ -26,8 +31,10 @@
 	  overflow:hidden;
 
 	  .body {
-      -webkit-flex-grow:1;
-		  flex-grow:1;
+      //-webkit-flex-grow:1;
+		  //flex-grow:1;
+      -webkit-flex: auto;
+      flex: auto;
 		  position:relative;
 
 		  .scroll-container {
@@ -62,6 +69,7 @@
 
   .row {
   	&.empty {
+      position: absolute;
   	  .cell {
 		    border: none;
 	    }
@@ -83,6 +91,7 @@
 	    top: 0px;
 	    right: 0px;
 	    bottom: 0px;
+      display: table;
 	  }
   }
 
@@ -217,6 +226,7 @@
 	  overflow-x: hidden;
 
 	  .row {
+      display: table-row;
 
 		  &.empty {
 
@@ -242,17 +252,17 @@
 //
 // This is only needed in safari; seems to be harmless but unnecessary
 // in mac chrome/firefox, but breaks some windows browsers -- so
-// for now safari specific
+// for now chrome/safari specific
 
 @media screen and (min-color-index:0) and (-webkit-min-device-pixel-ratio:0){ 
   .ember-grid .body {
-    .row {
+    /*.row {
       display: -webkit-flex;
       display: flex;
     }
     .cell {
       -webkit-flex: none;
       flex: none;
-    }
+    }*/
   }
 }

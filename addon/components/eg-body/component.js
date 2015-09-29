@@ -1,17 +1,16 @@
 // eg-body
 
 import Ember from 'ember';
-import EmberGridColumn from '../eg-column/component';
+import PortalDeclaration from 'ember-declarative/decl/ed-portal/mixin';
+import ColumnZone from '../eg-column/zone/mixin';
 import layout from './template';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(PortalDeclaration, ColumnZone, {
   layout: layout,
+  portalElementClass: 'eg-body-cell',
 	classNames: ['body-def'],
+  zoneName: 'body',
 
-  _body: null,
-
-  _data: Ember.computed.alias('_body.data'),
-  _column: Ember.computed.alias('parentView._column'),
   _items: Ember.computed('_body.{data,offset,limit}', function() {
     var body = this.get('_body');
     var {data, offset, limit} = body;
@@ -30,56 +29,30 @@ export default Ember.Component.extend({
 
   }),
   _requiredPresent: Ember.computed(
-      '_body.{data,rowHeight,offset,limit}', function() {
+      '_body.{data,offset,limit}', function() {
     var body = this._body || {};
-    var {data, height, width, rowHeight, offset, limit} = body;
-    return data != null && height != null && width != null && 
-      rowHeight != null && offset != null && limit != null;
+    var {data, offset, limit} = body;
+    return data != null && offset != null && limit != null;
   }),
-  /**
-   * Return DOM element for row index if currently rendered or null
-   *
-   * @params rowIndex
-   *
-   */
-  getCellElement(rowIndex) {
-    var element = this.element;
-    if (element == null || element.childNodes == null) {
-      return null;
-    }
-    var body = this.get('_body');
-    var {offset, limit} = body;
-    if (rowIndex < offset || rowIndex >= offset + limit) { return null; }
-    return element.getElementsByClassName('eg-body-cell')[rowIndex - offset];
-  },
-
   attrsChanged: Ember.on('didReceiveAttrs', function() {
-    var body = this._body;
-    if (body == null) {
-      body = this._body = Ember.Object.create({source: this});
-    }
-    for (let key in this.attrs) {
-      body[key] = this.getAttr(key);
-    }
-    if (body._offset == null) {
+    const body = this.get('_body');
+    if (this.getAttr('offset') == null) {
       Ember.set(body, 'offset', 0);
     }
-    if (body.limit == null && body.rowHeight != null && body.height != null) {
-      Ember.set(body, 'limit', Math.ciel(body.height / body.rowHeight) + 10);
+    if (this.getAttr('limit') == null) {
+      Ember.set(body, 'limit', 10);
     }
   }),
-  
-  willRender() {
-    this._super.apply(this, arguments);
-    var parentView = this.get('parentView');
-    if (parentView instanceof EmberGridColumn) {
-      var body = this._body;
-      if (parentView._column._zones.body !== body) {
-        parentView._column._zones.body = body;
-      }
-    }
-	},
-  didRender() {
-    this._body.element = this.element;
+  /**
+   *  Adjust porting element to reflect current offset.
+   */
+  portElement(receiver, idx) {
+    idx -= this.get('offset');
+    return this._super(receiver, idx);
+  },
+  // XXX STUDY IF WORKING....
+  putBackElement(receiver, idx) {
+    idx -= this.get('offset');
+    return this._super(receiver, idx);
   }
 });

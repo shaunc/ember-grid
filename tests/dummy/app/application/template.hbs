@@ -1,8 +1,9 @@
 <div id="banner"><h2 id="title">Ember Grid</h2></div>
 <div id="nav">
   {{#ember-grid 
-    id="gallery" data=gallery showHeader=false rowHeight=20 scroll-y=false
-    }}
+      id="gallery" data=gallery showHeader=false rowHeight=20 
+      scroll-x=false scroll-y=false
+      }}
     {{#eg-column key="section" width=150 }}
       {{#eg-body as |field|}}
         <strong>{{field}}</strong>

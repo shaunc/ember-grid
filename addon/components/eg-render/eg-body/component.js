@@ -2,6 +2,7 @@
 
 import Ember from 'ember';
 import layout from './template';
+import EmberGrid from 'ember-grid/components/ember-grid/component';
 
 export default Ember.Component.extend({
   layout: layout,
@@ -47,7 +48,7 @@ export default Ember.Component.extend({
 
   requiredPresent: Ember.computed(
     'attrs.data', 'attrs.columns', 'attrs.height', 'attrs.width', 
-    'attrs.contentWidth', 'attrs.rowHeight', function() {
+   'attrs.rowHeight', function() {
       if (this.getAttr('data') == null) { return false; }
       if (this.getAttr('columns') == null) { return false; }
       if (this.getAttr('height') == null) { return false; }
@@ -67,6 +68,33 @@ export default Ember.Component.extend({
     }
     return result;
   }),
+
+  didRender() {
+    let width = this.$().width();
+    let height = this.$().height();
+    let heightChanged = false;
+    // use css unless no scroll and dimension otherwise (almost) 0
+    if (height <= 1 && this.get('scrollY') === false) {
+      height = this.get('rowCount') * this.get('rowHeight');
+      this.element.style.height = height + 'px';
+      heightChanged = true;
+    }
+    if (width <= 1 && this.get('scrollX') === false) {
+      width = this.get('columns').reduce(((w,c)=>w + (c.width || 0)), 0);
+      this.element.style.width = width + 'px';
+    }
+    Ember.run.scheduleOnce('afterRender', ()=>{
+      this.set('width', width);
+      this.set('height', height);
+      if (heightChanged) {
+        const grid = this.nearestOfType(EmberGrid);
+        if (grid != null) {
+          grid.refreshColumns();
+        }
+      }
+    });
+  },
+
 
   bindScroll: Ember.on('didUpdate', function() {
     Ember.run.later(()=> {

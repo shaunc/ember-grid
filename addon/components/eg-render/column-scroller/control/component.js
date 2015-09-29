@@ -12,8 +12,8 @@ export default Ember.Component.extend(CspStyleMixin, {
   findModel: Ember.on('didInsertElement', function() {
     Ember.run.later(()=> {
       if (this.isDestroying) { return; }
-      var grid = this.nearestOfType(EmberGrid);
-      if (grid)
+      const grid = this.nearestOfType(EmberGrid);
+      if (grid != null)
       {
         var model = grid.get('_columnScrollerModel');
         this.set('_model', model);

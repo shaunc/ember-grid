@@ -107,7 +107,7 @@ export default Ember.Controller.extend({
       {{/ember-grid}}`,
 
     minimal: `
-      {{! without scroll-y=false, takes available space in parent element }}
+      {{! by default, takes available space in parent element }}
       {{ember-grid data=data columns="name,age,salary,email"}}`,
 
     'scroll-columns': `

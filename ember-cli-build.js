@@ -25,20 +25,5 @@ module.exports = function(defaults) {
   app.import( app.bowerDirectory + '/lodash/lodash.js', {test: true});
   app.import( app.bowerDirectory + '/ember/ember-template-compiler.js');
 
-  /**
-   * TODO: phantomJS needs a polyfill of requestAnimationFrame, which
-   * is used in ember-collection.
-   * 
-   * This one: https://github.com/cagosta/requestAnimationFrame
-   * however, doesn't seem to work.
-   * 
-   * For the moment, we have phantomjs turned off in testem.
-   *
-
-  app.import( 
-    app.bowerDirectory + '/requestAnimationFrame/app/requestAnimationFrame.js', 
-    {test: true});
-   */
-
   return app.toTree();
 };

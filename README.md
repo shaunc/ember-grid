@@ -34,19 +34,21 @@ All the below examples use the following model for the data rows
       }
     }
 
-### Defining the window
+### Defining the overall dimensions
 
 Ember grid only displays data that fits into a fixed size window. Cells will only be rendered as (or just before) they scroll into view. This makes `ember-grid` suitable for displaying very large datasets.
 
-To specify the window, use the `height` and `width` attributes. The `rowHeight` attribute specifies the (outer) height of rows in the body of the grid.
+The window may be specified with css, or explicitly with the `height` and
+`width` attributes. When using css, override the heights of the `.header`
+`.body` and `.footer` elements to size the components relative to the whole.
+
+The height of rows is also important, as ember-grid needs to calculate how many rows will fit in a window. Style `.ember-grid .row` to set height of rows using css, or use the `rowHeight` to set it explicitly.
 
     {{#ember-grid data=myData width=800 height=200 rowHeight=25}} 
       {{eg-column key="name"}}
       {{eg-column key="age"}}
       {{eg-column key="email"}}
     {{/ember-grid}}
-
-If `height` is not specified, `ember-grid` or `width` is not specified, `ember-grid` will use its actual height and width on display. (See [Control Scrolling](#control-scrolling), below, for more details.)  If `row-height` is not specified, `ember-grid` will look for a height in css for an element rendered with class `.ember-grid .row`. If none is found, the default is `25` pixels.
 
 ### Simple text columns
 
@@ -231,19 +233,24 @@ Note that as displayed above, the current `rowIndex` and `column` are available 
 
 Use `scroll-y` and `scroll-x` to control whether `ember-grid` will enable
 scrolling over rows and columns (respectively). Possible settings are `true`,
-`false` and `"auto"`. The default behavior, if `width` and `height` are
-specified, is `scroll-x="auto" scroll-y="auto"`: scroll if the rows or 
-columns do not fit in the window. Currently, `true` has the same effect
-as `auto`.
+`false` and `"auto"`. The default behavior is  `scroll-x="auto"`
+`scroll-y="auto"`: scroll if the rows or  columns do not fit in the window.
+Currently, `true` has the same effect as `auto`. 
 
-If `width` is not specified, then `ember-grid` will determine
-the width based on other factors. If `scroll-x` is false, and all
-columns have widths, then the width will be the sum of column
-widths. If either of these factors isn't true, then any css width will
-be used if present, or if not, the available width in the enclosing 
-html element. Thus, the grid:
+Explicitly turning scrolling off, and not specifying a css dimension (width or height) for both `.ember-grid` and `.body` (or specifying `auto`), results
+in the body given explicit calculated dimensions to hold the content:
 
-    {{#ember-grid data=myData }} 
+* If neither `.ember-grid` nor `.body` width is specified in css, and
+`scroll-x` is false, then the body will be given width as the sum of column
+widths. 
+
+* If neither `.ember-grid` nor `.body` height is specified in css, and
+`scroll-y` is false, then body will be given height as  
+`rowHeight * rowCount`.
+
+Thus, if `width` is `auto`, the grid:
+
+    {{#ember-grid data=myData scroll-x=false}} 
       {{eg-column key="name" width=150 }}
       {{eg-column key="age" width=50 }}
       {{eg-column key="email" width=250 }}
@@ -278,18 +285,15 @@ the width out of the example above would have the same effect:
       {{/ember-grid}}
     </div>
 
-The relationship between `height` and `scroll-y` is analogous, except
-that, currently, `rowHeight` cannot be set automatically. If
-total height is specified and `scroll-y` is `auto` vertical scrolling over
-rows will be turned on when there are more rows than can be displayed.
-If `scroll-y` is `false` and `height` is not specified, then all rows
-will be displayed. Finally, if `scroll-y` is not false, and `height` is not
-specified, then css height is used, or if not specified, available height
-in enclosing parent.
+The relationship between `height` and `scroll-y` is analogous, but
+keep in mind that the vertical scroll bar scrolls the `.body` element
+only, while the horizontal one scrolls the whole content (inside
+of border and any padding). By default, the body is styled with flexbox
+to grow to fill up any space header and footer don't use.
 
 ## Supplying Data
 
-Data is supplied as an array. The type of array required depends on the use case.
+Data is supplied as an array. The type of array required depends on the use case. If `Array.isArray()` is false, and the data has a `toArray` method, it is called to retrieve the final content.
 
 ### Immutable Data Array
 
@@ -297,7 +301,10 @@ If the `data` items will never change, supply a plain JavaScript array. Note tha
 
 ### Mutable Data Array
 
-When items will be added to and removed from the data array, the supllied `data` array must be an Ember Array (`Ember.A([...])`). Items must be added using `addObject`/`addObjects`/`pushObject`/`pushObjects` and removed with `removeObject`/`removeObjects`/`popObject`.
+When items will be added to and removed from the data array, the supplied
+`data` array must be an Ember Array (`Ember.A([...])`). Items must be added
+using `addObject`/`addObjects`/`pushObject`/`pushObjects` and removed with
+`removeObject`/`removeObjects`/`popObject`.
 
 ### Promises
 
@@ -320,7 +327,7 @@ Place an `eg-if-empty` component inside the `ember-grid` component to show custo
 
 ## Override Styling
 
-Use the following selectors in your css to affect each part of the layout.
+Use the following selectors in your css to affect corresponding parts of the layout.
 
 | Selector | Target |
 | --- | --- |
