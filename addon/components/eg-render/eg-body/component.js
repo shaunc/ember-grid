@@ -3,10 +3,12 @@
 import Ember from 'ember';
 import layout from './template';
 import EmberGrid from 'ember-grid/components/ember-grid/component';
+import CspStyleMixin from 'ember-cli-csp-style/mixins/csp-style';
 
 export default Ember.Component.extend({
   layout: layout,
   classNames: ['body'],
+  styleBindings: ['height:max-height[px]'],
 
   topVisibleIndex: 0,
   bufferRowCount: 10,
@@ -55,6 +57,7 @@ export default Ember.Component.extend({
       if (this.getAttr('width') == null) { return false; }
       if (this.getAttr('rowHeight') == null) { return false; }
       if (!this.getAttr('data').length) { return false; }
+      console.log("height", this.getAttr('height'));
       return true;
     }),
 

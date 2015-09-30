@@ -33,8 +33,9 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
                         // minus header and footer total height).
   rowHeight: 25,        // height of each row in body.
 
-  tooWide: Ember.computed('contentWidth', 'width', function(){
-    return this.get('contentWidth') > this.get('width');
+  tooWide: Ember.computed('contentWidth', 'bodyWidth', function(){
+    console.log("scroll", this.get('contentWidth'), this.get('bodyWidth'))
+    return this.get('contentWidth') > this.get('bodyWidth');
   }),
 
   nativeScroll: Ember.computed.alias('_columnScrollerModel.nativeScroll'),
@@ -244,7 +245,7 @@ export default Ember.Component.extend(CspStyleMixin, DeclarationContainer, {
     if(this.get('bodyWidth') == null || this.get('bodyHeight') == null) {
       Ember.run.scheduleOnce('afterRender', ()=>{
         this.set('bodyWidth', Math.floor(this.$().innerWidth()));
-        this.set('bodyHeight', 
+        this.set('contentHeight', 
           Math.floor(this.$().innerHeight())
             - Math.ceil(this.$('.header').height())
             - Math.ceil(this.$('.footer').height()))

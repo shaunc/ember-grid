@@ -18,7 +18,9 @@
   // default style is to fill space in parent. Override to change.
   height: 100%;
   width: 100%;
-  display: table;
+  // TODO: this is needed for "auto" sizing... but doesn't work for 100%
+  // sizing.
+  //display: table;
 
   .display {
     box-sizing: border-box;
